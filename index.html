@@ -2254,7 +2254,7 @@ table.t{border-collapse:collapse;width:100%;font-size:.88rem}table.t th,table.t 
 <div class="card" id="tpanel" style="display:none">
 <button class="b" onclick="exportX()">⬇️ Export (Excel)</button>
 <button class="b s" onclick="loadRes()">🔄 تحديث</button>
-<button class="b r" onclick="clearLocal()">حذف النتائج المحلية</button>
+<button class="b r" onclick="clearLocal()">حذف النتائج المحلية</button><button class="b r" onclick="delAll()">🗑 حذف كل النتائج من الجدول</button>
 <hr><b>📢 إرسال إشعار للمتدربين</b><input type="text" id="ntext" placeholder="نص الإشعار"><button class="b" onclick="postNote()">نشر الإشعار</button><div class="fb" id="nerr"></div>
 <p class="note" id="tcount"></p>
 <div class="wrapx"><table class="t" id="ttab"></table></div>
@@ -2426,10 +2426,10 @@ async function save(r){try{const a=JSON.parse(localStorage.getItem('results')||'
 let R=[];
 async function unlock(){if(!SHEET_URL){$('perr').textContent='لم يُضبط رابط Google Sheets في الملف';return}
  try{const j=await api({action:'list',pin:$('pin').value});if(!j.ok)throw 0;TP=$('pin').value;$('tlock').style.display='none';$('tpanel').style.display='block';loadRes()}catch(e){$('perr').textContent='الرمز غير صحيح أو تعذّر الاتصال'}}
-async function loadRes(){let a=[];try{const j=await api({action:'list',pin:TP});if(j.ok)j.rows.forEach(x=>a.push(x))}catch(e){}
- try{JSON.parse(localStorage.getItem('results')||'[]').forEach(x=>{if(!a.some(y=>y.start==x.start&&y.wa==x.wa))a.push(x)})}catch(e){}
- R=a.sort((x,y)=>x.start<y.start?1:-1);$('tcount').textContent='عدد المتدربين الذين أنهوا الاختبار: '+R.length;
- $('ttab').innerHTML='<tr><th>الاسم</th><th>الواتساب</th><th>البريد</th><th>الدرجة</th><th>صحيحة</th><th>خاطئة</th><th>البداية</th><th>الدقائق</th><th>إرسال النتيجة</th></tr>'+R.map(r=>`<tr><td>${esc(r.name)}</td><td dir="ltr">${esc(r.wa)}</td><td>${esc(r.email||'')}</td><td>${r.score}/${r.total}</td><td>${r.right}</td><td>${r.wrong}</td><td dir="ltr">${new Date(r.start).toLocaleString('ar')}</td><td>${r.mins}</td><td>${waBtn(waLink(r),'إرسال النتيجة')}</td></tr>`).join('')}
+async function loadRes(){let a=[],srv=false;try{const j=await api({action:'list',pin:TP});if(j.ok){j.rows.forEach(x=>a.push(x));srv=true}}catch(e){}
+ if(!srv)try{JSON.parse(localStorage.getItem('results')||'[]').forEach(x=>{if(!a.some(y=>y.start==x.start&&y.wa==x.wa))a.push(x)})}catch(e){}
+ R=a.sort((x,y)=>x.start<y.start?1:-1);$('tcount').textContent=(srv?'المصدر: Google Sheets. ':'⚠️ تعذّر الاتصال بالخادم، العرض من نسخة محلية. ')+'عدد المتدربين الذين أنهوا الاختبار: '+R.length;
+ $('ttab').innerHTML='<tr><th>الاسم</th><th>الواتساب</th><th>البريد</th><th>الدرجة</th><th>صحيحة</th><th>خاطئة</th><th>البداية</th><th>الدقائق</th><th>إرسال النتيجة</th><th>حذف</th></tr>'+R.map((r,i)=>`<tr><td>${esc(r.name)}</td><td dir="ltr">${esc(r.wa)}</td><td>${esc(r.email||'')}</td><td>${r.score}/${r.total}</td><td>${r.right}</td><td>${r.wrong}</td><td dir="ltr">${new Date(r.start).toLocaleString('ar')}</td><td>${r.mins}</td><td>${waBtn(waLink(r),'إرسال النتيجة')}</td><td><button class="b r" style="padding:4px 10px" onclick="delRes(${i})" title="حذف هذه النتيجة">🗑</button></td></tr>`).join('')}
 function waLink(r){let rows=[];try{rows=JSON.parse(r.rows)}catch(e){}return 'https://wa.me/'+String(r.wa).replace(/\D/g,'')+'?text='+encodeURIComponent(buildMsg(r,rows))}
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 async function exportX(){if(!R.length){alert('لا توجد نتائج للتصدير');return}
@@ -2439,6 +2439,13 @@ async function exportX(){if(!R.length){alert('لا توجد نتائج للتص�
  const fn='نتائج_المتدربين.xlsx';
  try{const d=await claude.use('downloads');if(d){await d.save({filename:fn,data:new Uint8Array(XLSX.write(wb,{type:'array',bookType:'xlsx'}))});return}}catch(e){if(e&&e.code=='declined')return}
  XLSX.writeFile(wb,fn)}
+async function delReq(o){await fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({...o,action:'delete',pin:TP})});await new Promise(r=>setTimeout(r,2000))}
+async function delRes(i){const r=R[i];if(!r||!confirm('حذف نتيجة «'+r.name+'» نهائياً من الجدول؟'))return;
+ try{const a=JSON.parse(localStorage.getItem('results')||'[]').filter(x=>!(x.start==r.start&&String(x.wa)==String(r.wa)));localStorage.setItem('results',JSON.stringify(a))}catch(e){}
+ try{await delReq({start:String(r.start),wa:String(r.wa)})}catch(e){alert('تعذّر الحذف من الخادم')}loadRes()}
+async function delAll(){if(!confirm('سيتم حذف كل النتائج من الجدول نهائياً. هل أنت متأكد؟'))return;if(!confirm('تأكيد أخير: لا يمكن التراجع.'))return;
+ try{localStorage.removeItem('results')}catch(e){}
+ try{await delReq({all:true})}catch(e){alert('تعذّر الحذف من الخادم')}loadRes()}
 function clearLocal(){if(confirm('حذف النتائج المخزنة محلياً في هذا المتصفح؟')){try{localStorage.removeItem('results')}catch(e){}loadRes()}}
 
 /* notifications */
