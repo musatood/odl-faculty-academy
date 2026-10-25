@@ -2307,6 +2307,7 @@ table.t{border-collapse:collapse;width:100%;font-size:.88rem}table.t th,table.t 
 <button class="b" onclick="unlock()">دخول</button><div id="perr" class="fb" style="color:var(--no)"></div>
 </div>
 <div class="card" id="tpanel" style="display:none">
+<div style="text-align:left;margin-bottom:6px"><button class="b s" onclick="tLogout()">🔒 خروج من لوحة المدرب</button></div>
 <div id="trk_brief"></div>
 <button class="b" onclick="exportX()">⬇️ Export (Excel)</button>
 <button class="b s" onclick="loadRes()">🔄 تحديث</button>
@@ -2668,11 +2669,16 @@ function renderAnalytics(){const box=$('ana');if(!box)return;const L=latestRes(R
   +'<b>التقدم: قبلي ← بعدي</b>'+(both.length?T(['المتدرب','قبلي','بعدي','الفرق'],both.map(b=>'<tr><td>'+esc(b.name)+'</td><td>'+b.a+'%</td><td>'+b.b+'%</td><td style="color:var(--'+(b.b>=b.a?'ok':'no')+')">'+(b.b-b.a>=0?'+':'')+(b.b-b.a)+'</td></tr>').join(''))+'<p class="note">متوسط القبلي '+avg(both.map(b=>b.a))+'% — متوسط البعدي '+avg(both.map(b=>b.b))+'% — متوسط التحسن '+avg(both.map(b=>b.b-b.a))+' نقطة (لمن أجرى الاختبارين: '+both.length+')</p>':'<p class="note">يظهر عندما يجري المتدرب الاختبارين القبلي والبعدي.</p>');
  $('anaf').value=ANAF}
 
+function tLogout(){TP='';try{$('pin').value=''}catch(e){}location.reload()}   /* يمسح الرمز والبيانات المعروضة من الذاكرة */
 async function unlock(){if(!SHEET_URL){$('perr').textContent='لم يُضبط رابط Google Sheets في الملف';return}
  try{const j=await api({action:'list',pin:$('pin').value});if(!j.ok){$('perr').textContent=pinErr(j);return}TP=$('pin').value;$('tlock').style.display='none';$('tpanel').style.display='block';loadRes();if(window.agLoadReq)agLoadReq();if(window.agUsers)agUsers()}catch(e){$('perr').textContent='الرمز غير صحيح أو تعذّر الاتصال'}}
+function fixScore(r){const t=String(r.score==null?'':r.score).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[٫,]/g,'.').trim();
+  if(t!==''&&isFinite(+t)){r.score=+t;return r}
+  try{const rr=JSON.parse(r.rows);if(Array.isArray(rr)&&rr.length)r.score=Math.max(0,Math.round(rr.reduce((s,x)=>s+(+x.pt||0),0)*100)/100)}catch(e){}
+  return r}   /* الدرجة غير الرقمية تُحسب من نقاط الأسئلة */
 async function loadRes(){let a=[],srv=false;try{const j=await api({action:'list',pin:TP});if(j.ok){j.rows.forEach(x=>a.push(x));srv=true}}catch(e){}
  if(!srv)try{JSON.parse(localStorage.getItem('results')||'[]').forEach(x=>{if(!a.some(y=>y.start==x.start&&y.wa==x.wa))a.push(x)})}catch(e){}
- R=a.sort((x,y)=>x.start<y.start?1:-1);$('tcount').textContent=(srv?'المصدر: Google Sheets. ':'⚠️ تعذّر الاتصال بالخادم، العرض من نسخة محلية. ')+'عدد المتدربين الذين أنهوا الاختبار: '+R.length;
+ R=a.map(fixScore).sort((x,y)=>x.start<y.start?1:-1);$('tcount').textContent=(srv?'المصدر: Google Sheets. ':'⚠️ تعذّر الاتصال بالخادم، العرض من نسخة محلية. ')+'عدد المتدربين الذين أنهوا الاختبار: '+R.length;
  $('ttab').innerHTML='<tr><th>الاسم</th><th>الواتساب</th><th>البريد</th><th>المرحلة</th><th>الدرجة</th><th>صحيحة</th><th>خاطئة</th><th>البداية</th><th>الدقائق</th><th>الثقة/الدقة</th><th>إرسال النتيجة</th><th>حذف</th><th>⚠️ إشارات</th><th>مقابلة شفوية</th></tr>'+R.map((r,i)=>`<tr><td>${esc(r.name)}</td><td dir="ltr">${esc(r.wa)}</td><td>${esc(r.email||'')}</td><td>${r.phase=='pre'?'قبلي':'بعدي'}</td><td>${r.score}/${r.total}</td><td>${r.right}</td><td>${r.wrong}</td><td dir="ltr">${new Date(r.start).toLocaleString('ar')}</td><td>${r.mins}</td><td dir="ltr">${cbCell(r)}</td><td>${waBtn(waLink(r),'إرسال النتيجة')}</td><td><button class="b r" style="padding:4px 10px" onclick="delRes(${i})" title="حذف هذه النتيجة">🗑</button></td><td style="text-align:right;max-width:200px">${esc(r.flags||'—')}</td><td><label><input type="checkbox" ${r.oral=='1'?'checked':''} onchange="setOral(${i},this.checked)"> تمت</label><br><button class="b s" style="padding:3px 8px" onclick="defSheet(${i})">🗣 ورقة الدفاع</button></td></tr>`).join('');renderAnalytics()}
 function waLink(r){let rows=[];try{rows=JSON.parse(r.rows)}catch(e){}return 'https://wa.me/'+String(r.wa).replace(/\D/g,'')+'?text='+encodeURIComponent(buildMsg(r,rows))}
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
