@@ -2747,8 +2747,9 @@ async function agSaveRoster(){const rows=$('ag_roster').value.split('\n').map(l=
   try{await fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'auth_roster',pin:TP,rows:JSON.stringify(rows)})});
     e.style.color='var(--ok)';e.textContent='تم إرسال القائمة ('+rows.length+').'}catch(x){e.style.color='var(--no)';e.textContent='تعذّر الإرسال'}}
 async function agLoadReq(){const box=$('ag_req');try{const j=await api({action:'auth_pending',pin:TP});if(!j.ok)throw 0;
-  box.innerHTML=j.rows.length?j.rows.map(r=>`<div class="agrow" id="agr_${esc(r.ph)}"><span>${esc(r.name||'—')} <span dir="ltr">${esc(r.ph)}</span></span><button class="b" onclick="agIssue('${esc(r.ph)}')">إنشاء رمز</button></div>`).join(''):'<p class="note">لا توجد طلبات.</p>'}
+  box.innerHTML=j.rows.length?j.rows.map(r=>`<div class="agrow" id="agr_${esc(r.ph)}"><span>${esc(r.name||'—')} <span dir="ltr">${esc(r.ph)}</span>${r.status==='issued'?' <small style="color:var(--ok)">✅ صدر له رمز</small>':''}</span><button class="b" onclick="agIssue('${esc(r.ph)}')">${r.status==='issued'?'رمز جديد':'إنشاء رمز'}</button></div>`).join(''):'<p class="note">لا توجد طلبات.</p>'}
   catch(e){box.innerHTML='<p class="note">تعذّر تحميل الطلبات.</p>'}}
+setInterval(()=>{if(TP&&!document.hidden&&$('tpanel').style.display==='block'&&!document.querySelector('#ag_req a'))agLoadReq()},30000);
 async function agIssue(ph){const row=$('agr_'+ph);try{const j=await api({action:'auth_issue',pin:TP,ph:ph});if(!j.ok)throw new Error(j.err);
   const msg='رمز الدخول إلى الحقيبة التدريبية: '+j.code+'\nصالح لمدة '+j.ttl+' دقيقة. لا تشاركه مع أحد.';
   row.innerHTML=`<span>${esc(j.name||'')} <span dir="ltr">${esc(ph)}</span></span><a class="b" target="_blank" rel="noopener" href="https://wa.me/${esc(ph)}?text=${encodeURIComponent(msg)}">فتح واتساب وإرسال الرمز</a>`}
