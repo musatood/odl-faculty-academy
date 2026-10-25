@@ -84,6 +84,7 @@ table.t{border-collapse:collapse;width:100%;font-size:.88rem}table.t th,table.t 
 </nav>
 </header>
 <div id="nbar" style="display:none;background:var(--ac);color:#fff;padding:10px 16px;text-align:center;font-weight:700"></div>
+<div id="peerbar" style="display:none;background:var(--pr2);color:var(--tx);padding:10px 16px;text-align:center"></div>
 <div id="trk_me" style="display:none"></div>
 <main>
 <!-- الوكلاء الذكيون -->
@@ -2320,7 +2321,8 @@ table.t{border-collapse:collapse;width:100%;font-size:.88rem}table.t th,table.t 
 <button class="b s" onclick="trkLoad()">🔄 تحديث</button> <button class="b s" onclick="trkRun('sync')">⚡ مزامنة الآن</button> <button class="b s" onclick="trkRun('daily')">📋 إرسال التقرير اليومي</button> <button class="b s" onclick="trkRun('weekly')">📊 إرسال الأسبوعي</button> <button class="b s" onclick="trkTest()">✅ اختبار الربط</button> <button class="b s" onclick="trkLog()">🧾 سجل الإرسال</button>
 <div class="fb" id="trk_msg"></div><div class="wrapx" id="trk_box"></div>
 <hr><b>📢 إرسال إشعار للمتدربين</b><input type="text" id="ntext" placeholder="نص الإشعار"><button class="b" onclick="postNote()">نشر الإشعار</button><div class="fb" id="nerr"></div>
-<hr><b>🔐 إدارة الدخول (رمز التحقق)</b><textarea id="ag_roster" rows="4" dir="rtl" placeholder="الاسم،الرقم — سطر لكل متدرب. مثال: أحمد علي،249912345678"></textarea><button class="b" onclick="agSaveRoster()">حفظ قائمة المسجلين</button> <button class="b s" onclick="agLoadReq()">🔄 تحديث الطلبات</button><div class="fb" id="ag_aerr"></div><div id="ag_req"></div><hr><button class="b s" onclick="agUsers()">👥 المسجلون ومحاولات الذكاء الاصطناعي</button><div id="ag_users"></div> <p class="note" id="tcount"></p>
+<hr><b>🔐 إدارة الدخول (رمز التحقق)</b><textarea id="ag_roster" rows="4" dir="rtl" placeholder="الاسم،الرقم — سطر لكل متدرب. مثال: أحمد علي،249912345678"></textarea><button class="b" onclick="agSaveRoster()">حفظ قائمة المسجلين</button> <button class="b s" onclick="agLoadReq()">🔄 تحديث الطلبات</button><div class="fb" id="ag_aerr"></div><div id="ag_req"></div><hr><button class="b s" onclick="agUsers()">👥 المسجلون ومحاولات الذكاء الاصطناعي</button><div id="ag_users"></div>
+<hr><b>🤝 الأقران المهنيون (دخول بالرقم وحده دون رمز)</b><p class="note">يرون «الشرح» و«المراجعة» فقط، ولا اختبار ولا مشروع ولا تتبع ولا شهادة ولا رسائل واتساب.</p><textarea id="peer_roster" rows="3" dir="rtl" placeholder="الاسم،الرقم — سطر لكل قرين. مثال: سارة محمد،249912345678"></textarea><button class="b" onclick="peerSave()">حفظ قائمة الأقران</button> <button class="b s" onclick="peerList()">👥 عرض الأقران</button><div class="fb" id="peer_msg"></div><div id="peer_list"></div> <p class="note" id="tcount"></p>
 <div class="wrapx"><table class="t" id="ttab"></table></div>
 </div>
 </div>
@@ -2496,13 +2498,17 @@ const TOPICS=["الفرق بين التعليم الإلكتروني والتع�
 const qi=x=>x.qid!==undefined?x.qid:x.n-1;
 function level(p){return p>=90?'ممتاز':p>=80?'جيد جداً':p>=70?'جيد':p>=60?'مقبول':'يحتاج إلى مراجعة معمّقة'}
 function rec(p){return p>=85?'أداء متميز. ننصحكم بتطبيق ما تعلّمتموه بتصميم وحدة من أحد مقرراتكم وفق مبادئ الاتساق البنائي.':p>=60?'أداء مقبول. راجعوا المحاور المذكورة في الشرح والمراجعة، ثم طبّقوا ما تعلّمتموه في أحد مقرراتكم.':'ننصحكم بإعادة دراسة وحدات الحقيبة المرتبطة بالمحاور المذكورة، والاستعانة بقسم المراجعة والاستماع إلى الشرح، ثم إعادة الاختبار.'}
+const PRE_REC_HI='لديكم معرفة سابقة جيدة بموضوعات الحقيبة. هذا اختبار قبلي لقياس نقطة انطلاقكم، ولا يدخل في شهادتكم. ننصحكم بالبدء بدراسة الحقيبة (الشرح ثم المراجعة) مع التركيز على المحاور المذكورة، ثم إجراء الاختبار البعدي بعد إتمام الدراسة لقياس تقدّمكم.';
+const PRE_REC_LO='هذه نتيجة طبيعية قبل دراسة الحقيبة؛ فالاختبار القبلي يقيس نقطة انطلاقكم فقط، ولا يدخل في شهادتكم. ننصحكم بالبدء بدراسة الحقيبة (الشرح ثم المراجعة) مع التركيز على المحاور المذكورة، ثم إجراء الاختبار البعدي بعد إتمام الدراسة لقياس تقدّمكم.';
+const levelP=(p,ph)=>ph=='pre'?'نقطة انطلاقك قبل الدراسة':level(p);
+const recP=(p,ph)=>ph=='pre'?(p>=60?PRE_REC_HI:PRE_REC_LO):rec(p);
 function buildMsg(r,rows){const sc=+r.score,tot=+r.total,p=Math.round(sc/tot*100),wr=rows.filter(x=>!x.ok),wk=[...new Set(wr.map(x=>TOPICS[qi(x)]))],st=[...new Set(TOPICS)].filter(t=>!wk.includes(t));
- let m='السلام عليكم ورحمة الله وبركاته\n\nحضرة '+r.name+' المحترم/ة،\nنشكركم على إتمام اختبار الحقيبة التدريبية «التدريس في التعليم المفتوح وعن بُعد».\n\n📊 النتيجة: '+sc+' من '+tot+' ('+p+'%)\n🏅 المستوى: '+level(p)+'\n'+(r.phase=='pre'?'🧪 المرحلة: اختبار قبلي (لقياس المستوى قبل الدراسة)\n':'🎯 المرحلة: اختبار بعدي\n')+(r.cert?'🎓 رمز شهادتك: '+r.cert+'\n':'');
+ let m='السلام عليكم ورحمة الله وبركاته\n\nحضرة '+r.name+' المحترم/ة،\nنشكركم على إتمام اختبار الحقيبة التدريبية «التدريس في التعليم المفتوح وعن بُعد».\n\n📊 النتيجة: '+sc+' من '+tot+' ('+p+'%)\n'+(r.phase=='pre'?'':'🏅 المستوى: '+level(p)+'\n')+(r.phase=='pre'?'🧪 المرحلة: اختبار قبلي لقياس نقطة انطلاقكم قبل دراسة الحقيبة، ولا يدخل في الشهادة\n':'🎯 المرحلة: اختبار بعدي\n')+(r.cert?'🎓 رمز شهادتك: '+r.cert+'\n':'');
  {const cb=calibOf(rows);if(cb.k)m+='\n🎯 معايرة الثقة: ثقتك المتوسطة '+cb.conf+'% ودقتك الفعلية '+cb.acc+'%'+(cb.over?' — أخطاء بثقة عالية: '+cb.over:'')+'\n'}
- if(st.length)m+='\n✅ محاور تمكّنتم منها:\n'+st.map(t=>'• '+t).join('\n')+'\n';
- if(wk.length)m+='\n📚 محاور تحتاج إلى مراجعة:\n'+wk.map(t=>'• '+t).join('\n')+'\n';
- if(wr.length)m+='\n❌ الأسئلة التي لم تصحّ إجابتها (مع الإجابة الصحيحة):\n'+wr.map(x=>'س'+x.n+': '+x.c).join('\n')+'\n';
- return m+'\n💡 التوصية: '+rec(p)+'\n\nمع خالص التقدير،\nفريق التدريب'}
+ if(st.length)m+='\n'+(r.phase=='pre'?'✅ محاور لديكم معرفة سابقة بها:':'✅ محاور تمكّنتم منها:')+'\n'+st.map(t=>'• '+t).join('\n')+'\n';
+ if(wk.length)m+='\n'+(r.phase=='pre'?'📚 محاور سيكون تركيزكم عليها أثناء الدراسة:':'📚 محاور تحتاج إلى مراجعة:')+'\n'+wk.map(t=>'• '+t).join('\n')+'\n';
+ if(wr.length)m+=r.phase=='pre'?'\nℹ️ لم تُعرض الإجابات الصحيحة في الاختبار القبلي حتى يبقى الاختبار البعدي قياساً حقيقياً لتقدّمكم. ستجدون مضمون هذه المحاور في وحدات الشرح والمراجعة.\n':'\n❌ الأسئلة التي لم تصحّ إجابتها (مع الإجابة الصحيحة):\n'+wr.map(x=>'س'+x.n+': '+x.c).join('\n')+'\n';
+ return m+'\n💡 التوصية: '+recP(p,r.phase)+'\n\nمع خالص التقدير،\nفريق التدريب'}
 const WAI='<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.15c-.25.69-1.45 1.32-2 1.37-.51.05-1.15.07-1.85-.12-.43-.13-.98-.32-1.69-.62-2.97-1.28-4.9-4.27-5.05-4.47-.15-.2-1.2-1.6-1.2-3.05 0-1.45.76-2.16 1.03-2.46.27-.3.59-.37.79-.37h.57c.18 0 .43-.07.67.51.25.6.84 2.05.92 2.2.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.38-.44.51-.15.15-.3.31-.13.61.17.3.77 1.27 1.65 2.05 1.13 1.01 2.09 1.32 2.39 1.47.3.15.47.12.64-.07.17-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.72.81 2.02.96.3.15.5.22.57.35.07.12.07.72-.18 1.41z"/></svg>';
 function waBtn(href,t){return '<a class="b" style="background:#25D366;color:#fff;padding:6px 12px;display:inline-flex;align-items:center;gap:6px" target="_blank" rel="noopener" href="'+href+'">'+WAI+' '+t+'</a>'}
 async function finish(){const rows=[];let sc=0;
@@ -2528,7 +2534,7 @@ async function finish(){const rows=[];let sc=0;
  const msg=buildMsg(res,rows);
  const link='https://wa.me/'+me.wa+'?text='+encodeURIComponent(msg);
  const p=Math.round(sc/EX.length*100),wr=rows.filter(x=>!x.ok),wk=[...new Set(wr.map(x=>TOPICS[qi(x)]))],st=[...new Set(TOPICS)].filter(t=>!wk.includes(t));
- const extra=phaseBlock(res,p,pre0);$('ebody').innerHTML=`<div class="card"><div class="scr">${fmt(sc)} / ${EX.length}</div>${extra}<p style="text-align:center;margin:0">${p}% — <b>${level(p)}</b></p><p>تم حفظ نتيجتكم. اضغطوا الزر لاستلام التقرير المفصّل على واتساب (+${me.wa}).</p>${st.length?'<h3 style="color:var(--ok)">✅ محاور تمكّنتم منها</h3><ul>'+st.map(t=>'<li>'+t+'</li>').join('')+'</ul>':''}${wk.length?'<h3 style="color:var(--no)">📚 محاور تحتاج إلى مراجعة</h3><ul>'+wk.map(t=>'<li>'+t+'</li>').join('')+'</ul>':''}<p><b>💡 التوصية:</b> ${rec(p)}</p>${waBtn(link,'إرسال التقرير إلى الواتساب')} <button class="b s" onclick="copyMsg()">📋 نسخ الرسالة</button></div>${calibBlock(rows)}${fbTopics(rows)}<div class="card"><h3>مراجعة تفصيلية للإجابات</h3>${rows.map(r=>`<div class="q"><b>${r.n}. ${r.q}</b><div style="color:var(--${r.ok?'ok':'no'})">${r.ok?'✅ إجابة صحيحة':'❌ إجابتكم: '+(r.a||'لم تُجب')}</div>${r.ok?'':'<div>الإجابة الصحيحة: <b>'+r.c+'</b></div>'+(r.e?'<div class="note">'+r.e+'</div>':'')}${r.cf?'<div class="note">ثقتك: '+CFL[r.cf]+' • النقاط: '+fmt(r.pt)+'</div>':''}<div class="note">المحور: ${TOPICS[qi(r)]}</div></div>`).join('')}</div>`;
+ const extra=phaseBlock(res,p,pre0);$('ebody').innerHTML=`<div class="card"><div class="scr">${fmt(sc)} / ${EX.length}</div>${extra}<p style="text-align:center;margin:0">${p}% — <b>${levelP(p,res.phase)}</b></p><p>تم حفظ نتيجتكم. اضغطوا الزر لاستلام التقرير المفصّل على واتساب (+${me.wa}).</p>${st.length?'<h3 style="color:var(--ok)">'+(res.phase=='pre'?'✅ محاور لديك معرفة سابقة بها':'✅ محاور تمكّنتم منها')+'</h3><ul>'+st.map(t=>'<li>'+t+'</li>').join('')+'</ul>':''}${wk.length?'<h3 style="color:var(--no)">'+(res.phase=='pre'?'📚 محاور ستركّز عليها أثناء الدراسة':'📚 محاور تحتاج إلى مراجعة')+'</h3><ul>'+wk.map(t=>'<li>'+t+'</li>').join('')+'</ul>':''}<p><b>💡 التوصية:</b> ${recP(p,res.phase)}</p>${waBtn(link,'إرسال التقرير إلى الواتساب')} <button class="b s" onclick="copyMsg()">📋 نسخ الرسالة</button></div>${calibBlock(rows)}${fbTopics(rows,res.phase)}<div class="card"><h3>مراجعة تفصيلية للإجابات</h3>${res.phase=='pre'?'<p class=\"note\">🔒 لا تُعرض الإجابات الصحيحة في الاختبار القبلي حتى يبقى الاختبار البعدي قياساً حقيقياً لتقدّمك.</p>':''}${rows.map(r=>`<div class="q"><b>${r.n}. ${r.q}</b><div style="color:var(--${r.ok?'ok':'no'})">${r.ok?'✅ إجابة صحيحة':'❌ إجابتكم: '+(r.a||'لم تُجب')}</div>${r.ok||res.phase=='pre'?'':'<div>الإجابة الصحيحة: <b>'+r.c+'</b></div>'+(r.e?'<div class="note">'+r.e+'</div>':'')}${r.cf?'<div class="note">ثقتك: '+CFL[r.cf]+' • النقاط: '+fmt(r.pt)+'</div>':''}<div class="note">المحور: ${TOPICS[qi(r)]}</div></div>`).join('')}</div>`;
  window.MSG=msg;window.scrollTo(0,0)}
 function copyMsg(){try{navigator.clipboard.writeText(window.MSG);alert('تم نسخ الرسالة')}catch(e){prompt('انسخ الرسالة:',window.MSG)}}
 async function save(r,ans){try{const a=JSON.parse(localStorage.getItem('results')||'[]');a.push(r);localStorage.setItem('results',JSON.stringify(a))}catch(e){}
@@ -2725,7 +2731,7 @@ initNotes();
 </script>
 <script>
 /* ===== الدخول برمز التحقق ===== */
-const AG={t:localStorage.getItem('odl_tok')||'',p:localStorage.getItem('odl_ph')||'',n:localStorage.getItem('odl_nm')||''};
+const AG={t:localStorage.getItem('odl_tok')||'',p:localStorage.getItem('odl_ph')||'',n:localStorage.getItem('odl_nm')||'',peer:localStorage.getItem('odl_peer')==='1'};
 const agDigits=s=>String(s||'').replace(/\D/g,'').replace(/^00/,'');
 function agShow(on){$('authgate').style.display=on?'block':'none'}
 function agMsg(m,ok){const e=$('ag_msg');e.style.color=ok?'var(--ok)':'var(--no)';e.textContent=m}
@@ -2735,14 +2741,24 @@ async function agRequest(){if(!SHEET_URL){agMsg('لم يُضبط رابط الخ
   const ph=agDigits($('ag_ph').value);if(!/^\d{8,15}$/.test(ph)){agMsg('أدخل الرقم مع رمز الدولة (8-15 رقماً).');return}
   agMsg('⏳ جارٍ الإرسال...',true);
   try{const j=await api({action:'auth_request',ph:ph});if(!j.ok){agMsg(j.err||'تعذّر الطلب');return}
+    if(j.peer){peerEnter(ph,j.name||'');return}
     AG.p=ph;$('ag_step1').style.display='none';$('ag_step2').style.display='block';agMsg('تم إبلاغ المدرب. سيصلك الرمز على واتساب قريباً.',true)}
   catch(e){agMsg('تعذّر الاتصال بالخادم. حاول لاحقاً.')}}
 async function agVerify(){const code=agDigits($('ag_code').value);if(code.length!==6){agMsg('الرمز 6 أرقام.');return}
   try{const j=await api({action:'auth_verify',ph:AG.p,code:code});if(!j.ok){agMsg(j.err||'الرمز غير صحيح');return}
-    AG.t=j.tok;AG.p=j.ph;AG.n=j.name;localStorage.setItem('odl_tok',AG.t);localStorage.setItem('odl_ph',AG.p);localStorage.setItem('odl_nm',AG.n);
+    AG.t=j.tok;AG.p=j.ph;AG.n=j.name;localStorage.setItem('odl_tok',AG.t);localStorage.setItem('odl_ph',AG.p);localStorage.setItem('odl_nm',AG.n);localStorage.removeItem('odl_peer');AG.peer=false;
     agShow(false);agApply()}catch(e){agMsg('تعذّر الاتصال بالخادم.')}}
-function agLogout(){['odl_tok','odl_ph','odl_nm'].forEach(k=>localStorage.removeItem(k));location.reload()}
+function agLogout(){['odl_tok','odl_ph','odl_nm','odl_peer'].forEach(k=>localStorage.removeItem(k));location.reload()}
+/* ===== الأقران المهنيون: دخول بالرقم وحده، صلاحية عرض الشرح والمراجعة فقط ===== */
+function peerEnter(ph,nm){AG.t='';AG.peer=true;AG.p=ph;AG.n=nm;localStorage.removeItem('odl_tok');localStorage.setItem('odl_peer','1');localStorage.setItem('odl_ph',ph);localStorage.setItem('odl_nm',nm);agShow(false);peerUI()}
+function peerUI(){['exam','project','myfb','agents','trainer'].forEach(t=>{const b=document.querySelector('#nav button[data-t="'+t+'"]');if(b)b.style.display='none'});
+  const e=document.querySelector('#nav button[data-t="explain"]');if(e)e.click();
+  const bar=$('peerbar');bar.style.display='block';bar.innerHTML='🤝 أهلاً <b>'+esc(AG.n||'')+'</b> — دخلتَ بصفة «قرين مهني»: الشرح والمراجعة. <button class="b s" onclick="agLogout()">تسجيل الخروج</button>'}
 async function agInit(){if(location.hash==='#admin'){agShow(false);return}
+  if(!AG.t&&AG.peer&&AG.p){agShow(false);
+    try{const j=await api({action:'auth_peer_check',ph:AG.p});if(j.ok){AG.n=j.name||AG.n;peerUI();return}
+      ['odl_peer','odl_ph','odl_nm'].forEach(k=>localStorage.removeItem(k));AG.peer=false;agShow(true)}catch(e){peerUI()}
+    return}
   if(!AG.t){agShow(true);return}
   agShow(false);
   try{const j=await api({action:'auth_check',tok:AG.t});
@@ -2868,6 +2884,16 @@ async function agUsers(){const box=$('ag_users');box.innerHTML='<p class="note">
   try{const j=await api({action:'auth_users',pin:TP});if(!j.ok)throw 0;
     box.innerHTML=j.rows.length?j.rows.map(r=>`<div class="agrow"><span>${r.req?'🔔 ':''}${esc(r.name||'—')} <span dir="ltr">${esc(r.ph)}</span> — المتبقي: <b>${esc(String(r.left))}</b></span><span><button class="b" onclick="agSetAi('${esc(r.ph)}',3)">تجديد إلى 3</button> <button class="b s" onclick="agSetAi('${esc(r.ph)}',${+r.left+1})">+1</button> <button class="b s" onclick="agSetAi('${esc(r.ph)}',0)">تصفير</button> <button class="b s" style="color:var(--no)" onclick="agDel('${esc(r.ph)}')">🗑 حذف</button></span></div>`).join(''):'<p class="note">لا يوجد مسجلون.</p>'}
   catch(e){box.innerHTML='<p class="note">تعذّر تحميل القائمة.</p>'}}
+async function peerSave(){const m=$('peer_msg');const rows=$('peer_roster').value.split('\n').map(l=>{const t=l.match(/(\+?\d[\d\s\-()]{6,}\d)/);if(!t)return null;const ph=t[1].replace(/\D/g,'').replace(/^00/,'');const name=l.replace(t[1],' ').replace(/[،,;:.\-–|\t]+/g,' ').replace(/\s+/g,' ').trim();return /^\d{8,15}$/.test(ph)?{name:name,ph:ph}:null}).filter(Boolean);
+  if(!rows.length){m.style.color='var(--no)';m.textContent='اكتب في كل سطر الاسم ثم الرقم مع رمز الدولة.';return}
+  try{const j=await api({action:'auth_peer_roster',pin:TP,rows:JSON.stringify(rows)});if(!j.ok)throw new Error(j.err);
+    m.style.color='var(--ok)';m.textContent='تم حفظ '+j.n+' من الأقران'+(j.skip?' — وتخطّى '+j.skip+' لأنهم مسجلون متدربين (يدخلون بالرمز)':'')+'.';$('peer_roster').value='';peerList()}
+  catch(e){m.style.color='var(--no)';m.textContent='تعذّر الحفظ ('+(e.message||'خطأ')+'). تأكد من نشر أحدث نسخة من Code.gs.'}}
+async function peerList(){const b=$('peer_list');b.innerHTML='<p class="note">⏳ جارٍ التحميل...</p>';
+  try{const j=await api({action:'auth_peer_list',pin:TP});if(!j.ok)throw 0;
+    b.innerHTML=j.rows.length?j.rows.map(r=>`<div class="agrow"><span>${esc(r.name||'—')} <span dir="ltr">${esc(r.ph)}</span></span><button class="b s" style="color:var(--no)" onclick="peerDel('${esc(r.ph)}')">🗑 حذف</button></div>`).join(''):'<p class="note">لا يوجد أقران.</p>'}
+  catch(e){b.innerHTML='<p class="note">تعذّر تحميل القائمة.</p>'}}
+async function peerDel(ph){if(!confirm('حذف القرين '+ph+'؟ يُمنع دخوله فوراً.'))return;try{const j=await api({action:'auth_peer_delete',pin:TP,ph:ph});if(!j.ok)throw 0;peerList()}catch(e){alert('تعذّر الحذف')}}
 async function agDel(ph){if(!confirm('حذف المتدرب '+ph+' من التسجيل؟\nيُلغى دخوله فوراً ويختفي من التتبع. تبقى نتائجه ومشاريعه في الجدول.'))return;
   try{const j=await api({action:'auth_delete',pin:TP,ph:ph});if(!j.ok)throw new Error(j.err);agUsers();agLoadReq()}catch(e){$('ag_users').insertAdjacentHTML('afterbegin','<p class="note" style="color:var(--no)">تعذّر الحذف: '+esc(e.message||'خطأ')+'</p>')}}
 async function agSetAi(ph,n){try{const j=await api({action:'auth_ai_set',pin:TP,ph:ph,n:n});if(!j.ok)throw new Error(j.err);agUsers()}catch(e){$('ag_users').insertAdjacentHTML('afterbegin','<p class="note" style="color:var(--no)">تعذّر التعديل: '+esc(e.message||'خطأ')+'</p>')}}
@@ -2905,13 +2931,13 @@ function mfTopicStats(rows){const t={};rows.forEach(r=>{const k=TOPICS[qi(r)];if
 function mfUnitLbl(u){const t=US[u].dataset.title||'';return t.indexOf(':')>0?'راجع الوحدة '+t.split(':')[0]:'راجع: '+t.slice(0,26)}
 function mfStudyBtn(topic){const u=unitFor(topic);return u>=0?'<button class="b s" style="padding:4px 10px" title="'+esc(US[u].dataset.title||'')+'" onclick="studyTopic('+u+')">📖 '+esc(mfUnitLbl(u))+'</button>':'📚 راجع الشرح'}
 /* ----- خريطة الإتقان تظهر فور انتهاء الاختبار ----- */
-function fbTopics(rows){
+function fbTopics(rows,ph){const PRE=ph=='pre';
   const t=mfTopicStats(rows),e=Object.entries(t).map(([k,v])=>({k,p:Math.round(v.ok/v.n*100),ok:v.ok,n:v.n})).sort((a,b)=>a.p-b.p);
   if(!e.length)return '';
-  return '<div class="card"><h3>🧭 خريطة إتقانك للمحاور</h3><p class="note">نسبة صحة إجاباتك في كل محور من هذه المحاولة، مع أقرب وحدة للمراجعة. الأضعف أولاً.</p><div class="wrapx"><table class="t"><tr><th>المحور</th><th>إتقانك</th><th>الإجراء</th></tr>'
+  return '<div class="card"><h3>'+(PRE?'🧭 خريطة معرفتك السابقة بالمحاور':'🧭 خريطة إتقانك للمحاور')+'</h3><p class="note">'+(PRE?'نسبة صحة إجاباتك في كل محور قبل الدراسة، مع أقرب وحدة تبدأ بها. الأضعف أولاً.':'نسبة صحة إجاباتك في كل محور من هذه المحاولة، مع أقرب وحدة للمراجعة. الأضعف أولاً.')+'</p><div class="wrapx"><table class="t"><tr><th>المحور</th><th>إتقانك</th><th>الإجراء</th></tr>'
    +e.map(x=>'<tr><td style="text-align:right">'+esc(x.k)+'</td><td>'+x.p+'% ('+x.ok+'/'+x.n+')'+mfBar(x.p)+'</td><td>'+(x.p>=80?'✅ متمكن':mfStudyBtn(x.k))+'</td></tr>').join('')
    +'</table></div><p class="note">نتائجك السابقة وتحليلها تبقى محفوظة في تبويب «📈 تغذيتي الراجعة».</p></div>'}
-function mfReview(rows){return rows.map(r=>'<div class="q"><b>'+r.n+'. '+esc(mfTxt(r.q)||('السؤال '+r.n))+'</b><div style="color:var(--'+(r.ok?'ok':'no')+')">'+(r.ok?'✅ إجابة صحيحة':'❌ إجابتك: '+esc(r.a||'لم تُجب'))+'</div>'+(r.ok?'':'<div>الإجابة الصحيحة: <b>'+esc(r.c)+'</b></div>'+(r.e?'<div class="note">'+esc(r.e)+'</div>':''))+(r.cf?'<div class="note">ثقتك: '+(CFL[r.cf]||r.cf)+' • النقاط: '+fmt(r.pt)+'</div>':'')+'<div class="note">المحور: '+esc(TOPICS[qi(r)]||'')+'</div></div>').join('')}
+function mfReview(rows,ph){return rows.map(r=>'<div class="q"><b>'+r.n+'. '+esc(mfTxt(r.q)||('السؤال '+r.n))+'</b><div style="color:var(--'+(r.ok?'ok':'no')+')">'+(r.ok?'✅ إجابة صحيحة':'❌ إجابتك: '+esc(r.a||'لم تُجب'))+'</div>'+(r.ok||ph=='pre'?'':'<div>الإجابة الصحيحة: <b>'+esc(r.c)+'</b></div>'+(r.e?'<div class="note">'+esc(r.e)+'</div>':''))+(r.cf?'<div class="note">ثقتك: '+(CFL[r.cf]||r.cf)+' • النقاط: '+fmt(r.pt)+'</div>':'')+'<div class="note">المحور: '+esc(TOPICS[qi(r)]||'')+'</div></div>').join('')}
 /* ----- ملاحظات آلية على المشروع (تعمل دون خادم) ----- */
 function mfAutoItems(o){
   const ck=String(o.checks||''),met=[...ck].filter(c=>c==='1').length,it=[];
@@ -2985,7 +3011,7 @@ function mfExam(j){
   if(!A.length)return '<div class="card"><h3>📝 اختباراتك</h3><p>لم تُجرِ أي اختبار بعد. ابدأ بالاختبار القبلي لتعرف نقطة انطلاقك، فتظهر هنا خريطة إتقانك وتوصياتك المخصصة.</p><button class="b" onclick="mfGo(\'exam\')">ابدأ الاختبار</button></div>';
   const last=A[0],lp=A.find(a=>a.phase=='pre'),lq=A.find(a=>a.phase!='pre'),g=j.group;
   let h='<div class="card"><h3>📝 اختباراتك: تقدمك وتغذيتك الراجعة</h3><div class="wrapx"><table class="t"><tr><th>التاريخ</th><th>النوع</th><th>الدرجة</th><th>النسبة</th><th>المستوى</th></tr>'
-   +A.map(a=>'<tr><td>'+esc(mfDate(a.end||a.start))+'</td><td>'+(a.phase=='pre'?'قبلي':'بعدي')+'</td><td>'+esc(a.score)+' / '+esc(a.total)+'</td><td>'+a.pct+'%'+mfBar(a.pct||0)+'</td><td>'+level(a.pct||0)+'</td></tr>').join('')+'</table></div>';
+   +A.map(a=>'<tr><td>'+esc(mfDate(a.end||a.start))+'</td><td>'+(a.phase=='pre'?'قبلي':'بعدي')+'</td><td>'+esc(a.score)+' / '+esc(a.total)+'</td><td>'+a.pct+'%'+mfBar(a.pct||0)+'</td><td>'+levelP(a.pct||0,a.phase)+'</td></tr>').join('')+'</table></div>';
   if(lp&&lq){const d=lq.pct-lp.pct;h+='<p>📈 قبلي <b>'+lp.pct+'%</b> ← بعدي <b>'+lq.pct+'%</b> ('+(d>=0?'+':'')+d+' نقطة). '+(d>=15?'تحسن كبير يدل على أثر الدراسة.':d>0?'تحسن إيجابي، وما زال في المحاور الضعيفة مجال للتقدم.':d==0?'لم يتغير مستواك: ركّز على المحاور الأضعف أدناه ثم أعد الاختبار.':'انخفضت نتيجتك: راجع المحاور الأضعف أدناه قبل المحاولة التالية.')+'</p>'}
   else if(lp&&!lq)h+='<p class="note">أجريتَ القبلي فقط: ادرس الحقيبة ثم أجرِ البعدي لتقيس تقدمك.</p>';
   if(g){const mine=lq?lq.pct:last.pct,avg=lq?g.avgPost:g.avgPre;if(avg!==null&&avg!==undefined){const d=mine-avg;h+='<p>👥 متوسط المجموعة ('+(lq?'بعدي':'قبلي')+', دون أسماء): <b>'+avg+'%</b>، ونتيجتك <b>'+mine+'%</b> ('+(d>=0?'أعلى منه بـ ':'أقل منه بـ ')+Math.abs(d)+' نقطة).</p>'}}
@@ -3000,9 +3026,9 @@ function mfExam(j){
     if(hi.length)h+='<p>⚠️ أخطأتَ بثقة عالية في <b>'+hi.length+'</b> سؤال: '+hi.map(r=>'س'+r.n).join('، ')+'. هذه أخطر الأخطاء لأنك لا تدرك أنها أخطاء؛ راجعها أولاً في التفاصيل أدناه.</p>';
     if(last.calib&&last.calib.k)h+=calibBlock(rows);
     const wrong=rows.filter(r=>!r.ok);
-    h+='<details style="margin-top:8px"><summary><b>🔍 مراجعة تفصيلية لآخر محاولة ('+wrong.length+' سؤالاً يحتاج مراجعة)</b></summary>'+mfReview(rows)+'</details>';
+    h+='<details style="margin-top:8px"><summary><b>🔍 مراجعة تفصيلية لآخر محاولة ('+wrong.length+' سؤالاً يحتاج مراجعة)</b></summary>'+mfReview(rows,last.phase)+'</details>';
   }
-  if(A.length>1)h+=A.slice(1).map((a,i)=>(a.rows&&a.rows.length)?'<details style="margin-top:6px"><summary>محاولة سابقة: '+(a.phase=='pre'?'قبلي':'بعدي')+' — '+a.pct+'% — '+esc(mfDate(a.end||a.start))+'</summary>'+mfReview(a.rows)+'</details>':'').join('');
+  if(A.length>1)h+=A.slice(1).map((a,i)=>(a.rows&&a.rows.length)?'<details style="margin-top:6px"><summary>محاولة سابقة: '+(a.phase=='pre'?'قبلي':'بعدي')+' — '+a.pct+'% — '+esc(mfDate(a.end||a.start))+'</summary>'+mfReview(a.rows,a.phase)+'</details>':'').join('');
   return h+'</div>'}
 function mfProj(j){
   const p=j.proj;
