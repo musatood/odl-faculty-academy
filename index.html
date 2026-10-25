@@ -2735,6 +2735,7 @@ async function agVerify(){const code=agDigits($('ag_code').value);if(code.length
   try{const j=await api({action:'auth_verify',ph:AG.p,code:code});if(!j.ok){agMsg(j.err||'الرمز غير صحيح');return}
     AG.t=j.tok;AG.p=j.ph;AG.n=j.name;localStorage.setItem('odl_tok',AG.t);localStorage.setItem('odl_ph',AG.p);localStorage.setItem('odl_nm',AG.n);
     agShow(false);agApply()}catch(e){agMsg('تعذّر الاتصال بالخادم.')}}
+function agLogout(){['odl_tok','odl_ph','odl_nm'].forEach(k=>localStorage.removeItem(k));location.reload()}
 async function agInit(){if(location.hash==='#admin'){agShow(false);return}
   if(!AG.t){agShow(true);return}
   agShow(false);
@@ -2859,8 +2860,10 @@ document.querySelector('#nav button[data-t="agents"]').addEventListener('click',
 /* لوحة المدرب */
 async function agUsers(){const box=$('ag_users');box.innerHTML='<p class="note">⏳ جارٍ التحميل...</p>';
   try{const j=await api({action:'auth_users',pin:TP});if(!j.ok)throw 0;
-    box.innerHTML=j.rows.length?j.rows.map(r=>`<div class="agrow"><span>${r.req?'🔔 ':''}${esc(r.name||'—')} <span dir="ltr">${esc(r.ph)}</span> — المتبقي: <b>${esc(String(r.left))}</b></span><span><button class="b" onclick="agSetAi('${esc(r.ph)}',3)">تجديد إلى 3</button> <button class="b s" onclick="agSetAi('${esc(r.ph)}',${+r.left+1})">+1</button> <button class="b s" onclick="agSetAi('${esc(r.ph)}',0)">تصفير</button></span></div>`).join(''):'<p class="note">لا يوجد مسجلون.</p>'}
+    box.innerHTML=j.rows.length?j.rows.map(r=>`<div class="agrow"><span>${r.req?'🔔 ':''}${esc(r.name||'—')} <span dir="ltr">${esc(r.ph)}</span> — المتبقي: <b>${esc(String(r.left))}</b></span><span><button class="b" onclick="agSetAi('${esc(r.ph)}',3)">تجديد إلى 3</button> <button class="b s" onclick="agSetAi('${esc(r.ph)}',${+r.left+1})">+1</button> <button class="b s" onclick="agSetAi('${esc(r.ph)}',0)">تصفير</button> <button class="b s" style="color:var(--no)" onclick="agDel('${esc(r.ph)}')">🗑 حذف</button></span></div>`).join(''):'<p class="note">لا يوجد مسجلون.</p>'}
   catch(e){box.innerHTML='<p class="note">تعذّر تحميل القائمة.</p>'}}
+async function agDel(ph){if(!confirm('حذف المتدرب '+ph+' من التسجيل؟\nيُلغى دخوله فوراً ويختفي من التتبع. تبقى نتائجه ومشاريعه في الجدول.'))return;
+  try{const j=await api({action:'auth_delete',pin:TP,ph:ph});if(!j.ok)throw new Error(j.err);agUsers();agLoadReq()}catch(e){$('ag_users').insertAdjacentHTML('afterbegin','<p class="note" style="color:var(--no)">تعذّر الحذف: '+esc(e.message||'خطأ')+'</p>')}}
 async function agSetAi(ph,n){try{const j=await api({action:'auth_ai_set',pin:TP,ph:ph,n:n});if(!j.ok)throw new Error(j.err);agUsers()}catch(e){$('ag_users').insertAdjacentHTML('afterbegin','<p class="note" style="color:var(--no)">تعذّر التعديل: '+esc(e.message||'خطأ')+'</p>')}}
 </script>
 <script>
@@ -3073,7 +3076,7 @@ async function trkMeLoad(){const box=$('trk_me');if(!AG.t||!SHEET_URL){box.style
     const chips=j.steps.map(s=>'<span style="display:inline-block;margin:3px;padding:4px 10px;border-radius:14px;background:'+(s.s==='done'?'var(--chd)':s.s==='wip'?'var(--cwp)':'var(--ctd)')+';color:var(--tx);font-size:.9em" title="'+esc(s.txt)+'">'+({done:'✅',wip:'⏳',todo:'⬜'})[s.s]+' '+esc(s.t)+'</span>').join('');
     box.innerHTML='<div style="max-width:1000px;margin:10px auto;padding:10px 14px;background:var(--card);color:var(--tx);border:2px solid var(--ac);border-radius:12px"><div style="display:flex;justify-content:space-between;gap:8px;cursor:pointer" onclick="TRK_ME_OPEN=!TRK_ME_OPEN;trkMeLoad()"><b>📍 '+esc(j.name||'مسارك')+' — تقدمك '+j.pct+'% ('+j.done+'/'+j.total+')</b><span>'+(TRK_ME_OPEN?'▲':'▼')+'</span></div>'
       +'<div style="background:var(--trk);border-radius:8px;height:10px;margin:8px 0"><div style="width:'+j.pct+'%;height:10px;border-radius:8px;background:var(--ok,#2e8b57)"></div></div>'
-      +(TRK_ME_OPEN?'<div>'+chips+'</div><div style="margin-top:6px"><b>الخطوة التالية:</b> '+esc(j.next)+'</div>':'')+'</div>';
+      +(TRK_ME_OPEN?'<div>'+chips+'</div><div style="margin-top:6px"><b>الخطوة التالية:</b> '+esc(j.next)+'</div><div style="margin-top:8px"><button class="b s" onclick="agLogout()">تسجيل الخروج</button></div>':'')+'</div>';
     box.style.display='block'}catch(e){box.style.display='none'}}
 function trkBriefShow(j){const b=j.brief||{},box=$('trk_brief');if(!box)return;
   const warn=[];if(!j.cfg.provider)warn.push('مزوّد واتساب غير مضبوط');if(!j.cfg.mgrPin)warn.push('رمز المدير غير مضبوط');
