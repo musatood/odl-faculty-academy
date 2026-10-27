@@ -3225,7 +3225,7 @@ async function loadProj(){
   catch(e){b.innerHTML='<p class="note">تعذّر التحميل. تأكد من نشر أحدث Code.gs بإصدار جديد.</p>'}}
 async function projFb(ph){
   const rb=[...document.querySelectorAll('.rbs')].filter(s=>s.dataset.ph===ph).sort((a,b)=>a.dataset.i-b.dataset.i).map(s=>s.value).join('');
-  try{const j=await api({action:'proj_fb',pin:TP,ph:ph,text:$('fb_'+ph).value,status:$('st_'+ph).value,rubric:rb});alert(j.ok?'تم الحفظ. سيراه المتدرب في «تغذيتي الراجعة».':'تعذّر الحفظ')}catch(e){alert('تعذّر الاتصال')}}
+  try{const j=await api({action:'proj_fb',pin:TP,ph:ph,text:$('fb_'+ph).value,status:$('st_'+ph).value,rubric:rb});alert(j.ok?'تم الحفظ. سيراه المتدرب في «تغذيتي الراجعة».':'تعذّر الحفظ');if(j.ok){loadProj();try{trkLoad()}catch(e2){}}}catch(e){alert('تعذّر الاتصال')}}
 async function loadVid(){
   const b=$('vidbox');b.innerHTML='<p class="note">⏳</p>';
   try{const j=await api({action:'video_list',pin:TP});if(!j.ok)throw 0;
