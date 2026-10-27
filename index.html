@@ -60,7 +60,7 @@ table.t{border-collapse:collapse;width:100%;font-size:.88rem}table.t th,table.t 
 .wkm{padding:10px 12px;border-radius:12px;margin:6px 0;white-space:pre-wrap;line-height:1.75}
 .wkm.u{background:var(--pr2)}.wkm.a{background:var(--card);border:1px solid var(--bd)}.wkm small{display:block;color:var(--mu);margin-bottom:4px;font-weight:700}
 .wkm.md{white-space:normal}.wkm.md table{border-collapse:collapse;display:block;overflow-x:auto;max-width:100%}.wkm.md th,.wkm.md td{border:1px solid var(--bd);padding:5px 9px}.wkm.md th{background:var(--pr2)}.wkm.md pre{background:var(--bg);padding:10px;border-radius:8px;overflow-x:auto;direction:ltr;text-align:left;white-space:pre}.wkm.md h2,.wkm.md h3,.wkm.md h4{color:var(--ac);margin:.8em 0 .3em}.wkm.md blockquote{border-right:4px solid var(--pr);margin:6px 0;padding:2px 10px;background:var(--pr2)}.wkm.md p{margin:.4em 0}
-.cf{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px;font-size:.9rem}.cf>span{color:var(--mu)}.cf label{border:1px solid var(--bd);border-radius:8px;padding:3px 10px;cursor:pointer}.cf label:has(input:checked){background:var(--pr2);border-color:var(--pr)}
+.cf{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px;font-size:.9rem}.cf>span{color:var(--mu)}.cf label{border:1px solid var(--bd);border-radius:8px;padding:3px 10px;cursor:pointer}.cf label:has(input:checked){background:var(--pr2);border-color:var(--pr)}.tmhd{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px 14px;margin-bottom:10px}.tmbar{height:10px;border-radius:6px;background:var(--bd);overflow:hidden;margin-top:6px}.tmbar>i{display:block;height:10px;width:100%;background:var(--pr);transition:width .25s linear}.tmbar.lo>i{background:var(--no)}#ttab tr[data-rk="r"]>td{background:var(--hot)}
 </style>
 <!-- نسخة GitHub Pages: النتائج تُحفظ في Google Sheets عبر Apps Script -->
 </head>
@@ -2268,8 +2268,8 @@ table.t{border-collapse:collapse;width:100%;font-size:.88rem}table.t th,table.t 
 <label>الاسم الكامل *</label><input type="text" id="nm">
 <label>رقم الواتساب مع رمز الدولة * (مثال: 249912345678)</label><input type="tel" id="wa" inputmode="tel" dir="ltr">
 <label>البريد الإلكتروني (اختياري)</label><input type="email" id="em" dir="ltr">
-<label>نوع الاختبار</label><select id="phase"><option value="pre">🧪 اختبار قبلي (قبل دراسة الحقيبة)</option><option value="post" selected>🎯 اختبار بعدي (بعد الدراسة)</option></select>
-<p class="note">ستُرسل درجتك إلى رقم الواتساب هذا مباشرة بعد إنهاء الاختبار. الاختبار البعدي بنسبة نجاح تُصدر شهادة.</p>
+<label>نوع الاختبار</label><select id="phase" onchange="tmNote()"><option value="pre">🧪 اختبار قبلي (قبل دراسة الحقيبة)</option><option value="post" selected>🎯 اختبار بعدي (بعد الدراسة)</option></select>
+<p class="note">ستُرسل درجتك إلى رقم الواتساب هذا مباشرة بعد إنهاء الاختبار. الاختبار البعدي بنسبة نجاح تُصدر شهادة.</p><p class="note" id="tmnote"></p><p class="note">🔎 تُسجَّل أثناء الاختبار إشارات للمراجعة فقط: خروجك من الصفحة، ولصق النصوص، وزمن كل سؤال، وتغيير إجاباتك. لا تترتب عليها عقوبة آلية، وقد تُطلب منك مقابلة قصيرة لشرح إجاباتك.</p>
 <label class="opt"><input type="checkbox" id="pledge"> أُقرّ بأنني سأحلّ الاختبار بنفسي دون مساعدة من أي شخص أو أداة (ومنها الذكاء الاصطناعي)، وأعلم أن مقابلة مسجلة قصيرة قد تُراجَع لتأكيد أن العمل عملي.</label>
 <div id="gerr" class="fb" style="color:var(--no)"></div>
 <button class="b" onclick="startExam()">ابدأ الاختبار</button> <button class="b s" onclick="myCert()">🎓 شهادتي / حالة المقابلة</button>
@@ -2321,7 +2321,7 @@ table.t{border-collapse:collapse;width:100%;font-size:.88rem}table.t th,table.t 
 <div class="fb" id="trk_msg"></div><div class="wrapx" id="trk_box"></div>
 <hr><b>📢 إرسال إشعار للمتدربين</b><input type="text" id="ntext" placeholder="نص الإشعار"><button class="b" onclick="postNote()">نشر الإشعار</button><div class="fb" id="nerr"></div>
 <hr><b>🔐 إدارة الدخول (رمز التحقق)</b><textarea id="ag_roster" rows="4" dir="rtl" placeholder="الاسم،الرقم — سطر لكل متدرب. مثال: أحمد علي،249912345678"></textarea><button class="b" onclick="agSaveRoster()">حفظ قائمة المسجلين</button> <button class="b s" onclick="agLoadReq()">🔄 تحديث الطلبات</button><div class="fb" id="ag_aerr"></div><div id="ag_req"></div><hr><button class="b s" onclick="agUsers()">👥 المسجلون ومحاولات الذكاء الاصطناعي</button><div id="ag_users"></div> <p class="note" id="tcount"></p>
-<div class="wrapx"><table class="t" id="ttab"></table></div>
+<div id="rkbar" class="note"></div><div class="wrapx"><table class="t" id="ttab"></table></div>
 </div>
 </div>
 </main>
@@ -2466,10 +2466,72 @@ ALL.forEach((x,k)=>x.qid=k);
 const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 function drawExam(){const by=t=>ALL.filter(x=>x.t==t);return shuf([].concat(shuf(by('tf')).slice(0,6),shuf(by('mc')).slice(0,6),shuf(by('fl')).slice(0,4))).map(x=>Object.assign({},x,{ord:shuf([0,1,2,3])}))}
 function flagsOf(mins,sg){const f=[];if(mins<2)f.push('إنهاء سريع جداً ('+mins+' د)');if(sg.blur>=2||sg.blurMs>45000)f.push('خروج من الصفحة ×'+sg.blur+' ('+Math.round(sg.blurMs/1000)+' ث)');if(sg.paste>0)f.push('لصق نص ×'+sg.paste);return f.join('، ')}
-let SIG=null,EX=[];
-function sigStart(){SIG={blur:0,blurMs:0,paste:0,t:{},hid:0};const b=$('ebody');SIG.bl=()=>{if(!SIG.hid)SIG.hid=Date.now()};SIG.fo=()=>{if(SIG.hid){SIG.blur++;SIG.blurMs+=Date.now()-SIG.hid;SIG.hid=0}};SIG.pa=()=>{SIG.paste++};SIG.ch=e=>{const nm=String(e.target.name||'').replace('q','');if(nm!=='')SIG.t[nm]=Date.now()-t0.getTime()};
- window.addEventListener('blur',SIG.bl);window.addEventListener('focus',SIG.fo);b.addEventListener('paste',SIG.pa,true);b.addEventListener('input',SIG.ch,true);b.addEventListener('change',SIG.ch,true)}
-function sigStop(){if(!SIG)return{blur:0,blurMs:0,paste:0,t:{}};window.removeEventListener('blur',SIG.bl);window.removeEventListener('focus',SIG.fo);const b=$('ebody');b.removeEventListener('paste',SIG.pa,true);b.removeEventListener('input',SIG.ch,true);b.removeEventListener('change',SIG.ch,true);SIG.fo();return SIG}
+/* ===== مؤقت كل سؤال + التسجيل الصامت =====
+   عدّل الأزمنة من هذا السطر وحده: ثوانٍ لكل نوع، السقف الكلي بالثواني، تشغيل المؤقت في القبلي/البعدي،
+   إيقافه عند الخروج من الصفحة (false = يستمر ويُسجَّل الخروج)، وأقصى إيقاف لكل سؤال عند انقطاع الاتصال (ثانية) */
+const QTIME={tf:30,mc:45,fl:60},QTIME_MAX=720,QTIME_PRE=false,QTIME_POST=true,QTIME_PAUSE_AWAY=false,QTIME_OFF_MAX=60;
+let SIG=null,EX=[],TM={on:false,cur:0,lim:[],done:false,ln:0};
+const tmOn=ph=>ph=='pre'?QTIME_PRE:QTIME_POST;
+function tmNote(){const e=$('tmnote'),ph=$('phase');if(!e||!ph)return;const pre=ph.value=='pre';
+ e.textContent=tmOn(ph.value)?'⏱️ الاختبار '+(pre?'القبلي':'البعدي')+' مؤقّت لكل سؤال: صح/خطأ '+QTIME.tf+' ث، اختيار من متعدد '+QTIME.mc+' ث، فراغ '+QTIME.fl+' ث (لا يتجاوز المجموع '+Math.round(QTIME_MAX/60)+' دقيقة). يُعرض سؤال واحد في كل مرة دون رجوع، وينتقل تلقائياً عند انتهاء الوقت، ويتوقف المؤقت إذا انقطع اتصالك بالإنترنت.':(pre?'🕓 الاختبار القبلي بلا مؤقت ولا يدخل في شهادتك.':'🕓 الاختبار البعدي بلا مؤقت.')}
+try{tmNote()}catch(e){}
+/* زمن كل سؤال بالثواني: الأساس حسب النوع + زيادة قليلة للأسئلة الطويلة، دون تجاوز السقف الكلي */
+function qLimits(){const base=EX.map(x=>QTIME[x.t]),bon=EX.map(x=>{const len=String(x.q).length+(x.t=='mc'?MC[x.i][1].join('').length:0),th=x.t=='tf'?90:x.t=='mc'?200:70;return Math.max(0,Math.min(10,Math.round((len-th)/15)))});
+ const b0=base.reduce((s,v)=>s+v,0),bs=bon.reduce((s,v)=>s+v,0),room=Math.max(0,QTIME_MAX-b0),k=bs>room&&bs>0?room/bs:1;
+ return base.map((v,i)=>v+Math.floor(bon[i]*k))}
+const qOf=t=>{const m=/^q(\d+)$/.exec((t&&t.name)||'');return m?+m[1]:-1};
+/* يحسب الزمن المنقضي منذ آخر لحظة ويضيفه إلى السؤال النشط: m=زمن داخل الصفحة، a=زمن خارجها، u=ما يُحتسب على المؤقت، o=زمن انقطاع الاتصال */
+function adv(){if(!SIG)return;const now=Date.now(),dt=Math.max(0,Math.min(now-SIG.last,36e5));SIG.last=now;if(SIG.act<0||!dt)return;const q=SIG.q[SIG.act];if(!q)return;const away=!!SIG.hid;
+ if(away)q.a+=dt;else q.m+=dt;
+ if(SIG.off)q.o+=dt;
+ if(!(SIG.off&&q.o<=QTIME_OFF_MAX*1000)&&!(away&&QTIME_PAUSE_AWAY))q.u+=dt}
+function setAct(n){if(!SIG)return;adv();SIG.act=n}
+function pickAct(){if(!SIG||TM.on)return;const mid=innerHeight/2;let best=-1,bd=1e9;document.querySelectorAll('#ebody .q[data-n]').forEach(el=>{const r=el.getBoundingClientRect(),d=(r.top<=mid&&r.bottom>=mid)?0:Math.min(Math.abs(r.top-mid),Math.abs(r.bottom-mid));if(d<bd){bd=d;best=+el.dataset.n}});if(best>=0&&best!==SIG.act)setAct(best)}
+function sigStart(){
+ SIG={blur:0,blurMs:0,paste:0,t:{},hid:0,awq:-1,blurred:false,off:!navigator.onLine,last:Date.now(),act:-1,has:{},tv:{},scT:0,
+  q:EX.map(()=>({m:0,a:0,n:0,c:0,f:-1,t:0,p:0,u:0,o:0,d:0}))};
+ const b=$('ebody');
+ SIG.ck=()=>{adv();const aw=SIG.blurred||document.hidden;
+  if(aw&&!SIG.hid){SIG.hid=Date.now();SIG.awq=SIG.act}
+  else if(!aw&&SIG.hid){SIG.blur++;SIG.blurMs+=Date.now()-SIG.hid;SIG.hid=0;if(SIG.q[SIG.awq])SIG.q[SIG.awq].n++}};
+ SIG.bl=()=>{SIG.blurred=true;SIG.ck()};SIG.fo=()=>{SIG.blurred=false;SIG.ck()};SIG.vc=()=>SIG.ck();
+ SIG.on=()=>{adv();SIG.off=false;tmOffUI()};SIG.of=()=>{adv();SIG.off=true;tmOffUI()};
+ SIG.pa=e=>{SIG.paste++;let n=qOf(e.target);if(n<0)n=SIG.act;if(SIG.q[n])SIG.q[n].p++};
+ SIG.ch=e=>{const t=e.target,n=qOf(t),q=SIG.q[n];if(!q)return;if(!TM.on&&SIG.act!==n)setAct(n);adv();SIG.t[n]=Date.now()-t0.getTime();
+  if(t.type=='text'){const v=t.value.trim();
+   if(e.type=='input'){if(v!==''&&!SIG.has[n]){SIG.has[n]=1;q.f=q.m+q.a}}
+   else{if(SIG.tv[n]!==undefined&&SIG.tv[n]!==v)q.c++;SIG.tv[n]=v}}
+  else if(e.type=='change'){if(SIG.has[n])q.c++;else{SIG.has[n]=1;q.f=q.m+q.a}}};
+ SIG.fi=e=>{if(TM.on)return;const el=e.target.closest&&e.target.closest('.q[data-n]');if(el&&SIG.act!==+el.dataset.n)setAct(+el.dataset.n)};
+ SIG.sc=()=>{if(TM.on||SIG.scT)return;SIG.scT=setTimeout(()=>{SIG.scT=0;pickAct()},200)};
+ window.addEventListener('blur',SIG.bl);window.addEventListener('focus',SIG.fo);document.addEventListener('visibilitychange',SIG.vc);
+ window.addEventListener('online',SIG.on);window.addEventListener('offline',SIG.of);window.addEventListener('scroll',SIG.sc,{passive:true});
+ b.addEventListener('paste',SIG.pa,true);b.addEventListener('input',SIG.ch,true);b.addEventListener('change',SIG.ch,true);b.addEventListener('focusin',SIG.fi,true);
+ SIG.iv=setInterval(tick,200)}
+function sigStop(){if(!SIG)return{blur:0,blurMs:0,paste:0,t:{},q:[]};
+ clearInterval(SIG.iv);window.removeEventListener('blur',SIG.bl);window.removeEventListener('focus',SIG.fo);document.removeEventListener('visibilitychange',SIG.vc);
+ window.removeEventListener('online',SIG.on);window.removeEventListener('offline',SIG.of);window.removeEventListener('scroll',SIG.sc);
+ const b=$('ebody');b.removeEventListener('paste',SIG.pa,true);b.removeEventListener('input',SIG.ch,true);b.removeEventListener('change',SIG.ch,true);b.removeEventListener('focusin',SIG.fi,true);
+ adv();if(SIG.hid){SIG.blur++;SIG.blurMs+=Date.now()-SIG.hid;SIG.hid=0;if(SIG.q[SIG.awq])SIG.q[SIG.awq].n++}return SIG}
+/* الصيغة المحفوظة في عمود sig (أزمنة بالملّي ثانية مقرّبة لأقرب 100) */
+function sigPack(sg){const r=v=>Math.round(v/100)*100;
+ return {v:2,blur:sg.blur,blurMs:sg.blurMs,paste:sg.paste,t:sg.t,tm:TM.on?1:0,pl:1,lim:TM.on?TM.lim:[],
+  q:(sg.q||[]).map(x=>({m:r(x.m),a:r(x.a),n:x.n,c:x.c,f:x.f<0?-1:r(x.f),t:x.t,p:x.p,u:r(x.u),o:r(x.o),d:x.d}))}}
+function tick(){if(!SIG)return;adv();if(!TM.on||TM.done)return;const n=TM.cur,q=SIG.q[n];if(!q)return;const lim=TM.lim[n]*1000,rem=Math.max(0,lim-q.u);tmDraw(rem,lim);if(rem<=0)tmNext(true)}
+function tmDraw(rem,lim){const t=$('tmt'),b=$('tmb');if(!t||!b)return;const s=Math.ceil(rem/1000);if(t.dataset.s!=s){t.dataset.s=s;t.textContent=s+' ث'}b.firstElementChild.style.width=(lim?Math.round(rem/lim*100):0)+'%';b.classList.toggle('lo',rem<=10000)}
+function tmOffUI(){const e=$('tmoff');if(e)e.style.display=(TM.on&&SIG&&SIG.off)?'block':'none'}
+function tmShow(n){document.querySelectorAll('#ebody .q[data-n]').forEach(e=>{e.style.display=(+e.dataset.n==n?'':'none')});
+ const c=$('tmc'),nb=$('tmn');if(c)c.textContent='سؤال '+(n+1)+' من '+EX.length;if(nb)nb.textContent=n>=EX.length-1?'إنهاء وإرسال ✔':'التالي ◀';
+ setAct(n);tmDraw(TM.lim[n]*1000,TM.lim[n]*1000);tmOffUI();window.scrollTo(0,0)}
+function tmGo(){t0=new Date();$('rdy').style.display='none';$('xwrap').style.display='block';sigStart();tmShow(0)}
+function tmNext(auto){if(!TM.on||TM.done||!SIG)return;const n=TM.cur,x=EX[n],q=SIG.q[n];
+ if(!auto&&Date.now()-TM.ln<400)return;
+ if(x.t!='fl'&&val(n)!==''&&cval(n)===''){
+  if(!auto){alert('اختر نسبة ثقتك في إجابتك أولاً ثم اضغط التالي.');return}
+  const d=document.querySelector('[name=c'+n+'][value="50"]');if(d){d.checked=true;q.d=1}}   /* انتهى الوقت وبقيت الثقة فارغة: تُعتمد 50% */
+ adv();if(auto)q.t=1;TM.ln=Date.now();
+ if(n>=EX.length-1){TM.done=true;const nb=$('tmn'),fb=$('fbtn');if(nb)nb.style.display='none';if(fb)fb.style.display='';finish();return}
+ TM.cur=n+1;tmShow(n+1)}
 let me={},t0=null;
 /* ===== التقييم بنسبة الثقة (الخادم هو المرجع في حساب الدرجة؛ هذه الجداول للعرض وللعمل دون خادم) ===== */
 const CF_OK={25:.4,50:.5,75:.75,90:1},CF_NO={25:0,50:.1,75:.5,90:1.5},CFL={25:'25% تخمين',50:'50%',75:'75%',90:'80% فأكثر'};
@@ -2484,13 +2546,20 @@ function startExam(){const nm=$('nm').value.trim(),wa=$('wa').value.replace(/[\s
  if(nm.length<3){e.textContent='الرجاء كتابة الاسم الكامل.';return}
  if(!/^\d{8,15}$/.test(wa)){e.textContent='رقم الواتساب إلزامي ويجب أن يكون أرقاماً مع رمز الدولة (8-15 رقماً).';return}
  if(!$('pledge').checked){e.textContent='يلزم الإقرار بحل الاختبار بنفسك قبل البدء.';return}
- me={name:nm,wa:wa,email:$('em').value.trim(),phase:$('phase').value};t0=new Date();EX=drawExam();$('gate').style.display='none';const b=$('ebody');b.style.display='block';
- let h='<div class="card"><b>'+nm+'</b> ('+(me.phase=='pre'?'اختبار قبلي':'اختبار بعدي')+') — أجب عن جميع الأسئلة ثم اضغط إنهاء.<p class="note">الأسئلة تُسحب لك عشوائياً. يُسجَّل خروجك من الصفحة ولصق النصوص وزمن الإجابة كإشارات للمراجعة، وقد تُطلب منك مقابلة قصيرة لشرح إجاباتك.</p>'+CFBOX+'</div><div class="card">';
- EX.forEach((x,n)=>{h+=`<div class="q" data-n="${n}"><b>${n+1}. ${x.q}</b>`;
-  if(x.t=='tf')h+=`<label class="opt"><input type="radio" name="q${n}" value="1"> صح</label><label class="opt"><input type="radio" name="q${n}" value="0"> خطأ</label>`+cfRow(n,[50,75,90]);
-  if(x.t=='mc')h+=x.ord.map(j=>`<label class="opt"><input type="radio" name="q${n}" value="${j}"> ${MC[x.i][1][j]}</label>`).join('')+cfRow(n,[25,50,75,90]);
-  if(x.t=='fl')h+=`<input type="text" name="q${n}" autocomplete="off">`;h+='</div>'});
- h+='<button class="b" onclick="finish()">إنهاء وإرسال الدرجة</button></div>';b.innerHTML=h;sigStart();window.scrollTo(0,0)}
+ me={name:nm,wa:wa,email:$('em').value.trim(),phase:$('phase').value};t0=new Date();EX=drawExam();TM={on:tmOn(me.phase),cur:0,lim:[],done:false,ln:0};if(TM.on)TM.lim=qLimits();$('gate').style.display='none';const b=$('ebody');b.style.display='block';
+ const lab=me.phase=='pre'?'اختبار قبلي':'اختبار بعدي',rec='يُسجَّل خروجك من الصفحة ولصق النصوص وزمن كل سؤال وتغيير إجاباتك كإشارات للمراجعة فقط، دون أي عقوبة آلية، وقد تُطلب منك مقابلة قصيرة لشرح إجاباتك.';
+ let qh='';
+ EX.forEach((x,n)=>{qh+=`<div class="q" data-n="${n}"><b>${n+1}. ${x.q}</b>`;
+  if(x.t=='tf')qh+=`<label class="opt"><input type="radio" name="q${n}" value="1"> صح</label><label class="opt"><input type="radio" name="q${n}" value="0"> خطأ</label>`+cfRow(n,[50,75,90]);
+  if(x.t=='mc')qh+=x.ord.map(j=>`<label class="opt"><input type="radio" name="q${n}" value="${j}"> ${MC[x.i][1][j]}</label>`).join('')+cfRow(n,[25,50,75,90]);
+  if(x.t=='fl')qh+=`<input type="text" name="q${n}" autocomplete="off">`;qh+='</div>'});
+ if(TM.on){
+  const TMHD='<div class="tmhd" id="tmhd"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><b id="tmc"></b><b id="tmt" dir="ltr"></b></div><div class="tmbar" id="tmb"><i></i></div><div id="tmoff" class="note" style="display:none;color:var(--no);margin-top:6px">⚠️ انقطع الاتصال: توقّف المؤقت مؤقتاً حتى يعود الاتصال.</div></div>';
+  b.innerHTML='<div class="card" id="rdy"><b>'+nm+'</b> ('+lab+') — <b>اختبار مؤقّت لكل سؤال</b><p>تُعرض الأسئلة ('+EX.length+') واحداً تلو الآخر دون إمكانية الرجوع. وقت كل سؤال يظهر في شريط أعلى الصفحة، وينتقل الاختبار تلقائياً عند انتهائه: صح/خطأ '+QTIME.tf+' ث، اختيار من متعدد '+QTIME.mc+' ث، فراغ '+QTIME.fl+' ث (قد يزيد قليلاً مع الأسئلة الطويلة، ولا يتجاوز المجموع '+Math.round(QTIME_MAX/60)+' دقيقة).</p><ul><li>إن انتهى الوقت وقد اخترتَ إجابة دون تحديد ثقتك اعتُمدت ثقة 50%.</li><li>السؤال الذي لا تجيب عنه لا يُخصم منه شيء.</li><li>يتوقف المؤقت إذا انقطع اتصالك بالإنترنت، ويستمر إذا غادرتَ الصفحة (ويُسجَّل ذلك).</li></ul><p class="note">'+rec+' إن كانت شبكتك أو جهازك غير مستقرين فأجّل الاختبار.</p>'+CFBOX+'<button class="b" onclick="tmGo()">ابدأ الأسئلة الآن ⏱️</button></div>'
+   +'<div id="xwrap" style="display:none">'+TMHD+'<div class="card">'+qh+'<button class="b" id="fbtn" style="display:none" onclick="finish()">إنهاء وإرسال الدرجة</button><button class="b" id="tmn" onclick="tmNext()"></button></div></div>';
+  window.scrollTo(0,0);return}
+ b.innerHTML='<div class="card"><b>'+nm+'</b> ('+lab+') — أجب عن جميع الأسئلة ثم اضغط إنهاء.<p class="note">الأسئلة تُسحب لك عشوائياً. '+rec+'</p>'+CFBOX+'</div><div class="card">'+qh+'<button class="b" id="fbtn" onclick="finish()">إنهاء وإرسال الدرجة</button></div>';
+ sigStart();window.scrollTo(0,0);pickAct()}
 function val(n){const x=document.querySelector('[name=q'+n+']');if(!x)return '';if(x.type=='radio'){const c=document.querySelector('[name=q'+n+']:checked');return c?c.value:''}return x.value.trim()}
 const TOPICS=["الفرق بين التعليم الإلكتروني والتعليم عن بُعد", "مفهوم الانفتاح في التعليم المفتوح", "تاريخ التعليم عن بُعد وأجياله", "الموارد التعليمية المفتوحة", "تراخيص المشاع الإبداعي", "الاتساق البنائي في تصميم المقرر", "التعلم المتزامن وغير المتزامن", "التعلم المتزامن وغير المتزامن", "تصميم المقاطع التعليمية", "تراخيص المشاع الإبداعي", "ضمان الجودة", "مخرجات التعلم", "النظريات الأساسية: المسافة التبادلية", "النظريات الأساسية: التعلم المستقل", "تراخيص المشاع الإبداعي", "التعليم المدمج", "الصف المقلوب", "التحديات الواقعية وضعف الإنترنت", "تراخيص المشاع الإبداعي", "التعلم المتزامن وغير المتزامن", "دعم الطالب", "الاتساق البنائي في تصميم المقرر", "التقويم عن بُعد والنزاهة", "الصف المقلوب", "مفهوم التعليم عن بُعد", "النظريات الأساسية: المحادثة الموجّهة", "تراخيص المشاع الإبداعي", "التعليم المدمج", "التعلم المتزامن وغير المتزامن", "تراخيص المشاع الإبداعي", "الاتساق البنائي في تصميم المقرر", "الصف المقلوب"];
 const qi=x=>x.qid!==undefined?x.qid:x.n-1;
@@ -2519,7 +2588,7 @@ async function finish(){const rows=[];let sc=0;
   if(x.t=='fl'){ok=FL[x.i][1].some(z=>norm(z)==norm(a));rows.push({n:n+1,qid:x.qid,q:x.q,a,c:FL[x.i][1][0],ok})}
   if(x.t=='fl'){if(ok)sc++}else{const r=rows[rows.length-1];if(a!==''){const cf=+cval(n);r.cf=cf;r.pt=ok?CF_OK[cf]:-CF_NO[cf];sc+=r.pt}else r.pt=0}});sc=fmt(Math.max(0,sc));rows.forEach((r,i)=>{if(EX[i].t=='tf')r.e=TF[EX[i].i][2]});
  const t1=new Date(),res={...me,score:sc,total:EX.length,start:t0.toISOString(),end:t1.toISOString(),mins:Math.round((t1-t0)/600)/100,right:rows.filter(r=>r.ok).map(r=>r.n).join('، '),wrong:rows.filter(r=>!r.ok).map(r=>r.n).join('، '),rows:JSON.stringify(rows),calib:JSON.stringify(calibOf(rows))};
- const sg=sigStop();res.flags=flagsOf(res.mins,sg);res.sig=JSON.stringify({blur:sg.blur,blurMs:sg.blurMs,paste:sg.paste,t:sg.t});
+ const sg=sigStop();res.flags=flagsOf(res.mins,sg);res.sig=JSON.stringify(sigPack(sg));
  let sv={};
  if(SHEET_URL){const btn=document.querySelector('#ebody button[onclick="finish()"]');if(btn)btn.disabled=true;   /* الدرجة يحسبها الخادم ولا يُعتمد ما يُحسب هنا */
   sv=await save(res,ANS);
@@ -2530,9 +2599,12 @@ async function finish(){const rows=[];let sc=0;
  res.cert=sv.cert||'';window.NEEDS=sv.needs||[];window.LASTROWS=rows;window.LASTSTART=res.start;const p0=Math.round(sc/EX.length*100);
  let pre0=null;try{if(res.phase=='pre')localStorage.setItem('pre_'+res.wa,String(p0));pre0=localStorage.getItem('pre_'+res.wa)}catch(e){}
  const msg=buildMsg(res,rows);
+ const srvRep=sv.rep==='queued'||sv.rep==='dup'||sv.rep==='optout'||sv.rep==='busy';   // التقرير يرسله الخادم، فلا زر إرسال من جهاز المتدرب
+ const repTxt=sv.rep==='optout'?'تم حفظ نتيجتكم.':srvRep?'تم حفظ نتيجتكم، وسيصلكم التقرير المفصّل من المركز على واتساب (+'+me.wa+') خلال دقائق.':'تم حفظ نتيجتكم. اضغطوا الزر لاستلام التقرير المفصّل على واتساب (+'+me.wa+').';
+ const repBtn=srvRep?'':waBtn(link,'إرسال التقرير إلى الواتساب')+' <button class="b s" onclick="copyMsg()">📋 نسخ الرسالة</button>';
  const link='https://wa.me/'+me.wa+'?text='+encodeURIComponent(msg);
  const p=Math.round(sc/EX.length*100),wr=rows.filter(x=>!x.ok),wk=[...new Set(wr.map(x=>TOPICS[qi(x)]))],st=[...new Set(TOPICS)].filter(t=>!wk.includes(t));
- const extra=phaseBlock(res,p,pre0);$('ebody').innerHTML=`<div class="card"><div class="scr">${fmt(sc)} / ${EX.length}</div>${extra}<p style="text-align:center;margin:0">${p}% — <b>${levelP(p,res.phase)}</b></p><p>تم حفظ نتيجتكم. اضغطوا الزر لاستلام التقرير المفصّل على واتساب (+${me.wa}).</p>${st.length?'<h3 style="color:var(--ok)">'+(res.phase=='pre'?'✅ محاور لديك معرفة سابقة بها':'✅ محاور تمكّنتم منها')+'</h3><ul>'+st.map(t=>'<li>'+t+'</li>').join('')+'</ul>':''}${wk.length?'<h3 style="color:var(--no)">'+(res.phase=='pre'?'📚 محاور ستركّز عليها أثناء الدراسة':'📚 محاور تحتاج إلى مراجعة')+'</h3><ul>'+wk.map(t=>'<li>'+t+'</li>').join('')+'</ul>':''}<p><b>💡 التوصية:</b> ${recP(p,res.phase)}</p>${waBtn(link,'إرسال التقرير إلى الواتساب')} <button class="b s" onclick="copyMsg()">📋 نسخ الرسالة</button></div>${calibBlock(rows)}${fbTopics(rows,res.phase)}<div class="card"><h3>مراجعة تفصيلية للإجابات</h3>${res.phase=='pre'?'<p class=\"note\">🔒 لا تُعرض الإجابات الصحيحة في الاختبار القبلي حتى يبقى الاختبار البعدي قياساً حقيقياً لتقدّمك.</p>':''}${rows.map(r=>`<div class="q"><b>${r.n}. ${r.q}</b><div style="color:var(--${r.ok?'ok':'no'})">${r.ok?'✅ إجابة صحيحة':'❌ إجابتكم: '+(r.a||'لم تُجب')}</div>${r.ok||res.phase=='pre'?'':'<div>الإجابة الصحيحة: <b>'+r.c+'</b></div>'+(r.e?'<div class="note">'+r.e+'</div>':'')}${r.cf?'<div class="note">ثقتك: '+CFL[r.cf]+' • النقاط: '+fmt(r.pt)+'</div>':''}<div class="note">المحور: ${TOPICS[qi(r)]}</div></div>`).join('')}</div>`;
+ const extra=phaseBlock(res,p,pre0);$('ebody').innerHTML=`<div class="card"><div class="scr">${fmt(sc)} / ${EX.length}</div>${extra}<p style="text-align:center;margin:0">${p}% — <b>${levelP(p,res.phase)}</b></p><p>${repTxt}</p>${st.length?'<h3 style="color:var(--ok)">'+(res.phase=='pre'?'✅ محاور لديك معرفة سابقة بها':'✅ محاور تمكّنتم منها')+'</h3><ul>'+st.map(t=>'<li>'+t+'</li>').join('')+'</ul>':''}${wk.length?'<h3 style="color:var(--no)">'+(res.phase=='pre'?'📚 محاور ستركّز عليها أثناء الدراسة':'📚 محاور تحتاج إلى مراجعة')+'</h3><ul>'+wk.map(t=>'<li>'+t+'</li>').join('')+'</ul>':''}<p><b>💡 التوصية:</b> ${recP(p,res.phase)}</p>${repBtn}</div>${calibBlock(rows)}${fbTopics(rows,res.phase)}<div class="card"><h3>مراجعة تفصيلية للإجابات</h3>${res.phase=='pre'?'<p class=\"note\">🔒 لا تُعرض الإجابات الصحيحة في الاختبار القبلي حتى يبقى الاختبار البعدي قياساً حقيقياً لتقدّمك.</p>':''}${rows.map(r=>`<div class="q"><b>${r.n}. ${r.q}</b><div style="color:var(--${r.ok?'ok':'no'})">${r.ok?'✅ إجابة صحيحة':'❌ إجابتكم: '+(r.a||'لم تُجب')}</div>${r.ok||res.phase=='pre'?'':'<div>الإجابة الصحيحة: <b>'+r.c+'</b></div>'+(r.e?'<div class="note">'+r.e+'</div>':'')}${r.cf?'<div class="note">ثقتك: '+CFL[r.cf]+' • النقاط: '+fmt(r.pt)+'</div>':''}<div class="note">المحور: ${TOPICS[qi(r)]}</div></div>`).join('')}</div>`;
  window.MSG=msg;window.scrollTo(0,0)}
 function copyMsg(){try{navigator.clipboard.writeText(window.MSG);alert('تم نسخ الرسالة')}catch(e){prompt('انسخ الرسالة:',window.MSG)}}
 async function save(r,ans){try{const a=JSON.parse(localStorage.getItem('results')||'[]');a.push(r);localStorage.setItem('results',JSON.stringify(a))}catch(e){}
@@ -2651,11 +2723,44 @@ async function verifyCert(){const e=$('vres');try{const j=await api({action:'cer
 async function setOral(i,on){try{const j=await api({action:'oral_set',pin:TP,wa:R[i].wa,start:R[i].start,val:on?'1':''});if(j.ok)R[i].oral=on?'1':'';else alert('تعذّر الحفظ')}catch(e){alert('تعذّر الاتصال')}}
 function defSheet(i){const r=R[i];let rows=[];try{rows=JSON.parse(r.rows)}catch(e){}
  const cnt={};latestRes(R).forEach(x=>{let rs=[];try{rs=JSON.parse(x.rows)}catch(e){}rs.forEach(z=>{const k=qi(z);cnt[k]=cnt[k]||{ok:0,n:0};cnt[k].n++;if(z.ok)cnt[k].ok++})});
- const pc=z=>{const c=cnt[qi(z)];return c&&c.n?c.ok/c.n:1},cand=rows.filter(z=>z.ok).sort((a,b)=>pc(a)-pc(b)),pick=(cand.length>=3?cand:rows).slice(0,3);
+ const pc=z=>{const c=cnt[qi(z)];return c&&c.n?c.ok/c.n:1},rk=r._rk||riskOf(r),fw=z=>(rk.qs.find(s=>s.n==z.n)||{w:0}).w,cand=rows.filter(z=>z.ok).sort((a,b)=>(fw(b)-fw(a))||(pc(a)-pc(b))),pick=(cand.length>=3?cand:rows).slice(0,3);
  const w=window.open('','_blank');if(!w){alert('اسمح بالنوافذ المنبثقة');return}
- w.document.write('<html dir="rtl"><head><meta charset="utf-8"><title>ورقة الدفاع</title><style>body{font-family:Arial,Tahoma;line-height:1.9;padding:20px}.q{border:1px solid #888;border-radius:8px;padding:10px;margin:10px 0}</style></head><body><h2>🗣 ورقة الدفاع عن الإجابة — '+esc(r.name)+'</h2><p>الدرجة: '+esc(r.score)+'/'+esc(r.total)+' — الإشارات: '+esc(r.flags||'لا يوجد')+'</p><p><b>تعليمات:</b> اطلب من المتدرب شرح إجاباته الثلاث شفوياً (دقيقتان). الإجابة المقنعة فيها سبب الاختيار ودليله من الحقيبة وقدرته على تغيير الشرط. اختيرت الأسئلة الأصعب على المجموعة مما أجاب عنه صحيحاً.</p>'+pick.map((z,k)=>'<div class="q"><b>'+(k+1)+') '+esc(z.q)+'</b><br>إجابته: '+esc(z.a||'—')+'<br>① لماذا اخترتَ هذه الإجابة؟<br>② أين تجد دليلها في الحقيبة؟<br>③ ماذا لو عكسنا الشرط في السؤال، كيف تتغير الإجابة؟<br>التقدير: ☐ مقنع &nbsp; ☐ متردد &nbsp; ☐ غير مقنع</div>').join('')+'<p>القرار: ☐ يُعتمد &nbsp; ☐ يُعاد الاختبار &nbsp; ☐ مقابلة موسّعة</p></body></html>');w.document.close()}
+ w.document.write('<html dir="rtl"><head><meta charset="utf-8"><title>ورقة الدفاع</title><style>body{font-family:Arial,Tahoma;line-height:1.9;padding:20px}.q{border:1px solid #888;border-radius:8px;padding:10px;margin:10px 0}</style></head><body><h2>🗣 ورقة الدفاع عن الإجابة — '+esc(r.name)+'</h2><p>الدرجة: '+esc(r.score)+'/'+esc(r.total)+' — الإشارات: '+esc((rk.list.length?rk.list.join('، '):r.flags)||'لا يوجد')+'</p><p><b>تعليمات:</b> اطلب من المتدرب شرح إجاباته الثلاث شفوياً (دقيقتان). الإجابة المقنعة فيها سبب الاختيار ودليله من الحقيبة وقدرته على تغيير الشرط. اختيرت أولاً الأسئلة التي ظهرت عليها إشارات، ثم الأصعب على المجموعة مما أجاب عنه صحيحاً.</p>'+pick.map((z,k)=>'<div class="q"><b>'+(k+1)+') '+esc(z.q)+'</b><br>إجابته: '+esc(z.a||'—')+(fw(z)?'<br><small>⚑ سبب اختيار هذا السؤال: '+esc((rk.qs.find(s=>s.n==z.n)||{}).why||'')+'</small>':'')+'<br>① لماذا اخترتَ هذه الإجابة؟<br>② أين تجد دليلها في الحقيبة؟<br>③ ماذا لو عكسنا الشرط في السؤال، كيف تتغير الإجابة؟<br>التقدير: ☐ مقنع &nbsp; ☐ متردد &nbsp; ☐ غير مقنع</div>').join('')+'<p>القرار: ☐ يُعتمد &nbsp; ☐ يُعاد الاختبار &nbsp; ☐ مقابلة موسّعة</p></body></html>');w.document.close()}
 async function loadVid(){const b=$('vidbox');b.innerHTML='<p class="note">⏳</p>';try{const j=await api({action:'video_list',pin:TP});if(!j.ok)throw 0;
  b.innerHTML=j.rows.length?'<div class="wrapx"><table class="t"><tr><th>المتدرب</th><th>الوقت</th><th>المدة</th><th>الأسئلة</th><th>الفيديو</th></tr>'+j.rows.map(v=>'<tr><td>'+esc(v.name)+'<br><small dir="ltr">'+esc(v.ph)+'</small></td><td>'+esc(new Date(+v.ts).toLocaleString('ar'))+'</td><td>'+esc(v.secs)+' ث</td><td style="text-align:right">'+esc(v.prompt)+'</td><td><a class="b s" target="_blank" rel="noopener" href="'+esc(v.url)+'">▶️ فتح</a></td></tr>').join('')+'</table></div><p class="note">تُحفظ الفيديوهات في مجلد ODL_Videos في Google Drive الخاص بحسابك ولا يفتحها غيرك.</p>':'<p class="note">لا توجد فيديوهات بعد.</p>'}catch(e){b.innerHTML='<p class="note">تعذّر التحميل. تأكد من نشر أحدث Code.gs وتشغيل authorize.</p>'}}
+/* ===== مؤشر المراجعة بثلاثة ألوان (يُحسب في متصفح المدرب من زمن كل سؤال؛ عدّل العتبات هنا) ===== */
+const RK={fast:{tf:2000,mc:3000,fl:3500},away:8000,awayLong:30000,outX:4,outMin:30000,off:20000,red:4,yel:2,minMins:2,blurN:3,blurMs:45000};
+let QD={},RKF='all';
+const TL={tf:'صح/خطأ',mc:'اختيار',fl:'فراغ'},secT=ms=>(Math.round(ms/100)/10)+' ث';
+function riskOf(r){
+ const o={lv:'n',pts:0,list:[],qs:[],det:''};
+ if(r.phase=='pre'){o.lv='p';return o}
+ let sg=null,rows=[];try{sg=JSON.parse(r.sig||'null')}catch(e){}try{rows=JSON.parse(r.rows||'[]')}catch(e){}
+ if(!sg||!Array.isArray(sg.q)||!sg.q.length){o.list=[r.flags||'لا توجد بيانات زمن الأسئلة (نتيجة قديمة)'];return o}
+ const ty={},add=(k,w)=>{o.pts+=w;ty[k]=(ty[k]||0)+w};
+ const tt=sg.q.map(x=>x.m+x.a).filter(v=>v>0).sort((a,b)=>a-b),med=tt.length?tt[tt.length>>1]:0;
+ let fastPts=0,det='';
+ rows.forEach(z=>{const q=sg.q[z.n-1];if(!q)return;const k=qi(z),ky=(ALL[k]||{}).t||'mc',hard=ky=='fl'||!!(QD[k]&&QD[k].h),t=q.m+q.a;let w=0;const why=[];
+  if(z.ok&&t>0&&t<RK.fast[ky]){const y=Math.min(hard?2:1,4-fastPts);if(y>0){fastPts+=y;w+=y;add('fast',y)}why.push('صحيحة خلال '+secT(t)+(hard?' (سؤال صعب)':''))}
+  if(z.ok&&q.a>=RK.away){const x=(q.a>=RK.awayLong?3:2)+(hard?1:0);w+=x;add('away',x);why.push('خرج '+secT(q.a)+' ثم أجاب صحيحاً'+(hard?' (سؤال صعب)':''))}
+  if(q.p>0){const x=3*Math.min(q.p,2);w+=x;add('paste',x);why.push('لصق نص ×'+q.p)}
+  if(z.ok&&med>0&&t>=Math.max(RK.outMin,RK.outX*med)&&q.a<RK.away){w+=1;add('slow',1);why.push('زمنه '+secT(t)+' أطول كثيراً من وسيط أسئلته ('+secT(med)+')')}
+  if(q.o>=RK.off){const x=z.ok?2:1;w+=x;add('off',x);why.push('انقطع اتصاله '+secT(q.o)+' أثناءه')}
+  if(why.length){o.qs.push({n:z.n,w:w,why:why.join('، ')});o.list.push('س'+z.n+': '+why.join('، '))}
+  det+='<tr'+(w?' style="background:var(--hot)"':'')+'><td>'+z.n+'</td><td>'+TL[ky]+'</td><td>'+(t?secT(t):'—')+(q.t?' ⏱':'')+'</td><td>'+(q.a?secT(q.a):'—')+'</td><td>'+(q.c||'—')+'</td><td>'+(z.ok?'✅':'❌')+'</td></tr>'});
+ if(+r.mins>0&&+r.mins<RK.minMins){add('speed',3);o.list.unshift('أنهى الاختبار في '+r.mins+' د فقط')}
+ if(!ty.away&&(sg.blur>=RK.blurN||sg.blurMs>RK.blurMs)){add('blur',1);o.list.push('خرج من الصفحة ×'+sg.blur+' ('+Math.round(sg.blurMs/1000)+' ث)')}
+ o.lv=(Object.keys(ty).length>=2&&o.pts>=RK.red)?'r':o.pts>=RK.yel?'y':'g';
+ o.det='<div class="wrapx"><table class="t" style="font-size:.78rem"><tr><th>#</th><th>النوع</th><th>الزمن</th><th>خروج</th><th>تغيير</th><th>نتيجة</th></tr>'+det+'</table></div>'+(sg.tm?'':'<div class="note">اختبار بلا مؤقت.</div>');
+ return o}
+const rkLabel=r=>({g:'طبيعي',y:'يستحق نظرة',r:'إشارات متعددة',p:'قبلي',n:'بلا بيانات'})[(r._rk||riskOf(r)).lv];
+function riskCell(r){const k=r._rk||riskOf(r),L={g:'🟢 طبيعي',y:'🟡 يستحق نظرة',r:'🔴 إشارات متعددة',p:'⚪ قبلي (لا يُقيَّم)',n:'⚪ بلا بيانات'}[k.lv];
+ return '<b>'+L+'</b>'+(k.list.length&&k.lv!='p'?'<ul style="margin:4px 0;padding-inline-start:18px;font-size:.8rem">'+k.list.slice(0,5).map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':'')+(k.det?'<details><summary style="cursor:pointer;font-size:.8rem">تفصيل الأسئلة</summary>'+k.det+'</details>':'')+(k.lv=='r'&&r.oral!='1'?'<div class="note" style="color:var(--no)">← اطلب مقابلة قصيرة: 🗣 ورقة الدفاع</div>':'')}
+function rkPrep(){QD={};const c={};latestRes(R).forEach(x=>{let rs=[];try{rs=JSON.parse(x.rows)}catch(e){}rs.forEach(z=>{const k=qi(z);c[k]=c[k]||{ok:0,n:0};c[k].n++;if(z.ok)c[k].ok++})});Object.keys(c).forEach(k=>{QD[k]={h:c[k].n>=4&&c[k].ok/c[k].n<0.5}});R.forEach(r=>{r._rk=riskOf(r)})}
+function applyRkf(){document.querySelectorAll('#ttab tr[data-rk]').forEach(tr=>{const l=tr.dataset.rk;tr.style.display=(RKF=='all'||(RKF=='ry'&&(l=='r'||l=='y'))||(RKF=='r'&&l=='r'))?'':'none'})}
+function rkSummary(){const e=$('rkbar');if(!e)return;const c={r:0,y:0,g:0};R.forEach(r=>{if(c[r._rk.lv]!==undefined)c[r._rk.lv]++});
+ e.innerHTML='<b>🚦 مؤشر المراجعة (الاختبار البعدي):</b> 🔴 '+c.r+' · 🟡 '+c.y+' · 🟢 '+c.g+' &nbsp; <select id="rkf" style="width:auto" onchange="RKF=this.value;applyRkf()"><option value="all">عرض الكل</option><option value="ry">الأصفر والأحمر فقط</option><option value="r">الأحمر فقط</option></select><br>الأحمر = إشارات من أكثر من نوع: اطلب مقابلة قصيرة (🗣 ورقة الدفاع) ولا تبنِ القرار على الاختبار وحده. لا عقوبة آلية، والمشروع ومقابلة الفيديو هما الفيصل.';$('rkf').value=RKF;applyRkf()}
+function qx(r,q){let g=null;try{g=JSON.parse(r.sig||'null')}catch(e){}const z=g&&g.q&&g.q[q.n-1];return z?{'زمن السؤال (ث)':Math.round((z.m+z.a)/100)/10,'مدة الخروج (ث)':Math.round(z.a/100)/10,'مرات تغيير الإجابة':z.c,'لصق':z.p||'','انتهى وقته':z.t?'نعم':''}:{}}
 function latestRes(rs){const m={};rs.forEach(r=>{const k=r.wa+'|'+(r.phase||'post');if(!m[k]||r.start>m[k].start)m[k]=r});return Object.values(m)}
 function renderAnalytics(){const box=$('ana');if(!box)return;const L=latestRes(R),pre=L.filter(r=>r.phase=='pre'),post=L.filter(r=>r.phase!='pre'),pct=r=>Math.round(r.score/r.total*100),avg=a=>a.length?Math.round(a.reduce((s,v)=>s+v,0)/a.length):'—';
  const src=ANAF=='pre'?pre:ANAF=='post'?post:L,qs=ALL.map(()=>({ok:0,n:0}));
@@ -2683,13 +2788,13 @@ function fixScore(r){const t=String(r.score==null?'':r.score).replace(/[٠-٩]/g
 async function loadRes(){let a=[],srv=false;try{const j=await api({action:'list',pin:TP});if(j.ok){j.rows.forEach(x=>a.push(x));srv=true}}catch(e){}
  if(!srv)try{JSON.parse(localStorage.getItem('results')||'[]').forEach(x=>{if(!a.some(y=>y.start==x.start&&y.wa==x.wa))a.push(x)})}catch(e){}
  R=a.map(fixScore).sort((x,y)=>x.start<y.start?1:-1);$('tcount').textContent=(srv?'المصدر: Google Sheets. ':'⚠️ تعذّر الاتصال بالخادم، العرض من نسخة محلية. ')+'عدد المتدربين الذين أنهوا الاختبار: '+R.length;
- $('ttab').innerHTML='<tr><th>الاسم</th><th>الواتساب</th><th>البريد</th><th>المرحلة</th><th>الدرجة</th><th>صحيحة</th><th>خاطئة</th><th>البداية</th><th>الدقائق</th><th>الثقة/الدقة</th><th>إرسال النتيجة</th><th>حذف</th><th>⚠️ إشارات</th><th>مقابلة شفوية</th></tr>'+R.map((r,i)=>`<tr><td>${esc(r.name)}</td><td dir="ltr">${esc(r.wa)}</td><td>${esc(r.email||'')}</td><td>${r.phase=='pre'?'قبلي':'بعدي'}</td><td>${r.score}/${r.total}</td><td>${r.right}</td><td>${r.wrong}</td><td dir="ltr">${new Date(r.start).toLocaleString('ar')}</td><td>${r.mins}</td><td dir="ltr">${cbCell(r)}</td><td>${waBtn(waLink(r),'إرسال النتيجة')}</td><td><button class="b r" style="padding:4px 10px" onclick="delRes(${i})" title="حذف هذه النتيجة">🗑</button></td><td style="text-align:right;max-width:200px">${esc(r.flags||'—')}</td><td><label><input type="checkbox" ${r.oral=='1'?'checked':''} onchange="setOral(${i},this.checked)"> تمت</label><br><button class="b s" style="padding:3px 8px" onclick="defSheet(${i})">🗣 ورقة الدفاع</button></td></tr>`).join('');renderAnalytics()}
+ rkPrep();$('ttab').innerHTML='<tr><th>الاسم</th><th>الواتساب</th><th>البريد</th><th>المرحلة</th><th>الدرجة</th><th>صحيحة</th><th>خاطئة</th><th>البداية</th><th>الدقائق</th><th>الثقة/الدقة</th><th>إرسال النتيجة</th><th>حذف</th><th>🚦 الخطورة</th><th>مقابلة شفوية</th></tr>'+R.map((r,i)=>`<tr data-rk="${r._rk.lv}"><td>${esc(r.name)}</td><td dir="ltr">${esc(r.wa)}</td><td>${esc(r.email||'')}</td><td>${r.phase=='pre'?'قبلي':'بعدي'}</td><td>${r.score}/${r.total}</td><td>${r.right}</td><td>${r.wrong}</td><td dir="ltr">${new Date(r.start).toLocaleString('ar')}</td><td>${r.mins}</td><td dir="ltr">${cbCell(r)}</td><td>${waBtn(waLink(r),'إرسال النتيجة')}</td><td><button class="b r" style="padding:4px 10px" onclick="delRes(${i})" title="حذف هذه النتيجة">🗑</button></td><td style="text-align:right;min-width:210px;max-width:330px">${riskCell(r)}</td><td><label><input type="checkbox" ${r.oral=='1'?'checked':''} onchange="setOral(${i},this.checked)"> تمت</label><br><button class="b s" style="padding:3px 8px" onclick="defSheet(${i})">🗣 ورقة الدفاع</button></td></tr>`).join('');rkSummary();renderAnalytics()}
 function waLink(r){let rows=[];try{rows=JSON.parse(r.rows)}catch(e){}return 'https://wa.me/'+String(r.wa).replace(/\D/g,'')+'?text='+encodeURIComponent(buildMsg(r,rows))}
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function cbCell(r){try{const c=JSON.parse(r.calib||'{}');return c.k?c.conf+'% / '+c.acc+'%'+(c.over?' ⚠️'+c.over:''):'—'}catch(e){return '—'}}
 async function exportX(){if(!R.length){alert('لا توجد نتائج للتصدير');return}
- const s1=R.map(r=>({'اسم المتدرب':r.name,'واتساب المتدرب':r.wa,'البريد الإلكتروني':r.email||'','الدرجة':r.score,'الدرجة الكلية':r.total,'النسبة %':Math.round(r.score/r.total*100),'الأسئلة الصحيحة (أرقام)':r.right,'الأسئلة الخاطئة (أرقام)':r.wrong,'وقت بداية الاختبار':r.start,'وقت نهاية الاختبار':r.end,'المدة (دقائق)':r.mins,'المرحلة':r.phase=='pre'?'قبلي':'بعدي','رمز الشهادة':r.cert||'','إشارات المراجعة':r.flags||'','ثقة متوسطة %':(()=>{try{return JSON.parse(r.calib||'{}').conf||''}catch(e){return ''}})(),'دقة الأسئلة المجاب عنها %':(()=>{try{return JSON.parse(r.calib||'{}').acc||''}catch(e){return ''}})(),'أخطاء بثقة عالية':(()=>{try{return JSON.parse(r.calib||'{}').over||0}catch(e){return ''}})(),'مقابلة شفوية':r.oral=='1'?'تمت':''}));
- const s2=[];R.forEach(r=>{let rows=[];try{rows=JSON.parse(r.rows)}catch(e){}rows.forEach(q=>s2.push({'اسم المتدرب':r.name,'واتساب':r.wa,'رقم السؤال':q.n,'السؤال':q.q,'إجابة المتدرب':q.a,'الإجابة الصحيحة':q.c,'النتيجة':q.ok?'صح':'خطأ','الثقة':q.cf?CFL[q.cf]:'','النقاط':q.pt===undefined?'':q.pt}))});
+ const s1=R.map(r=>({'اسم المتدرب':r.name,'واتساب المتدرب':r.wa,'البريد الإلكتروني':r.email||'','الدرجة':r.score,'الدرجة الكلية':r.total,'النسبة %':Math.round(r.score/r.total*100),'الأسئلة الصحيحة (أرقام)':r.right,'الأسئلة الخاطئة (أرقام)':r.wrong,'وقت بداية الاختبار':r.start,'وقت نهاية الاختبار':r.end,'المدة (دقائق)':r.mins,'المرحلة':r.phase=='pre'?'قبلي':'بعدي','رمز الشهادة':r.cert||'','إشارات المراجعة':r.flags||'','مستوى الخطورة':rkLabel(r),'تفاصيل الإشارات':((r._rk||{}).list||[]).join(' | '),'ثقة متوسطة %':(()=>{try{return JSON.parse(r.calib||'{}').conf||''}catch(e){return ''}})(),'دقة الأسئلة المجاب عنها %':(()=>{try{return JSON.parse(r.calib||'{}').acc||''}catch(e){return ''}})(),'أخطاء بثقة عالية':(()=>{try{return JSON.parse(r.calib||'{}').over||0}catch(e){return ''}})(),'مقابلة شفوية':r.oral=='1'?'تمت':''}));
+ const s2=[];R.forEach(r=>{let rows=[];try{rows=JSON.parse(r.rows)}catch(e){}rows.forEach(q=>s2.push({'اسم المتدرب':r.name,'واتساب':r.wa,'رقم السؤال':q.n,'السؤال':q.q,'إجابة المتدرب':q.a,'الإجابة الصحيحة':q.c,'النتيجة':q.ok?'صح':'خطأ','الثقة':q.cf?CFL[q.cf]:'','النقاط':q.pt===undefined?'':q.pt,...qx(r,q)}))});
  const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(s1),'النتائج');XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(s2),'تفصيل الإجابات');wb.Workbook={Views:[{RTL:true}]};
  const fn='نتائج_المتدربين.xlsx';
  try{const d=await claude.use('downloads');if(d){await d.save({filename:fn,data:new Uint8Array(XLSX.write(wb,{type:'array',bookType:'xlsx'}))});return}}catch(e){if(e&&e.code=='declined')return}
@@ -2755,8 +2860,11 @@ async function agInit(){if(location.hash==='#admin'){agShow(false);return}
 /* لوحة المدرب */
 async function agSaveRoster(){const rows=$('ag_roster').value.split('\n').map(l=>{const m=l.match(/(\+?\d[\d\s\-()]{6,}\d)/);if(!m)return null;const ph=m[1].replace(/\D/g,'').replace(/^00/,'');const name=l.replace(m[1],' ').replace(/[،,;:.\-–|\t]+/g,' ').replace(/\s+/g,' ').trim();return /^\d{8,15}$/.test(ph)?{name:name,ph:ph}:null}).filter(Boolean);
   const e=$('ag_aerr');if(!rows.length){e.style.color='var(--no)';e.textContent='اكتب في كل سطر الاسم ثم الرقم مع رمز الدولة، مثال: أحمد علي،249912345678';return}
-  try{await fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'auth_roster',pin:TP,rows:JSON.stringify(rows)})});
-    e.style.color='var(--ok)';e.textContent='تم إرسال القائمة ('+rows.length+').'}catch(x){e.style.color='var(--no)';e.textContent='تعذّر الإرسال'}}
+  e.style.color='';e.textContent='⏳ جارٍ الحفظ...';
+  try{const j=await api({action:'auth_roster',pin:TP,rows:JSON.stringify(rows)});   /* نقرأ ردّ الخادم بدل الإرسال الأعمى */
+    if(!j||!j.ok)throw new Error(j&&j.err==='pin'?'رمز المدرب غير صحيح':j&&j.err==='locked'?'الرمز مقفل مؤقتاً، انتظر '+(j.wait||'')+' دقيقة':(j&&j.err)||'ردّ غير مفهوم من الخادم');
+    e.style.color='var(--ok)';e.textContent='✅ حُفظ '+j.n+' من '+rows.length+(j.n<rows.length?' — تعذّر حفظ '+(rows.length-j.n)+' (رقم غير صالح)':'');agUsers()}
+  catch(x){e.style.color='var(--no)';e.textContent='❌ لم تُحفظ القائمة: '+(x.message||'تعذّر الاتصال')+'. أعد المحاولة بعد قليل.'}}
 async function agLoadReq(){const box=$('ag_req');try{const j=await api({action:'auth_pending',pin:TP});if(!j.ok)throw 0;
   box.innerHTML=j.rows.length?j.rows.map(r=>`<div class="agrow" id="agr_${esc(r.ph)}"><span>${esc(r.name||'—')} <span dir="ltr">${esc(r.ph)}</span>${r.status==='issued'?' <small style="color:var(--ok)">✅ صدر له رمز</small>':''}</span><button class="b" onclick="agIssue('${esc(r.ph)}')">${r.status==='issued'?'رمز جديد':'إنشاء رمز'}</button></div>`).join(''):'<p class="note">لا توجد طلبات.</p>'}
   catch(e){box.innerHTML='<p class="note">تعذّر تحميل الطلبات.</p>'}}
@@ -3079,7 +3187,7 @@ async function trkLog(){try{const j=await api({action:'trk_log',pin:TP});if(!j.o
 let TRK_ME_OPEN=true,PRE_LANDED=false;
 /* أول دخول: من لم يُجرِ الاختبار القبلي (ولم يبدأ البعدي) تُفتح له نافذة الاختبار القبلي أولاً */
 function preLand(need){const n=$('pre_note');if(n)n.style.display=need?'block':'none';
-  if(!need||PRE_LANDED)return;PRE_LANDED=true;try{$('phase').value='pre'}catch(e){}mfGo('exam')}
+  if(!need||PRE_LANDED)return;PRE_LANDED=true;try{$('phase').value='pre';tmNote()}catch(e){}mfGo('exam')}
 async function trkMeLoad(){const box=$('trk_me');if(!AG.t||!SHEET_URL){box.style.display='none';return}
   try{const j=await api({action:'trk_me',tok:AG.t});if(!j.ok){box.style.display='none';return}
     const _pre=j.steps.find(x=>x.k==='pre'),_post=j.steps.find(x=>x.k==='post');preLand(!!_pre&&_pre.s!=='done'&&!!_post&&_post.s==='todo');
