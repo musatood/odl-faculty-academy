@@ -8,9 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
-:root{--bg:#f6f4ee;--card:#fff;--tx:#1d2a26;--mu:#5d6b66;--pr:#0f6b4f;--pr2:#e3f1ea;--ac:#c28a1e;--bd:#dcd8cc;--ok:#1b7f45;--no:#b3261e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121917;--card:#1b2420;--tx:#e8efec;--mu:#9bb0a8;--pr:#4cc79a;--pr2:#1f332b;--ac:#e0b04a;--bd:#2d3a35;--ok:#58d68d;--no:#ff8a80}}
-:root[data-theme="dark"]{--bg:#121917;--card:#1b2420;--tx:#e8efec;--mu:#9bb0a8;--pr:#4cc79a;--pr2:#1f332b;--ac:#e0b04a;--bd:#2d3a35;--ok:#58d68d;--no:#ff8a80}
+:root{--bg:#f6f4ee;--card:#fff;--tx:#1d2a26;--mu:#5d6b66;--pr:#0f6b4f;--pr2:#e3f1ea;--ac:#c28a1e;--bd:#dcd8cc;--ok:#1b7f45;--no:#b3261e;--chd:#e6f6ec;--cwp:#fff4d6;--ctd:#eef0f3;--trk:#e3e7ee;--hot:#ffe9e6;--inf:#eef3fb;--sep:#d9e0ea;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121917;--card:#1b2420;--tx:#e8efec;--mu:#9bb0a8;--pr:#4cc79a;--pr2:#1f332b;--ac:#e0b04a;--bd:#2d3a35;--ok:#58d68d;--no:#ff8a80;--chd:#1f3a2c;--cwp:#3a3317;--ctd:#26302c;--trk:#2d3a35;--hot:#3d2420;--inf:#1f2a3a;--sep:#2d3a35}}
+:root[data-theme="dark"]{--bg:#121917;--card:#1b2420;--tx:#e8efec;--mu:#9bb0a8;--pr:#4cc79a;--pr2:#1f332b;--ac:#e0b04a;--bd:#2d3a35;--ok:#58d68d;--no:#ff8a80;--chd:#1f3a2c;--cwp:#3a3317;--ctd:#26302c;--trk:#2d3a35;--hot:#3d2420;--inf:#1f2a3a;--sep:#2d3a35}
 *{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--tx);font-family:'Tajawal',Tahoma,Arial,sans-serif;line-height:1.9;font-size:17px}
 header{background:linear-gradient(135deg,var(--pr),#0a3d2e);color:#fff;padding:22px 16px 0}
@@ -60,7 +60,7 @@ table.t{border-collapse:collapse;width:100%;font-size:.88rem}table.t th,table.t 
 .wkm{padding:10px 12px;border-radius:12px;margin:6px 0;white-space:pre-wrap;line-height:1.75}
 .wkm.u{background:var(--pr2)}.wkm.a{background:var(--card);border:1px solid var(--bd)}.wkm small{display:block;color:var(--mu);margin-bottom:4px;font-weight:700}
 .wkm.md{white-space:normal}.wkm.md table{border-collapse:collapse;display:block;overflow-x:auto;max-width:100%}.wkm.md th,.wkm.md td{border:1px solid var(--bd);padding:5px 9px}.wkm.md th{background:var(--pr2)}.wkm.md pre{background:var(--bg);padding:10px;border-radius:8px;overflow-x:auto;direction:ltr;text-align:left;white-space:pre}.wkm.md h2,.wkm.md h3,.wkm.md h4{color:var(--ac);margin:.8em 0 .3em}.wkm.md blockquote{border-right:4px solid var(--pr);margin:6px 0;padding:2px 10px;background:var(--pr2)}.wkm.md p{margin:.4em 0}
-.cf{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px;font-size:.9rem}.cf>span{color:var(--mu)}.cf label{border:1px solid var(--bd);border-radius:8px;padding:3px 10px;cursor:pointer}.cf label:has(input:checked){background:var(--pr2);border-color:var(--pr)}
+.cf{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px;font-size:.9rem}.cf>span{color:var(--mu)}.cf label{border:1px solid var(--bd);border-radius:8px;padding:3px 10px;cursor:pointer}.cf label:has(input:checked){background:var(--pr2);border-color:var(--pr)}.tmhd{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px 14px;margin-bottom:10px}.tmbar{height:10px;border-radius:6px;background:var(--bd);overflow:hidden;margin-top:6px}.tmbar>i{display:block;height:10px;width:100%;background:var(--pr);transition:width .25s linear}.tmbar.lo>i{background:var(--no)}#ttab tr[data-rk="r"]>td{background:var(--hot)}
 </style>
 <!-- نسخة GitHub Pages: النتائج تُحفظ في Google Sheets عبر Apps Script -->
 </head>
@@ -79,10 +79,12 @@ table.t{border-collapse:collapse;width:100%;font-size:.88rem}table.t th,table.t 
 <button data-t="review">🔁 المراجعة</button>
 <button data-t="exam">📝 الاختبار</button>
 <button data-t="project">🛠️ المشروع</button>
+<button data-t="myfb">📈 تغذيتي الراجعة<span id="mfdot" style="display:none;width:9px;height:9px;border-radius:50%;background:#ff5252;margin-right:6px;vertical-align:middle"></span></button>
 <button data-t="agents">🤖 الوكلاء</button> <button data-t="trainer">🎓 لوحة المدرب</button>
 </nav>
 </header>
 <div id="nbar" style="display:none;background:var(--ac);color:#fff;padding:10px 16px;text-align:center;font-weight:700"></div>
+<div id="trk_me" style="display:none"></div>
 <main>
 <!-- الوكلاء الذكيون -->
 <div id="agents" class="tab" style="display:none">
@@ -2261,12 +2263,13 @@ table.t{border-collapse:collapse;width:100%;font-size:.88rem}table.t th,table.t 
 <!-- الاختبار -->
 <div id="exam" class="tab" style="display:none">
 <div class="card" id="gate">
+<div id="pre_note" style="display:none;border:2px solid var(--ac);border-radius:12px;padding:10px 14px;margin-bottom:12px"><b>🧪 ابدأ من هنا: الاختبار القبلي</b><br>أجرِه قبل دراسة الحقيبة ليقيس نقطة انطلاقك. لا يدخل في شهادتك، وتُصدر الشهادة من الاختبار البعدي بعد الدراسة.</div>
 <h2>بيانات المتدرب (إلزامية قبل بدء الاختبار)</h2>
 <label>الاسم الكامل *</label><input type="text" id="nm">
 <label>رقم الواتساب مع رمز الدولة * (مثال: 249912345678)</label><input type="tel" id="wa" inputmode="tel" dir="ltr">
 <label>البريد الإلكتروني (اختياري)</label><input type="email" id="em" dir="ltr">
-<label>نوع الاختبار</label><select id="phase"><option value="pre">🧪 اختبار قبلي (قبل دراسة الحقيبة)</option><option value="post" selected>🎯 اختبار بعدي (بعد الدراسة)</option></select>
-<p class="note">ستُرسل درجتك إلى رقم الواتساب هذا مباشرة بعد إنهاء الاختبار. الاختبار البعدي بنسبة نجاح تُصدر شهادة.</p>
+<label>نوع الاختبار</label><select id="phase" onchange="tmNote()"><option value="pre">🧪 اختبار قبلي (قبل دراسة الحقيبة)</option><option value="post" selected>🎯 اختبار بعدي (بعد الدراسة)</option></select>
+<p class="note">ستُرسل درجتك إلى رقم الواتساب هذا مباشرة بعد إنهاء الاختبار. الاختبار البعدي بنسبة نجاح تُصدر شهادة.</p><p class="note" id="tmnote"></p><p class="note">🔎 تُسجَّل أثناء الاختبار إشارات للمراجعة فقط: خروجك من الصفحة، ولصق النصوص، وزمن كل سؤال، وتغيير إجاباتك. لا تترتب عليها عقوبة آلية، وقد تُطلب منك مقابلة قصيرة لشرح إجاباتك.</p>
 <label class="opt"><input type="checkbox" id="pledge"> أُقرّ بأنني سأحلّ الاختبار بنفسي دون مساعدة من أي شخص أو أداة (ومنها الذكاء الاصطناعي)، وأعلم أن مقابلة مسجلة قصيرة قد تُراجَع لتأكيد أن العمل عملي.</label>
 <div id="gerr" class="fb" style="color:var(--no)"></div>
 <button class="b" onclick="startExam()">ابدأ الاختبار</button> <button class="b s" onclick="myCert()">🎓 شهادتي / حالة المقابلة</button>
@@ -2286,12 +2289,15 @@ table.t{border-collapse:collapse;width:100%;font-size:.88rem}table.t th,table.t 
 <label>عنوان الوحدة / المقرر</label><input type="text" id="ptitle">
 <label>رابط ملف الوحدة (اختياري: Google Drive أو غيره)</label><input type="text" id="plink" dir="ltr">
 <label>أو ارفع ملف الوحدة (اختياري — PDF أو Word أو PowerPoint أو Excel أو TXT، بحد أقصى 5 ميغابايت)</label><input type="file" id="pfile" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.rtf,.odt"><div id="pfinfo" class="note"></div>
-<label>قائمة التحقق الذاتي: <b id="pscore"></b></label><div id="chk"></div>
+<label>قائمة التحقق الذاتي: <b id="pscore"></b></label><p class="note">هذه المعايير نفسها يقيّم بها المدرب مشروعك، وسترى تقييمه لكل معيار وتعليقه في تبويب «📈 تغذيتي الراجعة».</p><div id="chk"></div><div id="pauto" class="card" style="background:var(--pr2)"></div>
 <label>أهم تعديل أجريتَه على وحدتك ولماذا؟</label><textarea id="pnote" rows="4"></textarea>
 <button class="b" onclick="projSave()">💾 حفظ مشروعي</button> <span id="pmsg" class="fb"></span>
 <div id="pfb" style="margin-top:10px"></div>
 </div>
 </div>
+
+<!-- تغذيتي الراجعة (للمتدرب) -->
+<div id="myfb" class="tab" style="display:none"><div id="mfbody"><div class="card"><p class="note">افتح هذا التبويب لتجد نتائجك وتقييم المدرب في مكان واحد.</p></div></div></div>
 
 <!-- لوحة المدرب -->
 <div id="trainer" class="tab" style="display:none">
@@ -2301,6 +2307,8 @@ table.t{border-collapse:collapse;width:100%;font-size:.88rem}table.t th,table.t 
 <button class="b" onclick="unlock()">دخول</button><div id="perr" class="fb" style="color:var(--no)"></div>
 </div>
 <div class="card" id="tpanel" style="display:none">
+<div style="text-align:left;margin-bottom:6px"><button class="b s" onclick="tLogout()">🔒 خروج من لوحة المدرب</button></div>
+<div id="trk_brief"></div>
 <button class="b" onclick="exportX()">⬇️ Export (Excel)</button>
 <button class="b s" onclick="loadRes()">🔄 تحديث</button>
 <button class="b r" onclick="clearLocal()">حذف النتائج المحلية</button><button class="b r" onclick="delAll()">🗑 حذف كل النتائج من الجدول</button>
@@ -2308,9 +2316,12 @@ table.t{border-collapse:collapse;width:100%;font-size:.88rem}table.t th,table.t 
 <hr><b>🛠️ مشاريع المتدربين</b> <button class="b s" onclick="loadProj()">🔄 تحديث</button><div id="projbox"></div>
 <hr><b>🎥 فيديوهات المقابلة</b> <button class="b s" onclick="loadVid()">🔄 تحديث</button><div id="vidbox"></div>
 <hr><b>🎓 التحقق من شهادة</b> <input type="text" id="vcode" dir="ltr" placeholder="رمز التحقق"><button class="b s" onclick="verifyCert()">تحقق</button> <span id="vres" class="fb"></span>
+<hr><b>📈 تتبع المتدربين خطوة بخطوة (واتساب)</b>
+<button class="b s" onclick="trkLoad()">🔄 تحديث</button> <button class="b s" onclick="trkRun('sync')">⚡ مزامنة الآن</button> <button class="b s" onclick="trkRun('daily')">📋 إرسال التقرير اليومي</button> <button class="b s" onclick="trkRun('weekly')">📊 إرسال الأسبوعي</button> <button class="b s" onclick="trkTest()">✅ اختبار الربط</button> <button class="b s" onclick="trkLog()">🧾 سجل الإرسال</button>
+<div class="fb" id="trk_msg"></div><div class="wrapx" id="trk_box"></div>
 <hr><b>📢 إرسال إشعار للمتدربين</b><input type="text" id="ntext" placeholder="نص الإشعار"><button class="b" onclick="postNote()">نشر الإشعار</button><div class="fb" id="nerr"></div>
 <hr><b>🔐 إدارة الدخول (رمز التحقق)</b><textarea id="ag_roster" rows="4" dir="rtl" placeholder="الاسم،الرقم — سطر لكل متدرب. مثال: أحمد علي،249912345678"></textarea><button class="b" onclick="agSaveRoster()">حفظ قائمة المسجلين</button> <button class="b s" onclick="agLoadReq()">🔄 تحديث الطلبات</button><div class="fb" id="ag_aerr"></div><div id="ag_req"></div><hr><button class="b s" onclick="agUsers()">👥 المسجلون ومحاولات الذكاء الاصطناعي</button><div id="ag_users"></div> <p class="note" id="tcount"></p>
-<div class="wrapx"><table class="t" id="ttab"></table></div>
+<div id="rkbar" class="note"></div><div class="wrapx"><table class="t" id="ttab"></table></div>
 </div>
 </div>
 </main>
@@ -2324,40 +2335,40 @@ async function api(q){if(q&&q.pin!==undefined){const r=await fetch(SHEET_URL,{me
  const r=await fetch(SHEET_URL+'?'+new URLSearchParams(q));return r.json()}
 function pinErr(j){if(j&&(j.err==='unknown'||j.err==='post_only'))return '⚠️ الرمز لم يُفحص: الخادم يعمل بنسخة قديمة من Code.gs. الصق Code.gs الجديد في Apps Script ثم انشره بإصدار جديد.';if(!j||(j.err&&j.err!=='pin'&&j.err!=='locked'))return 'تعذّر التحقق من الرمز ('+((j&&j.err)||'لا رد')+').';return j&&j.err==='locked'?'🔒 دخول المدرب مقفل مؤقتاً بعد محاولات خاطئة. حاول بعد '+(j.wait||15)+' دقيقة.':(j&&typeof j.left==='number'?'رمز المدرب غير صحيح. المحاولات المتبقية قبل القفل: '+j.left+'.':'رمز المدرب غير صحيح.')}
 const AGENTS=[{id:'anthropic/claude-3.5-sonnet',t:'long'},{id:'openai/gpt-4o-mini',t:'fast'},{id:'google/gemini-flash-1.5',t:'fast'},{id:'meta-llama/llama-3.1-70b-instruct',t:'any'}];
-const TF=[
+const RTF=[
 ['التعليم الإلكتروني هو دائماً تعليم عن بُعد.',false,'خطأ: قد يُستخدم التعليم الإلكتروني داخل قاعة تقليدية لدعم التعليم الحضوري.'],
 ['الانفتاح في التعليم المفتوح لا يعني بالضرورة إلغاء شروط القبول أو الاختبارات.',true,'صح: درجة الانفتاح تختلف باختلاف المؤسسة والبرنامج.'],
 ['بدأ التعليم عن بُعد مع ظهور الإنترنت.',false,'خطأ: بدأ بالمراسلة البريدية ثم الإذاعة والتلفاز قبل الحاسوب والإنترنت.'],
 ['كل مورد تعليمي مجاني هو مورد تعليمي مفتوح.',false,'خطأ: المورد المفتوح يتيح إعادة الاستخدام والتعديل وفق ترخيص مفتوح، والمجاني قد لا يتيح ذلك.'],
 ['ترخيص CC BY-ND يسمح بتعديل العمل وإعادة نشره.',false,'خطأ: ND تعني عدم الاشتقاق، أي لا يجوز التعديل.'],
 ['الاتساق البنائي هو الربط بين مخرجات التعلم والأنشطة والتقويم.',true,'صح: يجب أن تقيس أدوات التقويم ما تدرّب عليه الطالب فعلاً وفق المخرجات.']];
-const MC=[
+const RMC=[
 ['صاحب نظرية المسافة التبادلية هو:',['مايكل مور','تشارلز ويدماير','بورج هولمبرغ','بنجامين بلوم'],0],
 ['صاحب نظرية التعلم المستقل هو:',['مايكل مور','تشارلز ويدماير','بورج هولمبرغ','ديفيد وايلي'],1],
 ['ما معنى الرمز NC في تراخيص المشاع الإبداعي؟',['نسب المصنف','المشاركة بالمثل','غير تجاري','منع الاشتقاق'],2],
 ['التصميم الذي يجمع بصورة مقصودة بين التعلم الحضوري والرقمي هو:',['التعليم عن بُعد','التعليم المدمج','التعليم بالمراسلة','التعليم المفتوح'],1],
 ['في الصف المقلوب يتعلّم الطالب المحتوى الأساسي:',['أثناء المحاضرة فقط','بعد الامتحان','قبل اللقاء بصورة مستقلة','لا يتعلمه'],2],
 ['من الحلول العملية لضعف الإنترنت:',['زيادة حجم الفيديوهات','مواد منخفضة البيانات وقابلة للتنزيل','إلغاء التغذية الراجعة','الاعتماد على البث المباشر فقط'],1]];
-const FL=[
+const RFL=[
 ['يتضمن التعليم عن بُعد انفصالاً ____ بين المتعلم والمعلم.',['مكاني','مكانيا','مكانيًا']],
 ['نظرية المحادثة ____ لبورج هولمبرغ.',['الموجهة','التعليمية الموجهة']],
 ['ترخيص ____ يشترط ذكر اسم المؤلف الأصلي.',['BY','by']],
 ['التعليم ____ يجمع بين التعلم الحضوري والتعلم عبر الإنترنت.',['المدمج','مدمج']]];
-TF.push(
+RTF.push(
 ['يقوم التعلم المتزامن على تفاعل المعلم والمتعلم في الوقت نفسه.',true,'صح: المتزامن يعني التواصل المباشر في الوقت ذاته كالجلسات المباشرة.'],
 ['يتطلب التعلم غير المتزامن حضور المتعلم في موعد ثابت.',false,'خطأ: غير المتزامن يتيح للمتعلم الدراسة في الوقت المناسب له.'],
 ['تقسيم المحاضرة المسجلة الطويلة إلى مقاطع قصيرة يدعم التعلم الذاتي.',true,'صح: المقاطع القصيرة أسهل في المتابعة والعودة إليها وأخف حجماً.'],
 ['تراخيص المشاع الإبداعي تحدد شروط إعادة استخدام العمل ومشاركته.',true,'صح: تتيح لصاحب العمل تحديد ما يُسمح به للآخرين.'],
 ['يقتصر ضمان الجودة في التعليم عن بُعد على جودة المحتوى فقط.',false,'خطأ: يشمل أيضاً التصميم والدعم والتقويم والعمليات.'],
 ['وضوح مخرجات التعلم وقابليتها للقياس من أسس تصميم المقرر الجيد.',true,'صح: عليها يُبنى اختيار الأنشطة وأدوات التقويم.']);
-MC.push(
+RMC.push(
 ['ماذا يشترط ترخيص CC BY-SA؟',['ذكر المؤلف ومشاركة الأعمال المشتقة بالترخيص نفسه','منع أي استخدام تجاري','منع تعديل العمل','عدم ذكر المؤلف'],0],
 ['ما أبرز ميزة للتعلم غير المتزامن؟',['فرض موعد حضور واحد للجميع','مرونة الوقت والمكان للمتعلم','إلغاء التغذية الراجعة','الاعتماد على البث المباشر فقط'],1],
 ['ما أفضل أول إجراء عند غياب طالب عن الأنشطة في مقرر غير متزامن؟',['إنذاره رسمياً فوراً','التواصل معه بودّ لمعرفة العوائق وتقديم المساعدة','تجاهل غيابه','حذفه من المقرر'],1],
 ['يعني الاتساق البنائي في المقرر:',['الربط بين المخرجات والأنشطة والتقويم','زيادة عدد الاختبارات','تقليل المحتوى','الاعتماد على نوع واحد من الأنشطة'],0],
 ['أي مما يلي يدعم نزاهة الاختبارات الإلكترونية؟',['بنوك أسئلة وترتيب عشوائي للأسئلة والخيارات','نشر الأسئلة مسبقاً','حذف زمن الاختبار','السماح بمشاركة الإجابات'],0],
 ['في الصف المقلوب يكون وقت اللقاء مخصصاً غالباً لـ:',['النقاش والتطبيق والأنشطة','إلقاء المحاضرة الأساسية فقط','تسليم الدرجات فقط','الاختبار الشفهي فقط'],0]);
-FL.push(
+RFL.push(
 ['التعلم ____ لا يتطلب حضور الجميع في الوقت نفسه.',['غير المتزامن','غير متزامن','اللامتزامن']],
 ['ترخيص CC ____ يمنع الاستخدام التجاري.',['NC','nc']],
 ['الربط بين المخرجات والأنشطة والتقويم يسمى الاتساق ____.',['البنائي','بنائي']],
@@ -2439,26 +2450,145 @@ const SEC=[['صح وخطأ','tf'],['اختر من متعدد','mc'],['أكمل �
 SEC.forEach((s,i)=>{const b=document.createElement('button');b.textContent=s[0];b.onclick=()=>rv(i);$('rsub').appendChild(b)});
 function rv(i){[...$('rsub').children].forEach((b,j)=>b.classList.toggle('on',i==j));const k=SEC[i][1];let h='';
  if(k=='sc'){scList();return}
- if(k=='tf')TF.forEach((q,n)=>h+=`<div class="q"><b>${n+1}. ${q[0]}</b><div><button class="b s" onclick="tfA(this,${n},true)">صح</button><button class="b s" onclick="tfA(this,${n},false)">خطأ</button></div><div class="fb"></div><div class="ans"><b>الإجابة: ${q[1]?'صح':'خطأ'}</b><br>${q[2]}</div><button class="b s" onclick="sh(this)">إظهار الإجابة</button></div>`);
- if(k=='mc')MC.forEach((q,n)=>h+=`<div class="q"><b>${n+1}. ${q[0]}</b>${q[1].map((o,j)=>`<div class="opt" onclick="mcA(this,${n},${j})">${o}</div>`).join('')}<div class="ans"><b>الإجابة الصحيحة: ${q[1][q[2]]}</b></div><button class="b s" onclick="sh(this)">إظهار الإجابة</button></div>`);
- if(k=='fl')FL.forEach((q,n)=>h+=`<div class="q"><b>${n+1}. ${q[0]}</b><input type="text" placeholder="اكتب الإجابة"><button class="b" onclick="flA(this,${n})">تحقق</button><div class="fb"></div><div class="ans"><b>الإجابة: ${q[1][0]}</b></div><button class="b s" onclick="sh(this)">إظهار الإجابة</button></div>`);
+ if(k=='tf')RTF.forEach((q,n)=>h+=`<div class="q"><b>${n+1}. ${q[0]}</b><div><button class="b s" onclick="tfA(this,${n},true)">صح</button><button class="b s" onclick="tfA(this,${n},false)">خطأ</button></div><div class="fb"></div><div class="ans"><b>الإجابة: ${q[1]?'صح':'خطأ'}</b><br>${q[2]}</div><button class="b s" onclick="sh(this)">إظهار الإجابة</button></div>`);
+ if(k=='mc')RMC.forEach((q,n)=>h+=`<div class="q"><b>${n+1}. ${q[0]}</b>${q[1].map((o,j)=>`<div class="opt" onclick="mcA(this,${n},${j})">${o}</div>`).join('')}<div class="ans"><b>الإجابة الصحيحة: ${q[1][q[2]]}</b></div><button class="b s" onclick="sh(this)">إظهار الإجابة</button></div>`);
+ if(k=='fl')RFL.forEach((q,n)=>h+=`<div class="q"><b>${n+1}. ${q[0]}</b><input type="text" placeholder="اكتب الإجابة"><button class="b" onclick="flA(this,${n})">تحقق</button><div class="fb"></div><div class="ans"><b>الإجابة: ${q[1][0]}</b></div><button class="b s" onclick="sh(this)">إظهار الإجابة</button></div>`);
  if(k=='sa')SA.forEach((q,n)=>h+=`<div class="q"><b>${n+1}. ${q[0]}</b><textarea rows="3" placeholder="اكتب إجابتك ثم قارنها بالنموذج"></textarea><div class="ans"><b>الإجابة النموذجية:</b><br>${q[1]}</div><button class="b s" onclick="sh(this)">إظهار الإجابة النموذجية</button></div>`);
  $('rbody').innerHTML=h}
 function sh(b){const a=b.parentNode.querySelector('.ans');a.style.display=a.style.display=='block'?'none':'block'}
-function tfA(b,n,v){const p=b.closest('.q'),f=p.querySelector('.fb'),ok=TF[n][1]==v;f.textContent=ok?'✅ إجابة صحيحة':'❌ إجابة خاطئة';f.style.color=ok?'var(--ok)':'var(--no)';p.querySelector('.ans').style.display='block'}
-function mcA(o,n,j){const p=o.closest('.q');p.querySelectorAll('.opt').forEach((x,i)=>{x.classList.remove('ok','no');if(i==MC[n][2])x.classList.add('ok');else if(x==o)x.classList.add('no')});p.querySelector('.ans').style.display='block'}
-function flA(b,n){const p=b.closest('.q'),f=p.querySelector('.fb'),ok=FL[n][1].some(a=>norm(a)==norm(p.querySelector('input').value));f.textContent=ok?'✅ إجابة صحيحة':'❌ حاول مرة أخرى أو اضغط إظهار الإجابة';f.style.color=ok?'var(--ok)':'var(--no)'}
+function tfA(b,n,v){const p=b.closest('.q'),f=p.querySelector('.fb'),ok=RTF[n][1]==v;f.textContent=ok?'✅ إجابة صحيحة':'❌ إجابة خاطئة';f.style.color=ok?'var(--ok)':'var(--no)';p.querySelector('.ans').style.display='block'}
+function mcA(o,n,j){const p=o.closest('.q');p.querySelectorAll('.opt').forEach((x,i)=>{x.classList.remove('ok','no');if(i==RMC[n][2])x.classList.add('ok');else if(x==o)x.classList.add('no')});p.querySelector('.ans').style.display='block'}
+function flA(b,n){const p=b.closest('.q'),f=p.querySelector('.fb'),ok=RFL[n][1].some(a=>norm(a)==norm(p.querySelector('input').value));f.textContent=ok?'✅ إجابة صحيحة':'❌ حاول مرة أخرى أو اضغط إظهار الإجابة';f.style.color=ok?'var(--ok)':'var(--no)'}
 rv(0);
 /* exam */
+/* ===== بنك الاختبار (مستقل عن أسئلة المراجعة): 3 مستويات، وتُسحب حصة ثابتة من كل مستوى ويتدرج الاختبار من السهل إلى الصعب =====
+   T_ صح/خطأ للتعريفات فقط | M_ اختيار من متعدد: الصحيح أولاً ثم 3 بدائل مبنية على أخطاء شائعة (يُوزَّع موضع الصحيح تلقائياً ثم يُرتَّب عشوائياً عند العرض)
+   F_ فراغ بمصطلح لا يُستنتج من سياق الجملة | المستوى: 1 سهل (تذكّر) 2 متوسط (فهم وتمييز) 3 صعب (تطبيق وتحليل) */
+let _qc=0;
+const T_=(l,tp,q,a,e)=>({t:'tf',l,tp,q,a,e}),M_=(l,tp,q,r,...w)=>{const k=(_qc++)%4,o=w.slice();o.splice(k,0,r);return{t:'mc',l,tp,q,o,a:k}},F_=(l,tp,q,...a)=>({t:'fl',l,tp,q,a});
+const QUOTA={1:{tf:2,mc:3,fl:0},2:{tf:0,mc:6,fl:2},3:{tf:0,mc:6,fl:1}},QLV={1:0.8,2:1,3:1.6},LVN={1:'🟢 سهل',2:'🟡 متوسط',3:'🔴 صعب'};
+const QB=[
+T_(1,'مفاهيم أنماط التعليم','يقوم التعليم عن بُعد على انفصال مكاني بين المتعلم والمعلم.',true,'صح: الانفصال المكاني من أبرز سمات التعليم عن بُعد.'),
+T_(1,'تاريخ التعليم عن بُعد وأجياله','بدأ التعليم عن بُعد بالمراسلة البريدية قبل ظهور الإنترنت.',true,'صح: كانت المراسلة من أولى صوره.'),
+T_(1,'التعلم المتزامن وغير المتزامن','يتطلب التعلم المتزامن أن يتفاعل المعلم والمتعلمون في الوقت نفسه.',true,'صح: كالجلسات المباشرة.'),
+T_(1,'التعليم المفتوح والموارد المفتوحة','المقصود بالاختصار OER هو الموارد التعليمية المفتوحة.',true,'صح.'),
+T_(1,'تراخيص المشاع الإبداعي','الرمز BY في تراخيص المشاع الإبداعي يعني ذكر اسم المؤلف الأصلي.',true,'صح: BY تعني نسب المصنف لصاحبه.'),
+T_(1,'مفاهيم أنماط التعليم','التعليم الإلكتروني هو نفسه التعليم عن بُعد في كل الحالات.',false,'خطأ: قد يُستخدم التعليم الإلكتروني داخل القاعة التقليدية.'),
+M_(1,'النظريات الأساسية','من صاحب نظرية المسافة التبادلية؟','مايكل مور','تشارلز ويدماير','بورج هولمبرغ','بنجامين بلوم'),
+M_(1,'تراخيص المشاع الإبداعي','ما معنى الرمز NC في تراخيص المشاع الإبداعي؟','غير تجاري','نسب المصنف','المشاركة بالمثل','منع الاشتقاق'),
+M_(1,'التعلم المتزامن وغير المتزامن','أي مما يلي من سمات التعلم غير المتزامن؟','الدراسة في الوقت المناسب للمتعلم','حضور الجميع في موعد واحد','بث مباشر إلزامي','غياب أي وسيلة للتواصل'),
+M_(1,'تاريخ التعليم عن بُعد وأجياله','أي وسيط ميّز الجيل الأول من التعليم عن بُعد؟','المواد المطبوعة والبريد','الإذاعة والتلفاز','الهواتف الذكية','الذكاء الاصطناعي'),
+M_(1,'التعليم المدمج والصف المقلوب','التعليم المدمج هو:','مزج مخطط بين التعلم الحضوري والتعلم عبر الإنترنت','بث مباشر فقط عبر الإنترنت','تسجيل المحاضرات وحدها','التعلم الذاتي بلا لقاءات'),
+M_(1,'تصميم المقرر والاتساق البنائي','أي صيغة أقرب لمخرج تعلم جيد؟','عبارة قابلة للقياس تبدأ بفعل سلوكي','عنوان عام للموضوعات','قائمة بالكتب المقررة','وصف لما سيفعله المحاضر'),
+M_(1,'دعم الطالب','ما الغرض الأهم من التغذية الراجعة؟','إعلام الطالب بمستواه وكيف يتحسن','عقاب الطالب','ملء وقت المحاضرة','زيادة عدد الواجبات'),
+M_(2,'التعليم المفتوح والموارد المفتوحة','ما الفرق بين المورد المجاني والمورد المفتوح؟','المفتوح يُتاح استخدامه وتعديله وإعادة نشره وفق ترخيص مفتوح، والمجاني قد لا يتيح ذلك','لا فرق بينهما','المجاني أكثر حرية من المفتوح','المفتوح هو ما ليس له مؤلف'),
+M_(2,'تراخيص المشاع الإبداعي','ما الفرق بين الرمزين ND وNC؟','ND يمنع تعديل العمل، وNC يمنع استخدامه تجارياً','ND يمنع الاستخدام التجاري، وNC يمنع التعديل','كلاهما يمنع ذكر المؤلف','كلاهما يسمح بكل أنواع الاستخدام'),
+M_(2,'تراخيص المشاع الإبداعي','أي ترخيص يسمح بتعديل العمل بشرط ذكر المؤلف ونشر المشتقات بالترخيص نفسه؟','CC BY-SA','CC BY-ND','CC BY-NC-ND','عمل بلا ترخيص'),
+M_(2,'التعليم المدمج والصف المقلوب','ما الفرق بين التعليم المدمج والتعلم المتزامن؟','المدمج مزج مخطط بين الحضوري والرقمي، والمتزامن وصف لتوقيت التفاعل','هما تسميتان لشيء واحد','المدمج يعني بثاً مباشراً دائماً','المتزامن يعني الحضور في القاعة فقط'),
+M_(2,'النظريات الأساسية','ما الفكرة المحورية في نظرية ويدماير عن التعلم المستقل؟','تحرير المتعلم من قيود الزمان والمكان وتمكينه من تنظيم دراسته','ربط الدراسة بحضور المحاضرات','إلغاء دور المعلم كلياً','اعتماد امتحان مركزي واحد'),
+M_(2,'النظريات الأساسية','ما أبرز ما تضيفه نظرية هولمبرغ (المحادثة التعليمية الموجهة)؟','العلاقة الشخصية الودية بين المعلم والمتعلم تدعم الدافعية والتعلم','الفصل التام بين المعلم والمتعلم','التركيز على الوسيلة التقنية وحدها','قياس التعلم بالمدة التي يقضيها الطالب'),
+M_(2,'التعليم المدمج والصف المقلوب','ما الذي يميّز الصف المقلوب عن الصف التقليدي؟','يدرس الطالب المحتوى قبل اللقاء ويُخصص اللقاء للتطبيق والنقاش','يُلقى المحتوى كله أثناء اللقاء','يُلغى اللقاء نهائياً','يدرس الطالب المحتوى بعد الاختبار'),
+M_(2,'تصميم المقرر والاتساق البنائي','أي الجمل أدق في وصف الاتساق البنائي؟','لكل مخرج نشاط يدرّب عليه وتقويم يقيسه','لكل نشاط درجة مستقلة','المحتوى أكثر من التقويم','التقويم متنوع بغض النظر عن المخرجات'),
+M_(2,'تصميم المقرر والاتساق البنائي','لماذا يُفضّل تقسيم المحاضرة المسجلة إلى مقاطع قصيرة؟','لأنها أسهل في المتابعة وأخف حجماً ويمكن العودة إلى نقطة محددة','لأن الطلاب لا يحبون الفيديو','لأن ذلك يلغي الحاجة إلى التقويم','لأن مدة المحاضرة تصبح أطول'),
+M_(2,'التعليم المفتوح والموارد المفتوحة','ما الذي يميّز التعليم المفتوح عن التعليم عن بُعد؟','يركز على إزالة الحواجز أمام الالتحاق، بينما يركز التعليم عن بُعد على التقديم عبر المسافة','التعليم المفتوح لا يكون عن بُعد أبداً','هما مترادفان تماماً','التعليم المفتوح يشترط امتحاناً واحداً للجميع'),
+M_(2,'دعم الطالب','ما أفضل وصف للدعم الاستباقي للطالب؟','التواصل معه مبكراً عند ظهور علامات التعثر قبل أن تتفاقم','انتظار أن يطلب هو المساعدة','الاكتفاء بالإعلانات العامة','تحويله إلى محاضر آخر'),
+M_(2,'التقويم عن بُعد والنزاهة','أي إجراء يدعم نزاهة الاختبار الإلكتروني دون مراقبة مباشرة؟','بنك أسئلة كبير وترتيب عشوائي ومهام تطبيقية يصعب نسخها','نشر الأسئلة قبل الاختبار','إلغاء الوقت المحدد','السماح بمشاركة الإجابات'),
+M_(2,'ضمان الجودة','أي مما يلي يدخل في نطاق ضمان الجودة في التعليم عن بُعد؟','جودة التصميم والدعم والتقويم والعمليات، لا المحتوى وحده','جودة المحتوى فقط','عدد الطلاب فقط','سرعة الإنترنت فقط'),
+F_(2,'النظريات الأساسية','تُسمّى نظرية مايكل مور نظرية المسافة ____.','التبادلية','تبادلية'),
+F_(2,'تراخيص المشاع الإبداعي','يرمز SA في تراخيص المشاع الإبداعي إلى ____ بالمثل.','المشاركة','مشاركة'),
+F_(2,'تصميم المقرر والاتساق البنائي','يُسمّى الربط بين المخرجات والأنشطة والتقويم الاتساق ____.','البنائي','بنائي'),
+F_(2,'النظريات الأساسية','تُعرف نظرية هولمبرغ باسم المحادثة ____ الموجهة.','التعليمية'),
+F_(2,'التعليم المدمج والصف المقلوب','في ____ المقلوب يُدرس المحتوى قبل اللقاء ويُخصص اللقاء للتطبيق.','الصف','الفصل'),
+M_(3,'تصميم المقرر والاتساق البنائي','يسجّل محاضر محاضرة مدتها ساعتان ويرفعها ملفاً واحداً، ويشكو الطلاب من صعوبة المتابعة وبطء التحميل. ما التعديل الأنسب؟','تقسيمها إلى مقاطع قصيرة مع سؤال بعد كل مقطع ونسخة صوتية خفيفة','زيادة مدة المحاضرة لتغطي المحتوى كاملاً','إلغاء التسجيل والاكتفاء بقراءة المقرر','طلب حضور الطلاب إلى الجامعة'),
+M_(3,'تصميم المقرر والاتساق البنائي','في مقرر مخرجاته «تحليل حالات واقعية» لا يوجد تقويم سوى اختبار حفظ بأسئلة اختيار من متعدد. ما الخلل التصميمي؟','غياب الاتساق البنائي: التقويم لا يقيس المخرج المعلن','كثرة الأنشطة التفاعلية','وضوح مخرجات التعلم','تنوع مصادر المحتوى'),
+M_(3,'التقويم عن بُعد والنزاهة','انقطع الإنترنت عن 20% من الطلاب بعد عشر دقائق من بدء اختبار نهائي. أي إجراء يحقق العدالة والنزاهة معاً؟','التحقق من سجل المنصة وإتاحة فرصة بديلة بأسئلة بديلة من البنك','إلغاء الاختبار لجميع الطلاب فوراً','تصحيح من أنهى الاختبار وتجاهل المنقطعين','إعادة الاختبار نفسه بالأسئلة نفسها دون ضوابط'),
+M_(3,'تراخيص المشاع الإبداعي','نشر أستاذ مادته بترخيص CC BY-NC-ND، ويريد زميل تعديلها وتوزيعها على طلابه مجاناً. ماذا يلزم؟','استئذان صاحب العمل لأن الترخيص يمنع التعديل','لا يلزم شيء لأن الاستخدام غير تجاري','يكفي ذكر المصدر لتعديلها','يجوز التعديل بشرط نشر المشتقات بالترخيص نفسه'),
+M_(3,'دعم الطالب','غاب طالب أسبوعين عن مقرر غير متزامن، وأخبرك أن إنترنته ضعيف وغير مستقر. ما التصرف الأنسب؟','تقديم مواد خفيفة قابلة للتنزيل ومنحه مرونة في موعد التسليم','إنذاره رسمياً لأن الغياب غير مبرر','دعوته إلى مقر الجامعة','تركه ليتدبر أمره'),
+M_(3,'التعلم المتزامن وغير المتزامن','طلاب مقرر في مناطق زمنية متباعدة وإنترنتهم ضعيف، وتريد نشاطاً نقاشياً. ما الأنسب؟','نقاش غير متزامن في منتدى مع مهلة تكفي للمشاركة','جلسة مباشرة واحدة إلزامية في وقت واحد','إلغاء النقاش','اختبار شفهي لكل طالب في الوقت نفسه'),
+M_(3,'التقويم عن بُعد والنزاهة','حصل طالب على درجة مرتفعة جداً في اختبار إلكتروني غير مراقب، وتريد التأكد من أنه عمله. ما الأقوى؟','مقابلة قصيرة يشرح فيها أسباب اختيار إجاباته','الاكتفاء بالدرجة المرتفعة دليلاً','منع الإنترنت عن مدينته','تكرار الاختبار نفسه بالأسئلة نفسها'),
+M_(3,'ضمان الجودة','أخطأ 90% من الطلاب في سؤال واحد، ونسب نجاحهم في بقية الأسئلة مرتفعة. ما الاستنتاج الأولى؟','مراجعة السؤال ووضوحه ومدى تغطية المحتوى له قبل لوم الطلاب','أن الطلاب كسالى جميعاً','حذف الاختبار كله','رفع صعوبة بقية الأسئلة'),
+M_(3,'تصميم المقرر والاتساق البنائي','وضع محاضر أنشطة جماعية كثيرة دون تعليمات واضحة، فشكا الطلاب من الارتباك. ما العنصر الناقص أساساً؟','تعليمات واضحة: الهدف والمدة وطريقة التسليم ومعيار التقويم','مزيد من المحاضرات المسجلة','تقليل عدد الطلاب','تغيير منصة التعلم'),
+M_(3,'التعليم المدمج والصف المقلوب','يريد محاضر تطبيق الصف المقلوب في مقرر عن بُعد. أي تصميم يطبقه فعلاً؟','مقطع قصير ونشاط تمهيدي قبل الجلسة، ثم تخصيص الجلسة لحل مشكلة تطبيقية','إلقاء المحاضرة كاملة في الجلسة ثم واجب','تسجيل الجلسة ونشرها فقط','اختبار في بداية الجلسة دون تمهيد'),
+M_(3,'تصميم المقرر والاتساق البنائي','أي الصيغ مخرج تعلم قابل للقياس في مقرر عن تصميم التعليم؟','يصمّم الدارس نشاطاً تفاعلياً مرتبطاً بمخرج تعلم محدد','يفهم الدارس التصميم التعليمي','يقدّر الدارس أهمية الأنشطة','يطّلع الدارس على المقرر'),
+M_(3,'التعليم المفتوح والموارد المفتوحة','تقدم جامعة مقرراً مجانياً، لكنها تمنع الطلاب من نسخ مواده أو تعديلها. كيف يُوصف؟','مجاني لكنه ليس مورداً مفتوحاً بالمعنى الكامل','مورد تعليمي مفتوح كامل','غير مجاني ومفتوح','عمل مباح لا يحتاج إلى ترخيص'),
+M_(3,'التحديات وضعف الإنترنت','مقرر لطلاب بعضهم بلا إنترنت مستقر. أي تصميم هو الأنسب؟','أساس غير متزامن مع مواد خفيفة قابلة للتنزيل وقناة تواصل بديلة','الاعتماد على بث مباشر عالي الجودة','مقاطع فيديو عالية الدقة فقط','إلزام الجميع بجلسة مصورة أسبوعية'),
+F_(3,'تصميم المقرر والاتساق البنائي','عندما يحوّل المحاضر فيديو طويلاً إلى مقاطع قصيرة فهو يطبّق مبدأ ____ المحتوى.','تجزئة','تقسيم','تقطيع'),
+F_(3,'التحديات وضعف الإنترنت','لطالب بإنترنت ضعيف تُوفَّر مواد ____ البيانات وقابلة للتنزيل.','منخفضة','قليلة','خفيفة'),
+F_(3,'التعلم المتزامن وغير المتزامن','لتمكين طلاب في مناطق زمنية مختلفة من المشاركة في أوقات تناسبهم يُعتمد التعلم ____.','غير المتزامن','غير متزامن','اللامتزامن')];
+const _ty=t=>QB.filter(x=>x.t==t);
+const TF=_ty('tf').map(x=>[x.q,x.a,x.e]),MC=_ty('mc').map(x=>[x.q,x.o,x.a]),FL=_ty('fl').map(x=>[x.q,x.a]);
+const TOPICS=[..._ty('tf'),..._ty('mc'),..._ty('fl')].map(x=>x.tp),LV=[..._ty('tf'),..._ty('mc'),..._ty('fl')].map(x=>x.l);
 const ALL=[...TF.map((q,i)=>({t:'tf',i,q:q[0]})),...MC.map((q,i)=>({t:'mc',i,q:q[0]})),...FL.map((q,i)=>({t:'fl',i,q:q[0]}))];
-ALL.forEach((x,k)=>x.qid=k);
+ALL.forEach((x,k)=>{x.qid=k;x.lv=LV[k]});
 const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
-function drawExam(){const by=t=>ALL.filter(x=>x.t==t);return shuf([].concat(shuf(by('tf')).slice(0,6),shuf(by('mc')).slice(0,6),shuf(by('fl')).slice(0,4))).map(x=>Object.assign({},x,{ord:shuf([0,1,2,3])}))}
+function drawExam(){const out=[];[1,2,3].forEach(l=>{const q=QUOTA[l],pool=ALL.filter(x=>x.lv==l),pick=[];['tf','mc','fl'].forEach(t=>pick.push(...shuf(pool.filter(x=>x.t==t)).slice(0,q[t])));out.push(...shuf(pick))});return out.map(x=>Object.assign({},x,{ord:shuf([0,1,2,3])}))}
 function flagsOf(mins,sg){const f=[];if(mins<2)f.push('إنهاء سريع جداً ('+mins+' د)');if(sg.blur>=2||sg.blurMs>45000)f.push('خروج من الصفحة ×'+sg.blur+' ('+Math.round(sg.blurMs/1000)+' ث)');if(sg.paste>0)f.push('لصق نص ×'+sg.paste);return f.join('، ')}
-let SIG=null,EX=[];
-function sigStart(){SIG={blur:0,blurMs:0,paste:0,t:{},hid:0};const b=$('ebody');SIG.bl=()=>{if(!SIG.hid)SIG.hid=Date.now()};SIG.fo=()=>{if(SIG.hid){SIG.blur++;SIG.blurMs+=Date.now()-SIG.hid;SIG.hid=0}};SIG.pa=()=>{SIG.paste++};SIG.ch=e=>{const nm=String(e.target.name||'').replace('q','');if(nm!=='')SIG.t[nm]=Date.now()-t0.getTime()};
- window.addEventListener('blur',SIG.bl);window.addEventListener('focus',SIG.fo);b.addEventListener('paste',SIG.pa,true);b.addEventListener('input',SIG.ch,true);b.addEventListener('change',SIG.ch,true)}
-function sigStop(){if(!SIG)return{blur:0,blurMs:0,paste:0,t:{}};window.removeEventListener('blur',SIG.bl);window.removeEventListener('focus',SIG.fo);const b=$('ebody');b.removeEventListener('paste',SIG.pa,true);b.removeEventListener('input',SIG.ch,true);b.removeEventListener('change',SIG.ch,true);SIG.fo();return SIG}
+/* ===== مؤقت كل سؤال + التسجيل الصامت =====
+   عدّل الأزمنة من هذا السطر وحده: ثوانٍ لكل نوع، السقف الكلي بالثواني، تشغيل المؤقت في القبلي/البعدي،
+   إيقافه عند الخروج من الصفحة (false = يستمر ويُسجَّل الخروج)، وأقصى إيقاف لكل سؤال عند انقطاع الاتصال (ثانية) */
+const QTIME={tf:30,mc:45,fl:60},QTIME_MAX=1500,QTIME_PRE=false,QTIME_POST=true,QTIME_PAUSE_AWAY=false,QTIME_OFF_MAX=60;
+let SIG=null,EX=[],TM={on:false,cur:0,lim:[],done:false,ln:0};
+const tmOn=ph=>ph=='pre'?QTIME_PRE:QTIME_POST;
+function tmNote(){const e=$('tmnote'),ph=$('phase');if(!e||!ph)return;const pre=ph.value=='pre';
+ e.textContent=tmOn(ph.value)?'⏱️ الاختبار '+(pre?'القبلي':'البعدي')+' مؤقّت لكل سؤال: صح/خطأ '+QTIME.tf+' ث، اختيار من متعدد '+QTIME.mc+' ث، فراغ '+QTIME.fl+' ث للمتوسط (أقصر للسهل وأطول للصعب) (لا يتجاوز المجموع '+Math.round(QTIME_MAX/60)+' دقيقة). يُعرض سؤال واحد في كل مرة دون رجوع، وينتقل تلقائياً عند انتهاء الوقت، ويتوقف المؤقت إذا انقطع اتصالك بالإنترنت.':(pre?'🕓 الاختبار القبلي بلا مؤقت ولا يدخل في شهادتك.':'🕓 الاختبار البعدي بلا مؤقت.')}
+try{tmNote()}catch(e){}
+/* زمن كل سؤال بالثواني: الأساس حسب النوع + زيادة قليلة للأسئلة الطويلة، دون تجاوز السقف الكلي */
+function qLimits(){const base=EX.map(x=>Math.round(QTIME[x.t]*QLV[x.lv||2])),bon=EX.map(x=>{const len=String(x.q).length+(x.t=='mc'?MC[x.i][1].join('').length:0),th=x.t=='tf'?90:x.t=='mc'?200:70;return Math.max(0,Math.min(10,Math.round((len-th)/15)))});
+ const b0=base.reduce((s,v)=>s+v,0),bs=bon.reduce((s,v)=>s+v,0),room=Math.max(0,QTIME_MAX-b0),k=bs>room&&bs>0?room/bs:1;
+ return base.map((v,i)=>v+Math.floor(bon[i]*k))}
+const qOf=t=>{const m=/^q(\d+)$/.exec((t&&t.name)||'');return m?+m[1]:-1};
+/* يحسب الزمن المنقضي منذ آخر لحظة ويضيفه إلى السؤال النشط: m=زمن داخل الصفحة، a=زمن خارجها، u=ما يُحتسب على المؤقت، o=زمن انقطاع الاتصال */
+function adv(){if(!SIG)return;const now=Date.now(),dt=Math.max(0,Math.min(now-SIG.last,36e5));SIG.last=now;if(SIG.act<0||!dt)return;const q=SIG.q[SIG.act];if(!q)return;const away=!!SIG.hid;
+ if(away)q.a+=dt;else q.m+=dt;
+ if(SIG.off)q.o+=dt;
+ if(!(SIG.off&&q.o<=QTIME_OFF_MAX*1000)&&!(away&&QTIME_PAUSE_AWAY))q.u+=dt}
+function setAct(n){if(!SIG)return;adv();SIG.act=n}
+function pickAct(){if(!SIG||TM.on)return;const mid=innerHeight/2;let best=-1,bd=1e9;document.querySelectorAll('#ebody .q[data-n]').forEach(el=>{const r=el.getBoundingClientRect(),d=(r.top<=mid&&r.bottom>=mid)?0:Math.min(Math.abs(r.top-mid),Math.abs(r.bottom-mid));if(d<bd){bd=d;best=+el.dataset.n}});if(best>=0&&best!==SIG.act)setAct(best)}
+function sigStart(){
+ SIG={blur:0,blurMs:0,paste:0,t:{},hid:0,awq:-1,blurred:false,off:!navigator.onLine,last:Date.now(),act:-1,has:{},tv:{},scT:0,
+  q:EX.map(()=>({m:0,a:0,n:0,c:0,f:-1,t:0,p:0,u:0,o:0,d:0}))};
+ const b=$('ebody');
+ SIG.ck=()=>{adv();const aw=SIG.blurred||document.hidden;
+  if(aw&&!SIG.hid){SIG.hid=Date.now();SIG.awq=SIG.act}
+  else if(!aw&&SIG.hid){SIG.blur++;SIG.blurMs+=Date.now()-SIG.hid;SIG.hid=0;if(SIG.q[SIG.awq])SIG.q[SIG.awq].n++}};
+ SIG.bl=()=>{SIG.blurred=true;SIG.ck()};SIG.fo=()=>{SIG.blurred=false;SIG.ck()};SIG.vc=()=>SIG.ck();
+ SIG.on=()=>{adv();SIG.off=false;tmOffUI()};SIG.of=()=>{adv();SIG.off=true;tmOffUI()};
+ SIG.pa=e=>{SIG.paste++;let n=qOf(e.target);if(n<0)n=SIG.act;if(SIG.q[n])SIG.q[n].p++};
+ SIG.ch=e=>{const t=e.target,n=qOf(t),q=SIG.q[n];if(!q)return;if(!TM.on&&SIG.act!==n)setAct(n);adv();SIG.t[n]=Date.now()-t0.getTime();
+  if(t.type=='text'){const v=t.value.trim();
+   if(e.type=='input'){if(v!==''&&!SIG.has[n]){SIG.has[n]=1;q.f=q.m+q.a}}
+   else{if(SIG.tv[n]!==undefined&&SIG.tv[n]!==v)q.c++;SIG.tv[n]=v}}
+  else if(e.type=='change'){if(SIG.has[n])q.c++;else{SIG.has[n]=1;q.f=q.m+q.a}}};
+ SIG.fi=e=>{if(TM.on)return;const el=e.target.closest&&e.target.closest('.q[data-n]');if(el&&SIG.act!==+el.dataset.n)setAct(+el.dataset.n)};
+ SIG.sc=()=>{if(TM.on||SIG.scT)return;SIG.scT=setTimeout(()=>{SIG.scT=0;pickAct()},200)};
+ window.addEventListener('blur',SIG.bl);window.addEventListener('focus',SIG.fo);document.addEventListener('visibilitychange',SIG.vc);
+ window.addEventListener('online',SIG.on);window.addEventListener('offline',SIG.of);window.addEventListener('scroll',SIG.sc,{passive:true});
+ b.addEventListener('paste',SIG.pa,true);b.addEventListener('input',SIG.ch,true);b.addEventListener('change',SIG.ch,true);b.addEventListener('focusin',SIG.fi,true);
+ SIG.iv=setInterval(tick,200)}
+function sigStop(){if(!SIG)return{blur:0,blurMs:0,paste:0,t:{},q:[]};
+ clearInterval(SIG.iv);window.removeEventListener('blur',SIG.bl);window.removeEventListener('focus',SIG.fo);document.removeEventListener('visibilitychange',SIG.vc);
+ window.removeEventListener('online',SIG.on);window.removeEventListener('offline',SIG.of);window.removeEventListener('scroll',SIG.sc);
+ const b=$('ebody');b.removeEventListener('paste',SIG.pa,true);b.removeEventListener('input',SIG.ch,true);b.removeEventListener('change',SIG.ch,true);b.removeEventListener('focusin',SIG.fi,true);
+ adv();if(SIG.hid){SIG.blur++;SIG.blurMs+=Date.now()-SIG.hid;SIG.hid=0;if(SIG.q[SIG.awq])SIG.q[SIG.awq].n++}return SIG}
+/* الصيغة المحفوظة في عمود sig (أزمنة بالملّي ثانية مقرّبة لأقرب 100) */
+function sigPack(sg){const r=v=>Math.round(v/100)*100;
+ return {v:2,blur:sg.blur,blurMs:sg.blurMs,paste:sg.paste,t:sg.t,tm:TM.on?1:0,pl:1,lim:TM.on?TM.lim:[],
+  q:(sg.q||[]).map(x=>({m:r(x.m),a:r(x.a),n:x.n,c:x.c,f:x.f<0?-1:r(x.f),t:x.t,p:x.p,u:r(x.u),o:r(x.o),d:x.d}))}}
+function tick(){if(!SIG)return;adv();if(!TM.on||TM.done)return;const n=TM.cur,q=SIG.q[n];if(!q)return;const lim=TM.lim[n]*1000,rem=Math.max(0,lim-q.u);tmDraw(rem,lim);if(rem<=0)tmNext(true)}
+function tmDraw(rem,lim){const t=$('tmt'),b=$('tmb');if(!t||!b)return;const s=Math.ceil(rem/1000);if(t.dataset.s!=s){t.dataset.s=s;t.textContent=s+' ث'}b.firstElementChild.style.width=(lim?Math.round(rem/lim*100):0)+'%';b.classList.toggle('lo',rem<=10000)}
+function tmOffUI(){const e=$('tmoff');if(e)e.style.display=(TM.on&&SIG&&SIG.off)?'block':'none'}
+function tmShow(n){document.querySelectorAll('#ebody .q[data-n]').forEach(e=>{e.style.display=(+e.dataset.n==n?'':'none')});
+ const c=$('tmc'),nb=$('tmn');if(c)c.textContent='سؤال '+(n+1)+' من '+EX.length;if(nb)nb.textContent=n>=EX.length-1?'إنهاء وإرسال ✔':'التالي ◀';
+ setAct(n);tmDraw(TM.lim[n]*1000,TM.lim[n]*1000);tmOffUI();window.scrollTo(0,0)}
+function tmGo(){t0=new Date();$('rdy').style.display='none';$('xwrap').style.display='block';sigStart();tmShow(0)}
+function tmNext(auto){if(!TM.on||TM.done||!SIG)return;const n=TM.cur,x=EX[n],q=SIG.q[n];
+ if(!auto&&Date.now()-TM.ln<400)return;
+ if(x.t!='fl'&&val(n)!==''&&cval(n)===''){
+  if(!auto){alert('اختر نسبة ثقتك في إجابتك أولاً ثم اضغط التالي.');return}
+  const d=document.querySelector('[name=c'+n+'][value="50"]');if(d){d.checked=true;q.d=1}}   /* انتهى الوقت وبقيت الثقة فارغة: تُعتمد 50% */
+ adv();if(auto)q.t=1;TM.ln=Date.now();
+ if(n>=EX.length-1){TM.done=true;const nb=$('tmn'),fb=$('fbtn');if(nb)nb.style.display='none';if(fb)fb.style.display='';finish();return}
+ TM.cur=n+1;tmShow(n+1)}
 let me={},t0=null;
 /* ===== التقييم بنسبة الثقة (الخادم هو المرجع في حساب الدرجة؛ هذه الجداول للعرض وللعمل دون خادم) ===== */
 const CF_OK={25:.4,50:.5,75:.75,90:1},CF_NO={25:0,50:.1,75:.5,90:1.5},CFL={25:'25% تخمين',50:'50%',75:'75%',90:'80% فأكثر'};
@@ -2473,38 +2603,49 @@ function startExam(){const nm=$('nm').value.trim(),wa=$('wa').value.replace(/[\s
  if(nm.length<3){e.textContent='الرجاء كتابة الاسم الكامل.';return}
  if(!/^\d{8,15}$/.test(wa)){e.textContent='رقم الواتساب إلزامي ويجب أن يكون أرقاماً مع رمز الدولة (8-15 رقماً).';return}
  if(!$('pledge').checked){e.textContent='يلزم الإقرار بحل الاختبار بنفسك قبل البدء.';return}
- me={name:nm,wa:wa,email:$('em').value.trim(),phase:$('phase').value};t0=new Date();EX=drawExam();$('gate').style.display='none';const b=$('ebody');b.style.display='block';
- let h='<div class="card"><b>'+nm+'</b> ('+(me.phase=='pre'?'اختبار قبلي':'اختبار بعدي')+') — أجب عن جميع الأسئلة ثم اضغط إنهاء.<p class="note">الأسئلة تُسحب لك عشوائياً. يُسجَّل خروجك من الصفحة ولصق النصوص وزمن الإجابة كإشارات للمراجعة، وقد تُطلب منك مقابلة قصيرة لشرح إجاباتك.</p>'+CFBOX+'</div><div class="card">';
- EX.forEach((x,n)=>{h+=`<div class="q" data-n="${n}"><b>${n+1}. ${x.q}</b>`;
-  if(x.t=='tf')h+=`<label class="opt"><input type="radio" name="q${n}" value="1"> صح</label><label class="opt"><input type="radio" name="q${n}" value="0"> خطأ</label>`+cfRow(n,[50,75,90]);
-  if(x.t=='mc')h+=x.ord.map(j=>`<label class="opt"><input type="radio" name="q${n}" value="${j}"> ${MC[x.i][1][j]}</label>`).join('')+cfRow(n,[25,50,75,90]);
-  if(x.t=='fl')h+=`<input type="text" name="q${n}" autocomplete="off">`;h+='</div>'});
- h+='<button class="b" onclick="finish()">إنهاء وإرسال الدرجة</button></div>';b.innerHTML=h;sigStart();window.scrollTo(0,0)}
+ me={name:nm,wa:wa,email:$('em').value.trim(),phase:$('phase').value};t0=new Date();EX=drawExam();TM={on:tmOn(me.phase),cur:0,lim:[],done:false,ln:0};if(TM.on)TM.lim=qLimits();$('gate').style.display='none';const b=$('ebody');b.style.display='block';
+ const lab=me.phase=='pre'?'اختبار قبلي':'اختبار بعدي',rec='يُسجَّل خروجك من الصفحة ولصق النصوص وزمن كل سؤال وتغيير إجاباتك كإشارات للمراجعة فقط، دون أي عقوبة آلية، وقد تُطلب منك مقابلة قصيرة لشرح إجاباتك.';
+ let qh='';
+ EX.forEach((x,n)=>{qh+=`<div class="q" data-n="${n}"><small class="note">${LVN[x.lv]}</small> <b>${n+1}. ${x.q}</b>`;
+  if(x.t=='tf')qh+=`<label class="opt"><input type="radio" name="q${n}" value="1"> صح</label><label class="opt"><input type="radio" name="q${n}" value="0"> خطأ</label>`+cfRow(n,[50,75,90]);
+  if(x.t=='mc')qh+=x.ord.map(j=>`<label class="opt"><input type="radio" name="q${n}" value="${j}"> ${MC[x.i][1][j]}</label>`).join('')+cfRow(n,[25,50,75,90]);
+  if(x.t=='fl')qh+=`<input type="text" name="q${n}" autocomplete="off">`;qh+='</div>'});
+ if(TM.on){
+  const TMHD='<div class="tmhd" id="tmhd"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><b id="tmc"></b><b id="tmt" dir="ltr"></b></div><div class="tmbar" id="tmb"><i></i></div><div id="tmoff" class="note" style="display:none;color:var(--no);margin-top:6px">⚠️ انقطع الاتصال: توقّف المؤقت مؤقتاً حتى يعود الاتصال.</div></div>';
+  b.innerHTML='<div class="card" id="rdy"><b>'+nm+'</b> ('+lab+') — <b>اختبار مؤقّت لكل سؤال</b><p>تُعرض الأسئلة ('+EX.length+') واحداً تلو الآخر دون إمكانية الرجوع. وقت كل سؤال يظهر في شريط أعلى الصفحة، وينتقل الاختبار تلقائياً عند انتهائه: صح/خطأ '+QTIME.tf+' ث، اختيار من متعدد '+QTIME.mc+' ث، فراغ '+QTIME.fl+' ث للمتوسط (أقصر للسهل وأطول للصعب) (قد يزيد قليلاً مع الأسئلة الطويلة، ولا يتجاوز المجموع '+Math.round(QTIME_MAX/60)+' دقيقة).</p><ul><li>إن انتهى الوقت وقد اخترتَ إجابة دون تحديد ثقتك اعتُمدت ثقة 50%.</li><li>السؤال الذي لا تجيب عنه لا يُخصم منه شيء.</li><li>يتوقف المؤقت إذا انقطع اتصالك بالإنترنت، ويستمر إذا غادرتَ الصفحة (ويُسجَّل ذلك).</li></ul><p class="note">'+rec+' إن كانت شبكتك أو جهازك غير مستقرين فأجّل الاختبار.</p>'+CFBOX+'<button class="b" onclick="tmGo()">ابدأ الأسئلة الآن ⏱️</button></div>'
+   +'<div id="xwrap" style="display:none">'+TMHD+'<div class="card">'+qh+'<button class="b" id="fbtn" style="display:none" onclick="finish()">إنهاء وإرسال الدرجة</button><button class="b" id="tmn" onclick="tmNext()"></button></div></div>';
+  window.scrollTo(0,0);return}
+ b.innerHTML='<div class="card"><b>'+nm+'</b> ('+lab+') — أجب عن جميع الأسئلة ثم اضغط إنهاء.<p class="note">الأسئلة تُسحب لك عشوائياً. '+rec+'</p>'+CFBOX+'</div><div class="card">'+qh+'<button class="b" id="fbtn" onclick="finish()">إنهاء وإرسال الدرجة</button></div>';
+ sigStart();window.scrollTo(0,0);pickAct()}
 function val(n){const x=document.querySelector('[name=q'+n+']');if(!x)return '';if(x.type=='radio'){const c=document.querySelector('[name=q'+n+']:checked');return c?c.value:''}return x.value.trim()}
-const TOPICS=["الفرق بين التعليم الإلكتروني والتعليم عن بُعد", "مفهوم الانفتاح في التعليم المفتوح", "تاريخ التعليم عن بُعد وأجياله", "الموارد التعليمية المفتوحة", "تراخيص المشاع الإبداعي", "الاتساق البنائي في تصميم المقرر", "التعلم المتزامن وغير المتزامن", "التعلم المتزامن وغير المتزامن", "تصميم المقاطع التعليمية", "تراخيص المشاع الإبداعي", "ضمان الجودة", "مخرجات التعلم", "النظريات الأساسية: المسافة التبادلية", "النظريات الأساسية: التعلم المستقل", "تراخيص المشاع الإبداعي", "التعليم المدمج", "الصف المقلوب", "التحديات الواقعية وضعف الإنترنت", "تراخيص المشاع الإبداعي", "التعلم المتزامن وغير المتزامن", "دعم الطالب", "الاتساق البنائي في تصميم المقرر", "التقويم عن بُعد والنزاهة", "الصف المقلوب", "مفهوم التعليم عن بُعد", "النظريات الأساسية: المحادثة الموجّهة", "تراخيص المشاع الإبداعي", "التعليم المدمج", "التعلم المتزامن وغير المتزامن", "تراخيص المشاع الإبداعي", "الاتساق البنائي في تصميم المقرر", "الصف المقلوب"];
+
 const qi=x=>x.qid!==undefined?x.qid:x.n-1;
 function level(p){return p>=90?'ممتاز':p>=80?'جيد جداً':p>=70?'جيد':p>=60?'مقبول':'يحتاج إلى مراجعة معمّقة'}
 function rec(p){return p>=85?'أداء متميز. ننصحكم بتطبيق ما تعلّمتموه بتصميم وحدة من أحد مقرراتكم وفق مبادئ الاتساق البنائي.':p>=60?'أداء مقبول. راجعوا المحاور المذكورة في الشرح والمراجعة، ثم طبّقوا ما تعلّمتموه في أحد مقرراتكم.':'ننصحكم بإعادة دراسة وحدات الحقيبة المرتبطة بالمحاور المذكورة، والاستعانة بقسم المراجعة والاستماع إلى الشرح، ثم إعادة الاختبار.'}
+const PRE_REC_HI='لديكم معرفة سابقة جيدة بموضوعات الحقيبة. هذا اختبار قبلي لقياس نقطة انطلاقكم، ولا يدخل في شهادتكم. ننصحكم بالبدء بدراسة الحقيبة (الشرح ثم المراجعة) مع التركيز على المحاور المذكورة، ثم إجراء الاختبار البعدي بعد إتمام الدراسة لقياس تقدّمكم.';
+const PRE_REC_LO='هذه نتيجة طبيعية قبل دراسة الحقيبة؛ فالاختبار القبلي يقيس نقطة انطلاقكم فقط، ولا يدخل في شهادتكم. ننصحكم بالبدء بدراسة الحقيبة (الشرح ثم المراجعة) مع التركيز على المحاور المذكورة، ثم إجراء الاختبار البعدي بعد إتمام الدراسة لقياس تقدّمكم.';
+const levelP=(p,ph)=>ph=='pre'?'نقطة انطلاقك قبل الدراسة':level(p);
+const recP=(p,ph)=>ph=='pre'?(p>=60?PRE_REC_HI:PRE_REC_LO):rec(p);
 function buildMsg(r,rows){const sc=+r.score,tot=+r.total,p=Math.round(sc/tot*100),wr=rows.filter(x=>!x.ok),wk=[...new Set(wr.map(x=>TOPICS[qi(x)]))],st=[...new Set(TOPICS)].filter(t=>!wk.includes(t));
- let m='السلام عليكم ورحمة الله وبركاته\n\nحضرة '+r.name+' المحترم/ة،\nنشكركم على إتمام اختبار الحقيبة التدريبية «التدريس في التعليم المفتوح وعن بُعد».\n\n📊 النتيجة: '+sc+' من '+tot+' ('+p+'%)\n🏅 المستوى: '+level(p)+'\n'+(r.phase=='pre'?'🧪 المرحلة: اختبار قبلي (لقياس المستوى قبل الدراسة)\n':'🎯 المرحلة: اختبار بعدي\n')+(r.cert?'🎓 رمز شهادتك: '+r.cert+'\n':'');
+ let m='السلام عليكم ورحمة الله وبركاته\n\nحضرة '+r.name+' المحترم/ة،\nنشكركم على إتمام اختبار الحقيبة التدريبية «التدريس في التعليم المفتوح وعن بُعد».\n\n📊 النتيجة: '+sc+' من '+tot+' ('+p+'%)\n'+(r.phase=='pre'?'':'🏅 المستوى: '+level(p)+'\n')+(r.phase=='pre'?'🧪 المرحلة: اختبار قبلي لقياس نقطة انطلاقكم قبل دراسة الحقيبة، ولا يدخل في الشهادة\n':'🎯 المرحلة: اختبار بعدي\n')+(r.cert?'🎓 رمز شهادتك: '+r.cert+'\n':'');
  {const cb=calibOf(rows);if(cb.k)m+='\n🎯 معايرة الثقة: ثقتك المتوسطة '+cb.conf+'% ودقتك الفعلية '+cb.acc+'%'+(cb.over?' — أخطاء بثقة عالية: '+cb.over:'')+'\n'}
- if(st.length)m+='\n✅ محاور تمكّنتم منها:\n'+st.map(t=>'• '+t).join('\n')+'\n';
- if(wk.length)m+='\n📚 محاور تحتاج إلى مراجعة:\n'+wk.map(t=>'• '+t).join('\n')+'\n';
- if(wr.length)m+='\n❌ الأسئلة التي لم تصحّ إجابتها (مع الإجابة الصحيحة):\n'+wr.map(x=>'س'+x.n+': '+x.c).join('\n')+'\n';
- return m+'\n💡 التوصية: '+rec(p)+'\n\nمع خالص التقدير،\nفريق التدريب'}
+ if(st.length)m+='\n'+(r.phase=='pre'?'✅ محاور لديكم معرفة سابقة بها:':'✅ محاور تمكّنتم منها:')+'\n'+st.map(t=>'• '+t).join('\n')+'\n';
+ if(wk.length)m+='\n'+(r.phase=='pre'?'📚 محاور سيكون تركيزكم عليها أثناء الدراسة:':'📚 محاور تحتاج إلى مراجعة:')+'\n'+wk.map(t=>'• '+t).join('\n')+'\n';
+ if(wr.length)m+=r.phase=='pre'?'\nℹ️ لم تُعرض الإجابات الصحيحة في الاختبار القبلي حتى يبقى الاختبار البعدي قياساً حقيقياً لتقدّمكم. ستجدون مضمون هذه المحاور في وحدات الشرح والمراجعة.\n':'\n❌ الأسئلة التي لم تصحّ إجابتها (مع الإجابة الصحيحة):\n'+wr.map(x=>'س'+x.n+': '+x.c).join('\n')+'\n';
+ return m+'\n💡 التوصية: '+recP(p,r.phase)+'\n\nمع خالص التقدير،\nفريق التدريب'}
 const WAI='<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.15c-.25.69-1.45 1.32-2 1.37-.51.05-1.15.07-1.85-.12-.43-.13-.98-.32-1.69-.62-2.97-1.28-4.9-4.27-5.05-4.47-.15-.2-1.2-1.6-1.2-3.05 0-1.45.76-2.16 1.03-2.46.27-.3.59-.37.79-.37h.57c.18 0 .43-.07.67.51.25.6.84 2.05.92 2.2.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.38-.44.51-.15.15-.3.31-.13.61.17.3.77 1.27 1.65 2.05 1.13 1.01 2.09 1.32 2.39 1.47.3.15.47.12.64-.07.17-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.72.81 2.02.96.3.15.5.22.57.35.07.12.07.72-.18 1.41z"/></svg>';
 function waBtn(href,t){return '<a class="b" style="background:#25D366;color:#fff;padding:6px 12px;display:inline-flex;align-items:center;gap:6px" target="_blank" rel="noopener" href="'+href+'">'+WAI+' '+t+'</a>'}
 async function finish(){const rows=[];let sc=0;
  const miss=[];EX.forEach((x,n)=>{if(x.t!='fl'&&val(n)!==''&&cval(n)==='')miss.push(n+1)});
  if(miss.length){alert('اختر نسبة ثقتك في الأسئلة: '+miss.join('، ')+' (أسئلة الفراغ بلا ثقة).');const q0=document.querySelector('.q[data-n="'+(miss[0]-1)+'"]');if(q0)q0.scrollIntoView({behavior:'smooth',block:'center'});return}
- const ANS=EX.map((x,n)=>({qid:x.qid,t:x.t,a:val(n),c:x.t=='fl'?'':cval(n)}));
+ const ANS=EX.map((x,n)=>({qid:x.qid,lv:x.lv,t:x.t,a:val(n),c:x.t=='fl'?'':cval(n)}));
  EX.forEach((x,n)=>{const a=val(n);let ok=false,exp='';
-  if(x.t=='tf'){ok=a!==''&&(a=='1')==TF[x.i][1];exp=TF[x.i][1]?'صح':'خطأ';rows.push({n:n+1,qid:x.qid,q:x.q,a:a===''?'':(a=='1'?'صح':'خطأ'),c:exp,ok})}
-  if(x.t=='mc'){ok=a!==''&&+a==MC[x.i][2];rows.push({n:n+1,qid:x.qid,q:x.q,a:a===''?'':MC[x.i][1][+a],c:MC[x.i][1][MC[x.i][2]],ok})}
-  if(x.t=='fl'){ok=FL[x.i][1].some(z=>norm(z)==norm(a));rows.push({n:n+1,qid:x.qid,q:x.q,a,c:FL[x.i][1][0],ok})}
+  if(x.t=='tf'){ok=a!==''&&(a=='1')==TF[x.i][1];exp=TF[x.i][1]?'صح':'خطأ';rows.push({n:n+1,qid:x.qid,lv:x.lv,q:x.q,a:a===''?'':(a=='1'?'صح':'خطأ'),c:exp,ok})}
+  if(x.t=='mc'){ok=a!==''&&+a==MC[x.i][2];rows.push({n:n+1,qid:x.qid,lv:x.lv,q:x.q,a:a===''?'':MC[x.i][1][+a],c:MC[x.i][1][MC[x.i][2]],ok})}
+  if(x.t=='fl'){ok=FL[x.i][1].some(z=>norm(z)==norm(a));rows.push({n:n+1,qid:x.qid,lv:x.lv,q:x.q,a,c:FL[x.i][1][0],ok})}
   if(x.t=='fl'){if(ok)sc++}else{const r=rows[rows.length-1];if(a!==''){const cf=+cval(n);r.cf=cf;r.pt=ok?CF_OK[cf]:-CF_NO[cf];sc+=r.pt}else r.pt=0}});sc=fmt(Math.max(0,sc));rows.forEach((r,i)=>{if(EX[i].t=='tf')r.e=TF[EX[i].i][2]});
  const t1=new Date(),res={...me,score:sc,total:EX.length,start:t0.toISOString(),end:t1.toISOString(),mins:Math.round((t1-t0)/600)/100,right:rows.filter(r=>r.ok).map(r=>r.n).join('، '),wrong:rows.filter(r=>!r.ok).map(r=>r.n).join('، '),rows:JSON.stringify(rows),calib:JSON.stringify(calibOf(rows))};
- const sg=sigStop();res.flags=flagsOf(res.mins,sg);res.sig=JSON.stringify({blur:sg.blur,blurMs:sg.blurMs,paste:sg.paste,t:sg.t});
+ const sg=sigStop();res.flags=flagsOf(res.mins,sg);res.sig=JSON.stringify(sigPack(sg));
  let sv={};
  if(SHEET_URL){const btn=document.querySelector('#ebody button[onclick="finish()"]');if(btn)btn.disabled=true;   /* الدرجة يحسبها الخادم ولا يُعتمد ما يُحسب هنا */
   sv=await save(res,ANS);
@@ -2517,7 +2658,7 @@ async function finish(){const rows=[];let sc=0;
  const msg=buildMsg(res,rows);
  const link='https://wa.me/'+me.wa+'?text='+encodeURIComponent(msg);
  const p=Math.round(sc/EX.length*100),wr=rows.filter(x=>!x.ok),wk=[...new Set(wr.map(x=>TOPICS[qi(x)]))],st=[...new Set(TOPICS)].filter(t=>!wk.includes(t));
- const extra=phaseBlock(res,p,pre0);$('ebody').innerHTML=`<div class="card"><div class="scr">${fmt(sc)} / ${EX.length}</div>${extra}<p style="text-align:center;margin:0">${p}% — <b>${level(p)}</b></p><p>تم حفظ نتيجتكم. اضغطوا الزر لاستلام التقرير المفصّل على واتساب (+${me.wa}).</p>${st.length?'<h3 style="color:var(--ok)">✅ محاور تمكّنتم منها</h3><ul>'+st.map(t=>'<li>'+t+'</li>').join('')+'</ul>':''}${wk.length?'<h3 style="color:var(--no)">📚 محاور تحتاج إلى مراجعة</h3><ul>'+wk.map(t=>'<li>'+t+'</li>').join('')+'</ul>':''}<p><b>💡 التوصية:</b> ${rec(p)}</p>${waBtn(link,'إرسال التقرير إلى الواتساب')} <button class="b s" onclick="copyMsg()">📋 نسخ الرسالة</button></div>${calibBlock(rows)}<div class="card"><h3>مراجعة تفصيلية للإجابات</h3>${rows.map(r=>`<div class="q"><b>${r.n}. ${r.q}</b><div style="color:var(--${r.ok?'ok':'no'})">${r.ok?'✅ إجابة صحيحة':'❌ إجابتكم: '+(r.a||'لم تُجب')}</div>${r.ok?'':'<div>الإجابة الصحيحة: <b>'+r.c+'</b></div>'+(r.e?'<div class="note">'+r.e+'</div>':'')}${r.cf?'<div class="note">ثقتك: '+CFL[r.cf]+' • النقاط: '+fmt(r.pt)+'</div>':''}<div class="note">المحور: ${TOPICS[qi(r)]}</div></div>`).join('')}</div>`;
+ const extra=phaseBlock(res,p,pre0);$('ebody').innerHTML=`<div class="card"><div class="scr">${fmt(sc)} / ${EX.length}</div>${extra}<p style="text-align:center;margin:0">${p}% — <b>${levelP(p,res.phase)}</b></p><p>تم حفظ نتيجتكم. اضغطوا الزر لاستلام التقرير المفصّل على واتساب (+${me.wa}).</p>${st.length?'<h3 style="color:var(--ok)">'+(res.phase=='pre'?'✅ محاور لديك معرفة سابقة بها':'✅ محاور تمكّنتم منها')+'</h3><ul>'+st.map(t=>'<li>'+t+'</li>').join('')+'</ul>':''}${wk.length?'<h3 style="color:var(--no)">'+(res.phase=='pre'?'📚 محاور ستركّز عليها أثناء الدراسة':'📚 محاور تحتاج إلى مراجعة')+'</h3><ul>'+wk.map(t=>'<li>'+t+'</li>').join('')+'</ul>':''}<p><b>💡 التوصية:</b> ${recP(p,res.phase)}</p>${waBtn(link,'إرسال التقرير إلى الواتساب')} <button class="b s" onclick="copyMsg()">📋 نسخ الرسالة</button></div>${calibBlock(rows)}${fbTopics(rows,res.phase)}<div class="card"><h3>مراجعة تفصيلية للإجابات</h3>${res.phase=='pre'?'<p class=\"note\">🔒 لا تُعرض الإجابات الصحيحة في الاختبار القبلي حتى يبقى الاختبار البعدي قياساً حقيقياً لتقدّمك.</p>':''}${rows.map(r=>`<div class="q"><b>${r.n}. ${r.q}</b><div style="color:var(--${r.ok?'ok':'no'})">${r.ok?'✅ إجابة صحيحة':'❌ إجابتكم: '+(r.a||'لم تُجب')}</div>${r.ok||res.phase=='pre'?'':'<div>الإجابة الصحيحة: <b>'+r.c+'</b></div>'+(r.e?'<div class="note">'+r.e+'</div>':'')}${r.cf?'<div class="note">ثقتك: '+CFL[r.cf]+' • النقاط: '+fmt(r.pt)+'</div>':''}<div class="note">المحور: ${TOPICS[qi(r)]}</div></div>`).join('')}</div>`;
  window.MSG=msg;window.scrollTo(0,0)}
 function copyMsg(){try{navigator.clipboard.writeText(window.MSG);alert('تم نسخ الرسالة')}catch(e){prompt('انسخ الرسالة:',window.MSG)}}
 async function save(r,ans){try{const a=JSON.parse(localStorage.getItem('results')||'[]');a.push(r);localStorage.setItem('results',JSON.stringify(a))}catch(e){}
@@ -2552,7 +2693,7 @@ const DOCH=(t,b)=>'<html dir="rtl" lang="ar"><head><meta charset="utf-8"><title>
 function dlTpl(k){const T=TPL[k];dlFile(T.n+'.doc','application/msword',DOCH(T.n,T.h))}
 function dlUnit(){const u=US[cur];dlFile((u.dataset.title||'وحدة')+'.html','text/html',DOCH(u.dataset.title||'وحدة',u.innerHTML))}
 function projAgent(){document.querySelector('#nav button[data-t="agents"]').click();try{wkA='idesign';wkCards();wkRender()}catch(e){}}
-function projSc(){const n=document.querySelectorAll('.ck:checked').length;$('pscore').textContent=n+' / '+CHK.length;return n}
+function projSc(){const n=document.querySelectorAll('.ck:checked').length;$('pscore').textContent=n+' / '+CHK.length;try{projLive()}catch(e){}return n}
 $('chk').innerHTML=CHK.map(t=>'<label class="opt"><input type="checkbox" class="ck" onchange="projSc()"> '+t+'</label>').join('');projSc();
 document.querySelector('#nav button[data-t="project"]').addEventListener('click',()=>projMine());
 async function projMine(){if(!AG.t)return;try{const j=await api({action:'proj_mine',tok:AG.t});if(j.ok&&j.row){const r=j.row,bits=(r.checks||'').split('');$('ptitle').value=r.title;$('plink').value=r.link;$('pfinfo').textContent=r.fileName?'📎 ملفك المحفوظ لدى المدرب: '+r.fileName+' (اختر ملفاً جديداً لاستبداله)':'';$('pnote').value=r.note;document.querySelectorAll('.ck').forEach((c,i)=>c.checked=bits[i]==='1');projSc();$('pfb').innerHTML=r.feedback?'<b>💬 تعليق المدرب:</b><br>'+esc(r.feedback):'<span class="note">لم يصلك تعليق من المدرب بعد.</span>'}}catch(e){}}
@@ -2563,10 +2704,10 @@ async function projSave(){const m=$('pmsg'),t=$('ptitle').value.trim();const say
  if(fi){const ext=(fi.name.split('.').pop()||'').toLowerCase();
   if(!['pdf','doc','docx','ppt','pptx','xls','xlsx','txt','rtf','odt'].includes(ext)){say('نوع الملف غير مدعوم. المسموح: PDF وWord وPowerPoint وExcel وTXT.',false);return}
   if(fi.size>5*1024*1024){say('حجم الملف '+(fi.size/1048576).toFixed(1)+' ميغابايت، والحد الأقصى 5 ميغابايت.',false);return}
-  try{fd=await new Promise((res,rej)=>{const f=new FileReader();f.onload=()=>res(String(f.result).split(',')[1]||'');f.onerror=()=>rej();f.readAsDataURL(fi)});fn=fi.name}catch(e){say('تعذّرت قراءة الملف.',false);return}}
+  try{fd=await new Promise((res,rej)=>{const f=new FileReader();f.onload=()=>res(String(f.result).replace(/^[^]*?base64,/,''));f.onerror=()=>rej();f.readAsDataURL(fi)});fn=fi.name}catch(e){say('تعذّرت قراءة الملف.',false);return}}
  try{const x=await fetch(SHEET_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'proj_save',tok:AG.t,title:t,link:$('plink').value.trim(),checks:checks,score:projSc(),note:$('pnote').value.trim(),fileName:fn,fileData:fd})});const j=await x.json();
   const er={bad_type:'نوع الملف غير مدعوم.',too_big:'الملف أكبر من 5 ميغابايت.',bad_file:'تعذّرت قراءة الملف على الخادم.',unauth:'انتهت جلستك. سجّل الدخول من جديد.'};
-  if(j.ok){say('✅ تم حفظ مشروعك'+(fn?' ورُفع ملفك إلى المدرب':'')+'. سيراجعه المدرب ويصلك تعليقه هنا.',true);if(fn){$('pfinfo').textContent='📎 ملفك المحفوظ لدى المدرب: '+fn+' (اختر ملفاً جديداً لاستبداله)';$('pfile').value=''}}
+  if(j.ok){say('✅ تم حفظ مشروعك'+(fn?' ورُفع ملفك إلى المدرب':'')+'. سيراجعه المدرب ويصلك تقييمه وتعليقه هنا وفي «تغذيتي الراجعة».',true);setTimeout(()=>{try{projMine()}catch(e){}},400);if(fn){$('pfinfo').textContent='📎 ملفك المحفوظ لدى المدرب: '+fn+' (اختر ملفاً جديداً لاستبداله)';$('pfile').value=''}}
   else say(er[j.err]||'تعذّر الحفظ. تأكد من نشر أحدث Code.gs ثم سجّل الدخول من جديد.',false)}catch(e){say('تعذّر الاتصال بالخادم.',false)}}
 async function loadProj(){const b=$('projbox');b.innerHTML='<p class="note">⏳</p>';try{const j=await api({action:'proj_list',pin:TP});if(!j.ok)throw 0;
  b.innerHTML=j.rows.length?'<div class="wrapx"><table class="t"><tr><th>المتدرب</th><th>العنوان</th><th>الرابط</th><th>الملف (Drive)</th><th>التحقق</th><th>ملاحظة المتدرب</th><th>تعليقك</th></tr>'+j.rows.map(r=>'<tr><td>'+esc(r.name)+'<br><small dir="ltr">'+esc(r.ph)+'</small></td><td>'+esc(r.title)+'</td><td>'+(/^https?:\/\//.test(r.link)?'<a href="'+esc(r.link)+'" target="_blank" rel="noopener">فتح</a>':esc(r.link))+'</td><td>'+(/^https?:\/\//.test(r.fileUrl)?'<a href="'+esc(r.fileUrl)+'" target="_blank" rel="noopener">📎 '+esc(r.fileName||'فتح')+'</a>':'—')+'</td><td>'+esc(r.score)+' / '+CHK.length+'</td><td style="text-align:right">'+esc(r.note)+'</td><td><textarea rows="2" id="fb_'+esc(r.ph)+'">'+esc(r.feedback)+'</textarea><button class="b s" style="padding:4px 10px" onclick="projFb(\''+esc(r.ph)+'\')">حفظ التعليق</button></td></tr>').join('')+'</table></div>':'<p class="note">لا توجد مشاريع بعد.</p>'}catch(e){b.innerHTML='<p class="note">تعذّر التحميل. تأكد من نشر أحدث Code.gs بإصدار جديد.</p>'}}
@@ -2584,7 +2725,7 @@ function phaseBlock(r,p,pre){window.CERT={name:r.name,p:p,cert:r.cert,date:new D
 function recQs(rows){const good=rows.filter(r=>r.ok),pool=(good.length>=3?good:rows).slice(),pk=[];while(pk.length<3&&pool.length)pk.push(pool.splice(Math.floor(Math.random()*pool.length),1)[0]);return pk}
 let REC=null;
 function openRec(start,qs){let o=$('recbox');if(o)o.remove();o=document.createElement('div');o.id='recbox';o.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:99;overflow:auto;padding:16px';
- o.innerHTML='<div class="card" style="max-width:680px;margin:auto"><h3>🎥 المقابلة المسجلة (دقيقة واحدة)</h3><p>'+(qs&&qs.length?'اشرح بصوتك وبكلماتك لماذا اخترتَ إجابتك في هذه الأسئلة، وما دليلها في الحقيبة:':'اشرح بصوتك أهم ما تعلمتَه في الحقيبة وكيف ستطبّقه في مقررك:')+'</p>'+(qs&&qs.length?'<ol>'+qs.map(q=>'<li>'+esc(q.q)+' <small>(إجابتك: '+esc(q.a||'—')+')</small></li>').join('')+'</ol>':'')+'<label class="opt"><input type="checkbox" id="rcon"> أوافق على تسجيل فيديو لا يتجاوز دقيقة وحفظه لدى المدرب (Google Drive) لأغراض التحقق من الاختبار فقط.</label><video id="rvid" playsinline muted style="width:100%;max-height:320px;background:#000;border-radius:10px;margin-top:8px"></video><div id="rtm" style="font-size:1.4rem;text-align:center"></div><div id="rbt"></div><p id="rmsg" class="fb"></p><button class="b s" onclick="recClose()">إغلاق</button></div>';
+ o.innerHTML='<div class="card" style="max-width:680px;margin:auto"><h3>🎥 المقابلة المسجلة (دقيقة واحدة)</h3><p>'+(qs&&qs.length?'اشرح بصوتك وبكلماتك لماذا اخترتَ إجابتك في هذه الأسئلة، وما دليلها في الحقيبة:':'اشرح بصوتك أهم ما تعلمتَه في الحقيبة وكيف ستطبّقه في مقررك:')+'</p>'+(qs&&qs.length?'<ol>'+qs.map(q=>'<li>'+esc(q.q)+' <small>(إجابتك: '+esc(q.a||'—')+')</small></li>').join('')+'</ol>':'')+'<p class="note">📋 معايير تقييم مقابلتك: ① سبب اختيارك للإجابة ② دليلها في الحقيبة ③ قدرتك على تغيير الشرط. ستصلك ملاحظات المدرب في «📈 تغذيتي الراجعة».</p><label class="opt"><input type="checkbox" id="rcon"> أوافق على تسجيل فيديو لا يتجاوز دقيقة وحفظه لدى المدرب (Google Drive) لأغراض التحقق من الاختبار فقط.</label><video id="rvid" playsinline muted style="width:100%;max-height:320px;background:#000;border-radius:10px;margin-top:8px"></video><div id="rtm" style="font-size:1.4rem;text-align:center"></div><div id="rbt"></div><p id="rmsg" class="fb"></p><button class="b s" onclick="recClose()">إغلاق</button></div>';
  document.body.appendChild(o);REC={start:start,qs:(qs||[]).map(q=>q.q).join(' | '),tries:0};recIdle()}
 function recIdle(){$('rbt').innerHTML='<button class="b" onclick="recStart()">⏺ ابدأ التسجيل</button>'}
 async function recStart(){const m=$('rmsg');m.style.color='var(--no)';if(!$('rcon').checked){m.textContent='يلزم الموافقة أولاً.';return}
@@ -2602,9 +2743,9 @@ function recDone(){REC.secs=Math.min(60,Math.round((Date.now()-REC.t0)/1000));RE
 async function recSend(){const m=$('rmsg');if(REC.blob.size>5500000){m.style.color='var(--no)';m.textContent='الحجم كبير. أعد التسجيل بمقطع أقصر.';return}
  if(!AG.t){m.style.color='var(--no)';m.textContent='سجّل الدخول متدرباً أولاً.';return}
  m.style.color='var(--ok)';m.textContent='⏳ جارٍ الرفع...';
- const b64=await new Promise(r=>{const f=new FileReader();f.onload=()=>r(String(f.result).split(',')[1]);f.readAsDataURL(REC.blob)});
+ const b64=await new Promise(r=>{const f=new FileReader();f.onload=()=>r(String(f.result).replace(/^[^]*?base64,/,''));f.readAsDataURL(REC.blob)});
  try{const x=await fetch(SHEET_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'video_save',tok:AG.t,start:REC.start,secs:REC.secs,mime:REC.mime,prompt:REC.qs,data:b64})});const j=await x.json();
-  if(j.ok){m.textContent='✅ تم إرسال مقابلتك. اضغط «شهادتي» للتحقق من جاهزية الشهادة.';$('rbt').innerHTML=''}else{m.style.color='var(--no)';m.textContent=j.error||'تعذّر الرفع.'}}catch(e){m.style.color='var(--no)';m.textContent='تعذّر الاتصال بالخادم.'}}
+  if(j.ok){m.textContent='✅ تم إرسال مقابلتك. اضغط «شهادتي» للتحقق من جاهزية الشهادة، وستجد ملاحظات المدرب عليها في «📈 تغذيتي الراجعة».';$('rbt').innerHTML=''}else{m.style.color='var(--no)';m.textContent=j.error||({unauth:'انتهت جلسة الدخول. سجّل الدخول من جديد ثم أعد الإرسال.',locked:'الخادم مقفل مؤقتاً. حاول بعد قليل.'}[j.err])||('تعذّر الرفع: '+(j.err||'استجابة غير متوقعة من الخادم'))}}catch(e){m.style.color='var(--no)';m.textContent='تعذّر الاتصال بالخادم.'}}
 function recClose(){recStop();const o=$('recbox');if(o)o.remove()}
 async function myCert(){if(!AG.t){alert('سجّل الدخول متدرباً أولاً.');return}
  try{const j=await api({action:'my_cert',tok:AG.t});if(!j.ok){alert('تعذّر الاتصال بالخادم.');return}
@@ -2613,14 +2754,21 @@ async function myCert(){if(!AG.t){alert('سجّل الدخول متدرباً أ
   window.LASTSTART=j.start;
   if(j.needs.includes('video')){if(confirm('شهادتك بانتظار المقابلة المسجلة (دقيقة واحدة). هل تسجّلها الآن؟'))openRec(j.start,window.LASTROWS?recQs(window.LASTROWS):null)}
   else alert('شهادتك بانتظار تأكيد المدرب لإجراء المقابلة الشفوية.')}catch(e){alert('تعذّر الاتصال بالخادم.')}}
+const CERT_LOGO=new Image();CERT_LOGO.src='data:image/png;base64,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';
+const CERT_COURSE_MANAGER=''; /* ضع هنا اسم مدير منفذ الدورة ليظهر في الشهادة */
 function drawCert(c){const W=1754,H=1240,x=c.getContext('2d'),d=window.CERT;c.width=W;c.height=H;
  x.fillStyle='#fbf8ef';x.fillRect(0,0,W,H);x.strokeStyle='#0f6b4f';x.lineWidth=14;x.strokeRect(40,40,W-80,H-80);x.strokeStyle='#c28a1e';x.lineWidth=4;x.strokeRect(66,66,W-132,H-132);
  x.direction='rtl';x.textAlign='center';const T=(s,y,z,col,b)=>{x.fillStyle=col;x.font=(b?'700 ':'400 ')+z+'px Tajawal,Tahoma,Arial,sans-serif';x.fillText(s,W/2,y)};
- const im=document.querySelector('.brand img');try{if(im&&im.complete)x.drawImage(im,W/2-85,95,170,170)}catch(e){}
- T('شهادة إتمام',380,96,'#0f6b4f',1);T('تشهد إدارة الدورة بأن',470,40,'#444');T(d.name,575,84,'#8a5a00',1);T('قد أتمّ بنجاح الحقيبة التدريبية',665,40,'#444');
+ try{if(CERT_LOGO.complete&&CERT_LOGO.naturalWidth)x.drawImage(CERT_LOGO,W/2-85,95,170,170);else CERT_LOGO.onload=()=>{if($('certc'))drawCert($('certc'))}}catch(e){}
+ T('شهادة إتمام',380,96,'#0f6b4f',1);T('تشهد إدارة مركز تدارس للتدريب بأن',470,40,'#444');T(d.name,575,84,'#8a5a00',1);T('قد أتمّ بنجاح الحقيبة التدريبية',665,40,'#444');
  T('«التدريس في التعليم المفتوح وعن بُعد»',750,56,'#0f6b4f',1);T('من الأسس النظرية إلى تصميم المقرر وضمان الجودة',820,36,'#444');
- T('الدورة الحتمية الثالثة عشر',890,40,'#8a5a00',1);T('بنسبة نجاح '+d.p+'% وتقدير «'+level(d.p)+'»',965,38,'#222');
- T('مركز تنمية القدرات — جامعة القرآن الكريم والعلوم الإسلامية',1070,34,'#0f6b4f',1);T('بتاريخ '+d.date.toLocaleDateString('ar')+'   |   رمز التحقق: '+d.cert,1145,28,'#555')}
+ const pv=(d.p===null||d.p===undefined||d.p==='')?NaN:+d.p;if(isFinite(pv))T('بنسبة نجاح '+pv+'% وتقدير «'+level(pv)+'»',895,38,'#222');
+ T('مركز تدارس للتدريب',975,40,'#0f6b4f',1);
+ const S=(s,cx,y,z,col,b)=>{x.fillStyle=col;x.font=(b?'700 ':'400 ')+z+'px Tajawal,Tahoma,Arial,sans-serif';x.fillText(s,cx,y)};
+ S('منفذ الدورة',W-420,1035,34,'#0f6b4f',1);S('مدير المركز',420,1035,34,'#0f6b4f',1);
+ if(CERT_COURSE_MANAGER)S(CERT_COURSE_MANAGER,W-420,1090,32,'#222',1);else{x.strokeStyle='#999';x.lineWidth=2;x.beginPath();x.moveTo(W-420-190,1085);x.lineTo(W-420+190,1085);x.stroke()}
+ S('أ.د عبد الباسط محمد شريف',420,1090,32,'#222',1);
+ T('بتاريخ '+d.date.toLocaleDateString('ar')+'   |   رمز التحقق: '+d.cert,1150,26,'#555')}
 function showCert(){let o=$('certbox');if(o)o.remove();o=document.createElement('div');o.id='certbox';o.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:99;overflow:auto;padding:16px;text-align:center';
  o.innerHTML='<canvas id="certc" style="max-width:100%;background:#fff;border-radius:8px"></canvas><div style="margin-top:10px"><button class="b" onclick="dlCert()">⬇️ تنزيل (PNG)</button><button class="b" onclick="printCert()">🖨 طباعة / حفظ PDF</button><button class="b s" onclick="$(\'certbox\').remove()">إغلاق</button></div>';document.body.appendChild(o);drawCert($('certc'))}
 function dlCert(){const a=document.createElement('a');a.href=$('certc').toDataURL('image/png');a.download='شهادة_'+window.CERT.name+'.png';document.body.appendChild(a);a.click();a.remove()}
@@ -2629,11 +2777,44 @@ async function verifyCert(){const e=$('vres');try{const j=await api({action:'cer
 async function setOral(i,on){try{const j=await api({action:'oral_set',pin:TP,wa:R[i].wa,start:R[i].start,val:on?'1':''});if(j.ok)R[i].oral=on?'1':'';else alert('تعذّر الحفظ')}catch(e){alert('تعذّر الاتصال')}}
 function defSheet(i){const r=R[i];let rows=[];try{rows=JSON.parse(r.rows)}catch(e){}
  const cnt={};latestRes(R).forEach(x=>{let rs=[];try{rs=JSON.parse(x.rows)}catch(e){}rs.forEach(z=>{const k=qi(z);cnt[k]=cnt[k]||{ok:0,n:0};cnt[k].n++;if(z.ok)cnt[k].ok++})});
- const pc=z=>{const c=cnt[qi(z)];return c&&c.n?c.ok/c.n:1},cand=rows.filter(z=>z.ok).sort((a,b)=>pc(a)-pc(b)),pick=(cand.length>=3?cand:rows).slice(0,3);
+ const pc=z=>{const c=cnt[qi(z)];return c&&c.n?c.ok/c.n:1},rk=r._rk||riskOf(r),fw=z=>(rk.qs.find(s=>s.n==z.n)||{w:0}).w,cand=rows.filter(z=>z.ok).sort((a,b)=>(fw(b)-fw(a))||(pc(a)-pc(b))),pick=(cand.length>=3?cand:rows).slice(0,3);
  const w=window.open('','_blank');if(!w){alert('اسمح بالنوافذ المنبثقة');return}
- w.document.write('<html dir="rtl"><head><meta charset="utf-8"><title>ورقة الدفاع</title><style>body{font-family:Arial,Tahoma;line-height:1.9;padding:20px}.q{border:1px solid #888;border-radius:8px;padding:10px;margin:10px 0}</style></head><body><h2>🗣 ورقة الدفاع عن الإجابة — '+esc(r.name)+'</h2><p>الدرجة: '+esc(r.score)+'/'+esc(r.total)+' — الإشارات: '+esc(r.flags||'لا يوجد')+'</p><p><b>تعليمات:</b> اطلب من المتدرب شرح إجاباته الثلاث شفوياً (دقيقتان). الإجابة المقنعة فيها سبب الاختيار ودليله من الحقيبة وقدرته على تغيير الشرط. اختيرت الأسئلة الأصعب على المجموعة مما أجاب عنه صحيحاً.</p>'+pick.map((z,k)=>'<div class="q"><b>'+(k+1)+') '+esc(z.q)+'</b><br>إجابته: '+esc(z.a||'—')+'<br>① لماذا اخترتَ هذه الإجابة؟<br>② أين تجد دليلها في الحقيبة؟<br>③ ماذا لو عكسنا الشرط في السؤال، كيف تتغير الإجابة؟<br>التقدير: ☐ مقنع &nbsp; ☐ متردد &nbsp; ☐ غير مقنع</div>').join('')+'<p>القرار: ☐ يُعتمد &nbsp; ☐ يُعاد الاختبار &nbsp; ☐ مقابلة موسّعة</p></body></html>');w.document.close()}
+ w.document.write('<html dir="rtl"><head><meta charset="utf-8"><title>ورقة الدفاع</title><style>body{font-family:Arial,Tahoma;line-height:1.9;padding:20px}.q{border:1px solid #888;border-radius:8px;padding:10px;margin:10px 0}</style></head><body><h2>🗣 ورقة الدفاع عن الإجابة — '+esc(r.name)+'</h2><p>الدرجة: '+esc(r.score)+'/'+esc(r.total)+' — الإشارات: '+esc((rk.list.length?rk.list.join('، '):r.flags)||'لا يوجد')+'</p><p><b>تعليمات:</b> اطلب من المتدرب شرح إجاباته الثلاث شفوياً (دقيقتان). الإجابة المقنعة فيها سبب الاختيار ودليله من الحقيبة وقدرته على تغيير الشرط. اختيرت أولاً الأسئلة التي ظهرت عليها إشارات، ثم الأصعب على المجموعة مما أجاب عنه صحيحاً.</p>'+pick.map((z,k)=>'<div class="q"><b>'+(k+1)+') '+esc(z.q)+'</b><br>إجابته: '+esc(z.a||'—')+(fw(z)?'<br><small>⚑ سبب اختيار هذا السؤال: '+esc((rk.qs.find(s=>s.n==z.n)||{}).why||'')+'</small>':'')+'<br>① لماذا اخترتَ هذه الإجابة؟<br>② أين تجد دليلها في الحقيبة؟<br>③ ماذا لو عكسنا الشرط في السؤال، كيف تتغير الإجابة؟<br>التقدير: ☐ مقنع &nbsp; ☐ متردد &nbsp; ☐ غير مقنع</div>').join('')+'<p>القرار: ☐ يُعتمد &nbsp; ☐ يُعاد الاختبار &nbsp; ☐ مقابلة موسّعة</p></body></html>');w.document.close()}
 async function loadVid(){const b=$('vidbox');b.innerHTML='<p class="note">⏳</p>';try{const j=await api({action:'video_list',pin:TP});if(!j.ok)throw 0;
  b.innerHTML=j.rows.length?'<div class="wrapx"><table class="t"><tr><th>المتدرب</th><th>الوقت</th><th>المدة</th><th>الأسئلة</th><th>الفيديو</th></tr>'+j.rows.map(v=>'<tr><td>'+esc(v.name)+'<br><small dir="ltr">'+esc(v.ph)+'</small></td><td>'+esc(new Date(+v.ts).toLocaleString('ar'))+'</td><td>'+esc(v.secs)+' ث</td><td style="text-align:right">'+esc(v.prompt)+'</td><td><a class="b s" target="_blank" rel="noopener" href="'+esc(v.url)+'">▶️ فتح</a></td></tr>').join('')+'</table></div><p class="note">تُحفظ الفيديوهات في مجلد ODL_Videos في Google Drive الخاص بحسابك ولا يفتحها غيرك.</p>':'<p class="note">لا توجد فيديوهات بعد.</p>'}catch(e){b.innerHTML='<p class="note">تعذّر التحميل. تأكد من نشر أحدث Code.gs وتشغيل authorize.</p>'}}
+/* ===== مؤشر المراجعة بثلاثة ألوان (يُحسب في متصفح المدرب من زمن كل سؤال؛ عدّل العتبات هنا) ===== */
+const RK={fast:{tf:2000,mc:3000,fl:3500},away:8000,awayLong:30000,outX:4,outMin:30000,off:20000,red:4,yel:2,minMins:2,blurN:3,blurMs:45000};
+let QD={},RKF='all';
+const TL={tf:'صح/خطأ',mc:'اختيار',fl:'فراغ'},secT=ms=>(Math.round(ms/100)/10)+' ث';
+function riskOf(r){
+ const o={lv:'n',pts:0,list:[],qs:[],det:''};
+ if(r.phase=='pre'){o.lv='p';return o}
+ let sg=null,rows=[];try{sg=JSON.parse(r.sig||'null')}catch(e){}try{rows=JSON.parse(r.rows||'[]')}catch(e){}
+ if(!sg||!Array.isArray(sg.q)||!sg.q.length){o.list=[r.flags||'لا توجد بيانات زمن الأسئلة (نتيجة قديمة)'];return o}
+ const ty={},add=(k,w)=>{o.pts+=w;ty[k]=(ty[k]||0)+w};
+ const tt=sg.q.map(x=>x.m+x.a).filter(v=>v>0).sort((a,b)=>a-b),med=tt.length?tt[tt.length>>1]:0;
+ let fastPts=0,det='';
+ rows.forEach(z=>{const q=sg.q[z.n-1];if(!q)return;const k=qi(z),ky=(ALL[k]||{}).t||'mc',hard=ky=='fl'||!!(QD[k]&&QD[k].h),t=q.m+q.a;let w=0;const why=[];
+  if(z.ok&&t>0&&t<RK.fast[ky]){const y=Math.min(hard?2:1,4-fastPts);if(y>0){fastPts+=y;w+=y;add('fast',y)}why.push('صحيحة خلال '+secT(t)+(hard?' (سؤال صعب)':''))}
+  if(z.ok&&q.a>=RK.away){const x=(q.a>=RK.awayLong?3:2)+(hard?1:0);w+=x;add('away',x);why.push('خرج '+secT(q.a)+' ثم أجاب صحيحاً'+(hard?' (سؤال صعب)':''))}
+  if(q.p>0){const x=3*Math.min(q.p,2);w+=x;add('paste',x);why.push('لصق نص ×'+q.p)}
+  if(z.ok&&med>0&&t>=Math.max(RK.outMin,RK.outX*med)&&q.a<RK.away){w+=1;add('slow',1);why.push('زمنه '+secT(t)+' أطول كثيراً من وسيط أسئلته ('+secT(med)+')')}
+  if(q.o>=RK.off){const x=z.ok?2:1;w+=x;add('off',x);why.push('انقطع اتصاله '+secT(q.o)+' أثناءه')}
+  if(why.length){o.qs.push({n:z.n,w:w,why:why.join('، ')});o.list.push('س'+z.n+': '+why.join('، '))}
+  det+='<tr'+(w?' style="background:var(--hot)"':'')+'><td>'+z.n+'</td><td>'+TL[ky]+'</td><td>'+(t?secT(t):'—')+(q.t?' ⏱':'')+'</td><td>'+(q.a?secT(q.a):'—')+'</td><td>'+(q.c||'—')+'</td><td>'+(z.ok?'✅':'❌')+'</td></tr>'});
+ if(+r.mins>0&&+r.mins<RK.minMins){add('speed',3);o.list.unshift('أنهى الاختبار في '+r.mins+' د فقط')}
+ if(!ty.away&&(sg.blur>=RK.blurN||sg.blurMs>RK.blurMs)){add('blur',1);o.list.push('خرج من الصفحة ×'+sg.blur+' ('+Math.round(sg.blurMs/1000)+' ث)')}
+ o.lv=(Object.keys(ty).length>=2&&o.pts>=RK.red)?'r':o.pts>=RK.yel?'y':'g';
+ o.det='<div class="wrapx"><table class="t" style="font-size:.78rem"><tr><th>#</th><th>النوع</th><th>الزمن</th><th>خروج</th><th>تغيير</th><th>نتيجة</th></tr>'+det+'</table></div>'+(sg.tm?'':'<div class="note">اختبار بلا مؤقت.</div>');
+ return o}
+const rkLabel=r=>({g:'طبيعي',y:'يستحق نظرة',r:'إشارات متعددة',p:'قبلي',n:'بلا بيانات'})[(r._rk||riskOf(r)).lv];
+function riskCell(r){const k=r._rk||riskOf(r),L={g:'🟢 طبيعي',y:'🟡 يستحق نظرة',r:'🔴 إشارات متعددة',p:'⚪ قبلي (لا يُقيَّم)',n:'⚪ بلا بيانات'}[k.lv];
+ return '<b>'+L+'</b>'+(k.list.length&&k.lv!='p'?'<ul style="margin:4px 0;padding-inline-start:18px;font-size:.8rem">'+k.list.slice(0,5).map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':'')+(k.det?'<details><summary style="cursor:pointer;font-size:.8rem">تفصيل الأسئلة</summary>'+k.det+'</details>':'')+(k.lv=='r'&&r.oral!='1'?'<div class="note" style="color:var(--no)">← اطلب مقابلة قصيرة: 🗣 ورقة الدفاع</div>':'')}
+function rkPrep(){QD={};const c={};latestRes(R).forEach(x=>{let rs=[];try{rs=JSON.parse(x.rows)}catch(e){}rs.forEach(z=>{const k=qi(z);c[k]=c[k]||{ok:0,n:0};c[k].n++;if(z.ok)c[k].ok++})});Object.keys(c).forEach(k=>{QD[k]={h:c[k].n>=4&&c[k].ok/c[k].n<0.5}});R.forEach(r=>{r._rk=riskOf(r)})}
+function applyRkf(){document.querySelectorAll('#ttab tr[data-rk]').forEach(tr=>{const l=tr.dataset.rk;tr.style.display=(RKF=='all'||(RKF=='ry'&&(l=='r'||l=='y'))||(RKF=='r'&&l=='r'))?'':'none'})}
+function rkSummary(){const e=$('rkbar');if(!e)return;const c={r:0,y:0,g:0};R.forEach(r=>{if(c[r._rk.lv]!==undefined)c[r._rk.lv]++});
+ e.innerHTML='<b>🚦 مؤشر المراجعة (الاختبار البعدي):</b> 🔴 '+c.r+' · 🟡 '+c.y+' · 🟢 '+c.g+' &nbsp; <select id="rkf" style="width:auto" onchange="RKF=this.value;applyRkf()"><option value="all">عرض الكل</option><option value="ry">الأصفر والأحمر فقط</option><option value="r">الأحمر فقط</option></select><br>الأحمر = إشارات من أكثر من نوع: اطلب مقابلة قصيرة (🗣 ورقة الدفاع) ولا تبنِ القرار على الاختبار وحده. لا عقوبة آلية، والمشروع ومقابلة الفيديو هما الفيصل.';$('rkf').value=RKF;applyRkf()}
+function qx(r,q){let g=null;try{g=JSON.parse(r.sig||'null')}catch(e){}const z=g&&g.q&&g.q[q.n-1];return z?{'زمن السؤال (ث)':Math.round((z.m+z.a)/100)/10,'مدة الخروج (ث)':Math.round(z.a/100)/10,'مرات تغيير الإجابة':z.c,'لصق':z.p||'','انتهى وقته':z.t?'نعم':''}:{}}
 function latestRes(rs){const m={};rs.forEach(r=>{const k=r.wa+'|'+(r.phase||'post');if(!m[k]||r.start>m[k].start)m[k]=r});return Object.values(m)}
 function renderAnalytics(){const box=$('ana');if(!box)return;const L=latestRes(R),pre=L.filter(r=>r.phase=='pre'),post=L.filter(r=>r.phase!='pre'),pct=r=>Math.round(r.score/r.total*100),avg=a=>a.length?Math.round(a.reduce((s,v)=>s+v,0)/a.length):'—';
  const src=ANAF=='pre'?pre:ANAF=='post'?post:L,qs=ALL.map(()=>({ok:0,n:0}));
@@ -2651,18 +2832,23 @@ function renderAnalytics(){const box=$('ana');if(!box)return;const L=latestRes(R
   +'<b>التقدم: قبلي ← بعدي</b>'+(both.length?T(['المتدرب','قبلي','بعدي','الفرق'],both.map(b=>'<tr><td>'+esc(b.name)+'</td><td>'+b.a+'%</td><td>'+b.b+'%</td><td style="color:var(--'+(b.b>=b.a?'ok':'no')+')">'+(b.b-b.a>=0?'+':'')+(b.b-b.a)+'</td></tr>').join(''))+'<p class="note">متوسط القبلي '+avg(both.map(b=>b.a))+'% — متوسط البعدي '+avg(both.map(b=>b.b))+'% — متوسط التحسن '+avg(both.map(b=>b.b-b.a))+' نقطة (لمن أجرى الاختبارين: '+both.length+')</p>':'<p class="note">يظهر عندما يجري المتدرب الاختبارين القبلي والبعدي.</p>');
  $('anaf').value=ANAF}
 
+function tLogout(){TP='';try{$('pin').value=''}catch(e){}location.reload()}   /* يمسح الرمز والبيانات المعروضة من الذاكرة */
 async function unlock(){if(!SHEET_URL){$('perr').textContent='لم يُضبط رابط Google Sheets في الملف';return}
  try{const j=await api({action:'list',pin:$('pin').value});if(!j.ok){$('perr').textContent=pinErr(j);return}TP=$('pin').value;$('tlock').style.display='none';$('tpanel').style.display='block';loadRes();if(window.agLoadReq)agLoadReq();if(window.agUsers)agUsers()}catch(e){$('perr').textContent='الرمز غير صحيح أو تعذّر الاتصال'}}
+function fixScore(r){const t=String(r.score==null?'':r.score).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[٫,]/g,'.').trim();
+  if(t!==''&&isFinite(+t)){r.score=+t;return r}
+  try{const rr=JSON.parse(r.rows);if(Array.isArray(rr)&&rr.length)r.score=Math.max(0,Math.round(rr.reduce((s,x)=>s+(+x.pt||0),0)*100)/100)}catch(e){}
+  return r}   /* الدرجة غير الرقمية تُحسب من نقاط الأسئلة */
 async function loadRes(){let a=[],srv=false;try{const j=await api({action:'list',pin:TP});if(j.ok){j.rows.forEach(x=>a.push(x));srv=true}}catch(e){}
  if(!srv)try{JSON.parse(localStorage.getItem('results')||'[]').forEach(x=>{if(!a.some(y=>y.start==x.start&&y.wa==x.wa))a.push(x)})}catch(e){}
- R=a.sort((x,y)=>x.start<y.start?1:-1);$('tcount').textContent=(srv?'المصدر: Google Sheets. ':'⚠️ تعذّر الاتصال بالخادم، العرض من نسخة محلية. ')+'عدد المتدربين الذين أنهوا الاختبار: '+R.length;
- $('ttab').innerHTML='<tr><th>الاسم</th><th>الواتساب</th><th>البريد</th><th>المرحلة</th><th>الدرجة</th><th>صحيحة</th><th>خاطئة</th><th>البداية</th><th>الدقائق</th><th>الثقة/الدقة</th><th>إرسال النتيجة</th><th>حذف</th><th>⚠️ إشارات</th><th>مقابلة شفوية</th></tr>'+R.map((r,i)=>`<tr><td>${esc(r.name)}</td><td dir="ltr">${esc(r.wa)}</td><td>${esc(r.email||'')}</td><td>${r.phase=='pre'?'قبلي':'بعدي'}</td><td>${r.score}/${r.total}</td><td>${r.right}</td><td>${r.wrong}</td><td dir="ltr">${new Date(r.start).toLocaleString('ar')}</td><td>${r.mins}</td><td dir="ltr">${cbCell(r)}</td><td>${waBtn(waLink(r),'إرسال النتيجة')}</td><td><button class="b r" style="padding:4px 10px" onclick="delRes(${i})" title="حذف هذه النتيجة">🗑</button></td><td style="text-align:right;max-width:200px">${esc(r.flags||'—')}</td><td><label><input type="checkbox" ${r.oral=='1'?'checked':''} onchange="setOral(${i},this.checked)"> تمت</label><br><button class="b s" style="padding:3px 8px" onclick="defSheet(${i})">🗣 ورقة الدفاع</button></td></tr>`).join('');renderAnalytics()}
+ R=a.map(fixScore).sort((x,y)=>x.start<y.start?1:-1);$('tcount').textContent=(srv?'المصدر: Google Sheets. ':'⚠️ تعذّر الاتصال بالخادم، العرض من نسخة محلية. ')+'عدد المتدربين الذين أنهوا الاختبار: '+R.length;
+ rkPrep();$('ttab').innerHTML='<tr><th>الاسم</th><th>الواتساب</th><th>البريد</th><th>المرحلة</th><th>الدرجة</th><th>صحيحة</th><th>خاطئة</th><th>البداية</th><th>الدقائق</th><th>الثقة/الدقة</th><th>إرسال النتيجة</th><th>حذف</th><th>🚦 الخطورة</th><th>مقابلة شفوية</th></tr>'+R.map((r,i)=>`<tr data-rk="${r._rk.lv}"><td>${esc(r.name)}</td><td dir="ltr">${esc(r.wa)}</td><td>${esc(r.email||'')}</td><td>${r.phase=='pre'?'قبلي':'بعدي'}</td><td>${r.score}/${r.total}</td><td>${r.right}</td><td>${r.wrong}</td><td dir="ltr">${new Date(r.start).toLocaleString('ar')}</td><td>${r.mins}</td><td dir="ltr">${cbCell(r)}</td><td>${waBtn(waLink(r),'إرسال النتيجة')}</td><td><button class="b r" style="padding:4px 10px" onclick="delRes(${i})" title="حذف هذه النتيجة">🗑</button></td><td style="text-align:right;min-width:210px;max-width:330px">${riskCell(r)}</td><td><label><input type="checkbox" ${r.oral=='1'?'checked':''} onchange="setOral(${i},this.checked)"> تمت</label><br><button class="b s" style="padding:3px 8px" onclick="defSheet(${i})">🗣 ورقة الدفاع</button></td></tr>`).join('');rkSummary();renderAnalytics()}
 function waLink(r){let rows=[];try{rows=JSON.parse(r.rows)}catch(e){}return 'https://wa.me/'+String(r.wa).replace(/\D/g,'')+'?text='+encodeURIComponent(buildMsg(r,rows))}
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function cbCell(r){try{const c=JSON.parse(r.calib||'{}');return c.k?c.conf+'% / '+c.acc+'%'+(c.over?' ⚠️'+c.over:''):'—'}catch(e){return '—'}}
 async function exportX(){if(!R.length){alert('لا توجد نتائج للتصدير');return}
- const s1=R.map(r=>({'اسم المتدرب':r.name,'واتساب المتدرب':r.wa,'البريد الإلكتروني':r.email||'','الدرجة':r.score,'الدرجة الكلية':r.total,'النسبة %':Math.round(r.score/r.total*100),'الأسئلة الصحيحة (أرقام)':r.right,'الأسئلة الخاطئة (أرقام)':r.wrong,'وقت بداية الاختبار':r.start,'وقت نهاية الاختبار':r.end,'المدة (دقائق)':r.mins,'المرحلة':r.phase=='pre'?'قبلي':'بعدي','رمز الشهادة':r.cert||'','إشارات المراجعة':r.flags||'','ثقة متوسطة %':(()=>{try{return JSON.parse(r.calib||'{}').conf||''}catch(e){return ''}})(),'دقة الأسئلة المجاب عنها %':(()=>{try{return JSON.parse(r.calib||'{}').acc||''}catch(e){return ''}})(),'أخطاء بثقة عالية':(()=>{try{return JSON.parse(r.calib||'{}').over||0}catch(e){return ''}})(),'مقابلة شفوية':r.oral=='1'?'تمت':''}));
- const s2=[];R.forEach(r=>{let rows=[];try{rows=JSON.parse(r.rows)}catch(e){}rows.forEach(q=>s2.push({'اسم المتدرب':r.name,'واتساب':r.wa,'رقم السؤال':q.n,'السؤال':q.q,'إجابة المتدرب':q.a,'الإجابة الصحيحة':q.c,'النتيجة':q.ok?'صح':'خطأ','الثقة':q.cf?CFL[q.cf]:'','النقاط':q.pt===undefined?'':q.pt}))});
+ const s1=R.map(r=>({'اسم المتدرب':r.name,'واتساب المتدرب':r.wa,'البريد الإلكتروني':r.email||'','الدرجة':r.score,'الدرجة الكلية':r.total,'النسبة %':Math.round(r.score/r.total*100),'الأسئلة الصحيحة (أرقام)':r.right,'الأسئلة الخاطئة (أرقام)':r.wrong,'وقت بداية الاختبار':r.start,'وقت نهاية الاختبار':r.end,'المدة (دقائق)':r.mins,'المرحلة':r.phase=='pre'?'قبلي':'بعدي','رمز الشهادة':r.cert||'','إشارات المراجعة':r.flags||'','مستوى الخطورة':rkLabel(r),'تفاصيل الإشارات':((r._rk||{}).list||[]).join(' | '),'ثقة متوسطة %':(()=>{try{return JSON.parse(r.calib||'{}').conf||''}catch(e){return ''}})(),'دقة الأسئلة المجاب عنها %':(()=>{try{return JSON.parse(r.calib||'{}').acc||''}catch(e){return ''}})(),'أخطاء بثقة عالية':(()=>{try{return JSON.parse(r.calib||'{}').over||0}catch(e){return ''}})(),'مقابلة شفوية':r.oral=='1'?'تمت':''}));
+ const s2=[];R.forEach(r=>{let rows=[];try{rows=JSON.parse(r.rows)}catch(e){}rows.forEach(q=>s2.push({'اسم المتدرب':r.name,'واتساب':r.wa,'رقم السؤال':q.n,'السؤال':q.q,'إجابة المتدرب':q.a,'الإجابة الصحيحة':q.c,'النتيجة':q.ok?'صح':'خطأ','الثقة':q.cf?CFL[q.cf]:'','النقاط':q.pt===undefined?'':q.pt,...qx(r,q)}))});
  const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(s1),'النتائج');XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(s2),'تفصيل الإجابات');wb.Workbook={Views:[{RTL:true}]};
  const fn='نتائج_المتدربين.xlsx';
  try{const d=await claude.use('downloads');if(d){await d.save({filename:fn,data:new Uint8Array(XLSX.write(wb,{type:'array',bookType:'xlsx'}))});return}}catch(e){if(e&&e.code=='declined')return}
@@ -2718,6 +2904,7 @@ async function agVerify(){const code=agDigits($('ag_code').value);if(code.length
   try{const j=await api({action:'auth_verify',ph:AG.p,code:code});if(!j.ok){agMsg(j.err||'الرمز غير صحيح');return}
     AG.t=j.tok;AG.p=j.ph;AG.n=j.name;localStorage.setItem('odl_tok',AG.t);localStorage.setItem('odl_ph',AG.p);localStorage.setItem('odl_nm',AG.n);
     agShow(false);agApply()}catch(e){agMsg('تعذّر الاتصال بالخادم.')}}
+function agLogout(){['odl_tok','odl_ph','odl_nm'].forEach(k=>localStorage.removeItem(k));location.reload()}
 async function agInit(){if(location.hash==='#admin'){agShow(false);return}
   if(!AG.t){agShow(true);return}
   agShow(false);
@@ -2728,10 +2915,15 @@ async function agInit(){if(location.hash==='#admin'){agShow(false);return}
 async function agSaveRoster(){const rows=$('ag_roster').value.split('\n').map(l=>{const m=l.match(/(\+?\d[\d\s\-()]{6,}\d)/);if(!m)return null;const ph=m[1].replace(/\D/g,'').replace(/^00/,'');const name=l.replace(m[1],' ').replace(/[،,;:.\-–|\t]+/g,' ').replace(/\s+/g,' ').trim();return /^\d{8,15}$/.test(ph)?{name:name,ph:ph}:null}).filter(Boolean);
   const e=$('ag_aerr');if(!rows.length){e.style.color='var(--no)';e.textContent='اكتب في كل سطر الاسم ثم الرقم مع رمز الدولة، مثال: أحمد علي،249912345678';return}
   try{await fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'auth_roster',pin:TP,rows:JSON.stringify(rows)})});
-    e.style.color='var(--ok)';e.textContent='تم إرسال القائمة ('+rows.length+').'}catch(x){e.style.color='var(--no)';e.textContent='تعذّر الإرسال'}}
-async function agLoadReq(){const box=$('ag_req');try{const j=await api({action:'auth_pending',pin:TP});if(!j.ok)throw 0;
-  box.innerHTML=j.rows.length?j.rows.map(r=>`<div class="agrow" id="agr_${esc(r.ph)}"><span>${esc(r.name||'—')} <span dir="ltr">${esc(r.ph)}</span></span><button class="b" onclick="agIssue('${esc(r.ph)}')">إنشاء رمز</button></div>`).join(''):'<p class="note">لا توجد طلبات.</p>'}
-  catch(e){box.innerHTML='<p class="note">تعذّر تحميل الطلبات.</p>'}}
+    e.style.color='var(--ok)';e.textContent='⏳ جارٍ حفظ '+rows.length+' متدرب...';await new Promise(r=>setTimeout(r,1800));
+    try{const u=await api({action:'auth_users',pin:TP});const have=new Set((u.rows||[]).map(x=>String(x.ph)));const miss=rows.filter(r=>!have.has(r.ph));
+     if(u.ok&&!miss.length){e.textContent='✅ تم تسجيل '+rows.length+' متدرب وظهروا في قائمة المسجلين أدناه. اضغط «🔑 إنشاء رمز» بجانب اسم المتدرب ليدخل.';$('ag_roster').value=''}
+     else{e.style.color='var(--no)';e.textContent='لم يظهر في قائمة المسجلين: '+miss.map(r=>r.name||r.ph).join('، ')+'. أعد المحاولة بعد لحظات.'}}catch(x2){e.style.color='var(--no)';e.textContent='تعذّر التأكد من الحفظ. اضغط «تحديث» في قائمة المسجلين.'}
+    agUsers();agLoadReq()}catch(x){e.style.color='var(--no)';e.textContent='تعذّر الإرسال'}}
+async function agLoadReq(t){const box=$('ag_req');try{const j=await api({action:'auth_pending',pin:TP});if(!j.ok)throw new Error(j.err||'رد غير متوقع');
+  box.innerHTML=j.rows.length?j.rows.map(r=>`<div class="agrow" id="agr_${esc(r.ph)}"><span>${esc(r.name||'—')} <span dir="ltr">${esc(r.ph)}</span>${r.status==='issued'?' <small style="color:var(--ok)">✅ صدر له رمز</small>':''}</span><button class="b" onclick="agIssue('${esc(r.ph)}')">${r.status==='issued'?'رمز جديد':'إنشاء رمز'}</button></div>`).join(''):'<p class="note">لا توجد طلبات. المتدرب الذي سجّلتَه حديثاً يظهر هنا بعد أن يطلب الرمز من صفحة الدخول، أو أنشئ له الرمز مباشرة بزر «🔑 إنشاء رمز» في قائمة المسجلين أدناه.</p>'}
+  catch(e){if(!t){setTimeout(()=>agLoadReq(1),1500);return}box.innerHTML='<p class="note">تعذّر تحميل الطلبات ('+esc(e.message||'خطأ')+'). اضغط «تحديث الطلبات» مرة أخرى.</p>'}}
+setInterval(()=>{if(TP&&!document.hidden&&$('tpanel').style.display==='block'&&!document.querySelector('#ag_req a'))agLoadReq()},30000);
 async function agIssue(ph){const row=$('agr_'+ph);try{const j=await api({action:'auth_issue',pin:TP,ph:ph});if(!j.ok)throw new Error(j.err);
   const msg='رمز الدخول إلى الحقيبة التدريبية: '+j.code+'\nصالح لمدة '+j.ttl+' دقيقة. لا تشاركه مع أحد.';
   row.innerHTML=`<span>${esc(j.name||'')} <span dir="ltr">${esc(ph)}</span></span><a class="b" target="_blank" rel="noopener" href="https://wa.me/${esc(ph)}?text=${encodeURIComponent(msg)}">فتح واتساب وإرسال الرمز</a>`}
@@ -2841,9 +3033,236 @@ document.querySelector('#nav button[data-t="agents"]').addEventListener('click',
 /* لوحة المدرب */
 async function agUsers(){const box=$('ag_users');box.innerHTML='<p class="note">⏳ جارٍ التحميل...</p>';
   try{const j=await api({action:'auth_users',pin:TP});if(!j.ok)throw 0;
-    box.innerHTML=j.rows.length?j.rows.map(r=>`<div class="agrow"><span>${r.req?'🔔 ':''}${esc(r.name||'—')} <span dir="ltr">${esc(r.ph)}</span> — المتبقي: <b>${esc(String(r.left))}</b></span><span><button class="b" onclick="agSetAi('${esc(r.ph)}',3)">تجديد إلى 3</button> <button class="b s" onclick="agSetAi('${esc(r.ph)}',${+r.left+1})">+1</button> <button class="b s" onclick="agSetAi('${esc(r.ph)}',0)">تصفير</button></span></div>`).join(''):'<p class="note">لا يوجد مسجلون.</p>'}
+    box.innerHTML=j.rows.length?j.rows.map(r=>`<div class="agrow"><span>${r.req?'🔔 ':''}${esc(r.name||'—')} <span dir="ltr">${esc(r.ph)}</span> — المتبقي: <b>${esc(String(r.left))}</b></span><span><button class="b" onclick="agIssueU('${esc(r.ph)}',this)">🔑 إنشاء رمز</button> <button class="b" onclick="agSetAi('${esc(r.ph)}',3)">تجديد إلى 3</button> <button class="b s" onclick="agSetAi('${esc(r.ph)}',${+r.left+1})">+1</button> <button class="b s" onclick="agSetAi('${esc(r.ph)}',0)">تصفير</button> <button class="b s" style="color:var(--no)" onclick="agDel('${esc(r.ph)}')">🗑 حذف</button></span></div>`).join(''):'<p class="note">لا يوجد مسجلون.</p>'}
   catch(e){box.innerHTML='<p class="note">تعذّر تحميل القائمة.</p>'}}
+async function agIssueU(ph,btn){try{btn.disabled=true;const j=await api({action:'auth_issue',pin:TP,ph:ph});if(!j.ok)throw new Error(j.err||'فشل');
+ const msg='رمز الدخول إلى الحقيبة التدريبية: '+j.code+'\nصالح لمدة '+j.ttl+' دقيقة. لا تشاركه مع أحد.';
+ const row=btn.closest('.agrow'),old=row.nextElementSibling;if(old&&old.classList.contains('agcode'))old.remove();
+ row.insertAdjacentHTML('afterend','<div class="agrow agcode" style="background:var(--pr2)"><span>🔑 رمز '+esc(j.name||ph)+': <b dir="ltr">'+esc(j.code)+'</b> (صالح '+j.ttl+' دقيقة)</span><a class="b" target="_blank" rel="noopener" href="https://wa.me/'+esc(ph)+'?text='+encodeURIComponent(msg)+'">فتح واتساب وإرسال الرمز</a></div>')}
+ catch(e){alert('تعذّر إنشاء الرمز: '+(e.message||'خطأ'))}finally{btn.disabled=false}}
+async function agDel(ph){if(!confirm('حذف المتدرب '+ph+' من التسجيل؟\nيُلغى دخوله فوراً ويختفي من التتبع. تبقى نتائجه ومشاريعه في الجدول.'))return;
+  try{const j=await api({action:'auth_delete',pin:TP,ph:ph});if(!j.ok)throw new Error(j.err);agUsers();agLoadReq()}catch(e){$('ag_users').insertAdjacentHTML('afterbegin','<p class="note" style="color:var(--no)">تعذّر الحذف: '+esc(e.message||'خطأ')+'</p>')}}
 async function agSetAi(ph,n){try{const j=await api({action:'auth_ai_set',pin:TP,ph:ph,n:n});if(!j.ok)throw new Error(j.err);agUsers()}catch(e){$('ag_users').insertAdjacentHTML('afterbegin','<p class="note" style="color:var(--no)">تعذّر التعديل: '+esc(e.message||'خطأ')+'</p>')}}
+</script>
+<script>
+/* ===== التغذية الراجعة للمتدرب: تبويب «تغذيتي الراجعة» + المشروع + المقابلة + الاختبار ===== */
+const MF_ST={submitted:['📥 تم استلام مشروعك','#b7791f'],reviewing:['🔎 قيد المراجعة','#2b6cb0'],needs_work:['✏️ يحتاج إلى تعديل','#b3261e'],approved:['✅ معتمد','#1b7f45'],resubmitted:['🔁 أُعيد إرساله بعد التعديل','#2b6cb0']};
+const MF_RB={'2':['✅ محقق','var(--ok)'],'1':['◐ جزئي','var(--ac)'],'0':['✖ غير محقق','var(--no)']};
+const MF_VR={'3':['🌟 متقن','#1b7f45'],'2':['👍 جيد','#2b6cb0'],'1':['🔧 يحتاج إلى تحسين','#b7791f']};
+const MF_TH=[[0,2,'الاتساق البنائي','الوحدة الخامسة'],[3,6,'تصميم المحتوى','الوحدة الخامسة'],[7,9,'تعليمات الدراسة والدعم','الوحدة السادسة'],[10,11,'الانفتاح والخاتمة','الوحدة الرابعة']];
+const mfChip=(t,c)=>'<span style="display:inline-block;padding:2px 10px;border-radius:999px;background:'+c+';color:#fff;font-size:.85rem;font-weight:700">'+t+'</span>';
+const mfBar=p=>'<div style="background:var(--bd);border-radius:6px;height:10px;min-width:80px"><div style="height:10px;border-radius:6px;width:'+p+'%;background:var(--'+(p<50?'no':p<80?'ac':'ok')+')"></div></div>';
+const mfDate=ts=>{const d=new Date(isNaN(+ts)?ts:+ts);return isNaN(d)?'':d.toLocaleDateString('ar')+' '+d.toLocaleTimeString('ar',{hour:'2-digit',minute:'2-digit'})};
+const mfTxt=s=>String(s==null?'':s).replace(/<[^>]*>/g,'');
+function mfGo(t){const b=document.querySelector('#nav button[data-t="'+t+'"]');if(b)b.click()}
+/* ----- أقرب وحدة لمحور ما: بحث في نص الوحدات نفسها، مع وزن أقل للكلمات الشائعة ----- */
+let _UT=null;
+/* خريطة المحاور إلى الوحدات: محققة بعدّ ورود المفاهيم في نص كل وحدة؛ وما لم يُدرج هنا يُقدَّر آلياً */
+const MF_TU={'الفرق بين التعليم الإلكتروني والتعليم عن بُعد':'الأولى','مفهوم التعليم عن بُعد':'الأولى','التعليم المدمج':'الأولى','تاريخ التعليم عن بُعد وأجياله':'الثانية','النظريات الأساسية: المسافة التبادلية':'الثالثة','النظريات الأساسية: التعلم المستقل':'الثالثة','النظريات الأساسية: المحادثة الموجّهة':'الثالثة','مفهوم الانفتاح في التعليم المفتوح':'الرابعة','الموارد التعليمية المفتوحة':'الرابعة','تراخيص المشاع الإبداعي':'الرابعة','الاتساق البنائي في تصميم المقرر':'الخامسة','التعلم المتزامن وغير المتزامن':'الخامسة','تصميم المقاطع التعليمية':'الخامسة','مخرجات التعلم':'الخامسة','الصف المقلوب':'الخامسة','دعم الطالب':'السادسة','ضمان الجودة':'السابعة','التحديات الواقعية وضعف الإنترنت':'الثامنة','التقويم عن بُعد والنزاهة':'التقويم عن بُعد'};
+const MF_TUN={};Object.keys(MF_TU).forEach(k=>MF_TUN[norm(k)]=MF_TU[k]);
+function unitFor(topic){
+  const pre=MF_TUN[norm(topic)];
+  if(pre){const i=US.findIndex(u=>norm(u.dataset.title||'').indexOf(norm(pre))===0);if(i>=0)return i}
+  if(!_UT)_UT=US.map(u=>norm(u.textContent));
+  const w=[...new Set(norm(topic).split(/[^\u0621-\u064Aa-z0-9]+/).map(x=>x.replace(/^ال/,'')).filter(x=>x.length>=3))];
+  if(!w.length)return -1;
+  const df={};w.forEach(x=>{df[x]=_UT.filter((s,i)=>i>0&&s.indexOf(x)>=0).length||1});
+  let best=-1,bs=0;
+  _UT.forEach((s,i)=>{if(i===0)return;const ti=norm(US[i].dataset.title||'');let sc=0;
+    w.forEach(x=>{const c=s.split(x).length-1;sc+=c/(df[x]*df[x]);if(ti.indexOf(x)>=0)sc+=6/df[x]});
+    if(sc>bs){bs=sc;best=i}});
+  return best}
+function studyTopic(i){mfGo('explain');show(i)}
+function mfTopicStats(rows){const t={};rows.forEach(r=>{const k=TOPICS[qi(r)];if(!k)return;t[k]=t[k]||{ok:0,n:0};t[k].n++;if(r.ok)t[k].ok++});return t}
+function mfUnitLbl(u){const t=US[u].dataset.title||'';return t.indexOf(':')>0?'راجع الوحدة '+t.split(':')[0]:'راجع: '+t.slice(0,26)}
+function mfStudyBtn(topic){const u=unitFor(topic);return u>=0?'<button class="b s" style="padding:4px 10px" title="'+esc(US[u].dataset.title||'')+'" onclick="studyTopic('+u+')">📖 '+esc(mfUnitLbl(u))+'</button>':'📚 راجع الشرح'}
+/* ----- خريطة الإتقان تظهر فور انتهاء الاختبار ----- */
+function fbTopics(rows,ph){const PRE=ph=='pre';
+  const t=mfTopicStats(rows),e=Object.entries(t).map(([k,v])=>({k,p:Math.round(v.ok/v.n*100),ok:v.ok,n:v.n})).sort((a,b)=>a.p-b.p);
+  if(!e.length)return '';
+  return '<div class="card"><h3>'+(PRE?'🧭 خريطة معرفتك السابقة بالمحاور':'🧭 خريطة إتقانك للمحاور')+'</h3><p class="note">'+(PRE?'نسبة صحة إجاباتك في كل محور قبل الدراسة، مع أقرب وحدة تبدأ بها. الأضعف أولاً.':'نسبة صحة إجاباتك في كل محور من هذه المحاولة، مع أقرب وحدة للمراجعة. الأضعف أولاً.')+'</p><div class="wrapx"><table class="t"><tr><th>المحور</th><th>إتقانك</th><th>الإجراء</th></tr>'
+   +e.map(x=>'<tr><td style="text-align:right">'+esc(x.k)+'</td><td>'+x.p+'% ('+x.ok+'/'+x.n+')'+mfBar(x.p)+'</td><td>'+(x.p>=80?'✅ متمكن':mfStudyBtn(x.k))+'</td></tr>').join('')
+   +'</table></div><p class="note">نتائجك السابقة وتحليلها تبقى محفوظة في تبويب «📈 تغذيتي الراجعة».</p></div>'}
+function mfReview(rows,ph){return rows.map(r=>'<div class="q"><b>'+r.n+'. '+esc(mfTxt(r.q)||('السؤال '+r.n))+'</b><div style="color:var(--'+(r.ok?'ok':'no')+')">'+(r.ok?'✅ إجابة صحيحة':'❌ إجابتك: '+esc(r.a||'لم تُجب'))+'</div>'+(r.ok||ph=='pre'?'':'<div>الإجابة الصحيحة: <b>'+esc(r.c)+'</b></div>'+(r.e?'<div class="note">'+esc(r.e)+'</div>':''))+(r.cf?'<div class="note">ثقتك: '+(CFL[r.cf]||r.cf)+' • النقاط: '+fmt(r.pt)+'</div>':'')+'<div class="note">المحور: '+esc(TOPICS[qi(r)]||'')+'</div></div>').join('')}
+/* ----- ملاحظات آلية على المشروع (تعمل دون خادم) ----- */
+function mfAutoItems(o){
+  const ck=String(o.checks||''),met=[...ck].filter(c=>c==='1').length,it=[];
+  it.push(met>=10?['ok','جاهز للمراجعة: استوفيتَ '+met+' من '+CHK.length+' معياراً.']:met>=6?['warn','قريب من الجاهزية: '+met+' من '+CHK.length+' معياراً. أكمل الناقص ثم أعد الحفظ.']:['no','في بداية الطريق: '+met+' من '+CHK.length+' معياراً. ابدأ بالأساسيات: مخرجات قابلة للقياس ثم أنشطة مرتبطة بها ثم تقويم يقيسها.']);
+  it.push(o.link||o.hasFile?['ok','أرفقتَ عملك الفعلي (ملفاً أو رابطاً) فيمكن مراجعته.']:['warn','لم ترفق ملفاً ولا رابطاً لوحدتك؛ سيرى المدرب وصفك فقط. ارفع ملف الوحدة أو ضع رابطها ليتمكن من مراجعة العمل نفسه.']);
+  it.push(String(o.note||'').trim().length>=40?['ok','وصفك لأهم تعديل واضح وفيه مبرر.']:['warn','وصف التعديل قصير. اكتب أهم تعديل ولماذا أجريتَه، واربطه بمبدأ تعلّمته (مثل الاتساق البنائي أو تجزئة المحتوى).']);
+  MF_TH.forEach(([a,b,name,unit])=>{const miss=[];for(let i=a;i<=b;i++)if(ck[i]!=='1')miss.push(CHK[i]);
+    it.push(miss.length?['warn','محور «'+name+'»: لم تستوفِ بعد: '+miss.join('؛ ')+'. (راجع '+unit+')']:['ok','محور «'+name+'»: استوفيتَ جميع معاييره.'])});
+  return it}
+const mfAutoHtml=it=>'<ul style="list-style:none;padding:0;margin:6px 0">'+it.map(x=>'<li style="margin:4px 0;color:var(--'+(x[0]=='ok'?'ok':x[0]=='no'?'no':'tx')+')">'+(x[0]=='ok'?'✅ ':x[0]=='no'?'⛔ ':'⚠️ ')+esc(x[1])+'</li>').join('')+'</ul>';
+function projLive(){
+  const box=$('pauto');if(!box)return;
+  const ck=[...document.querySelectorAll('.ck')].map(c=>c.checked?'1':'0').join('');
+  const hasFile=!!($('pfile')&&$('pfile').files[0])||!!($('pfinfo')&&$('pfinfo').textContent.trim());
+  box.innerHTML='<b>🔎 ملاحظات فورية على مشروعك</b> <span class="note">(تتحدث أثناء عملك، وهي آلية وتكوينية)</span>'+mfAutoHtml(mfAutoItems({checks:ck,link:$('plink').value.trim(),hasFile:hasFile,note:$('pnote').value}))
+   +'<button class="b s" onclick="projAI()">🤖 ملاحظات ذكية على وصفي وقائمتي</button><span class="note"> تُحتسب من محاولاتك اليومية، وتقرأ العنوان والوصف والقائمة فقط ولا تقرأ الملف المرفوع.</span><div id="paiout" class="out"></div>'}
+async function projAI(){
+  const o=$('paiout');o.style.display='block';o.textContent='⏳ جارٍ إعداد الملاحظات...';
+  const ok=[],no=[];[...document.querySelectorAll('.ck')].forEach((c,i)=>(c.checked?ok:no).push(CHK[i]));
+  const p='أنت مصمم تعليم خبير تراجع مشروع متدرب (عضو هيئة تدريس) في دورة «التدريس في التعليم المفتوح وعن بُعد». أعطِ تغذية راجعة تكوينية موجزة بالعربية الفصحى المبسطة في خمس نقاط مرقمة: (1) نقطة قوة. (2) ثلاثة تحسينات مرتبة حسب الأولوية. (3) سؤال تأملي واحد. اعتمد فقط على البيانات التالية ولا تخترع محتوى لم تره، وصرّح في سطر أخير أنك لم تقرأ ملف الوحدة نفسه.\nعنوان المشروع: '+($('ptitle').value||'(لم يُكتب)')+'\nوصف أهم تعديل: '+($('pnote').value||'(لم يُكتب)')+'\nمعايير استوفاها المتدرب: '+(ok.join('؛ ')||'لا شيء')+'\nمعايير لم يستوفها: '+(no.join('؛ ')||'لا شيء');
+  try{o.textContent=await llm(p)}catch(e){o.textContent='تعذّر التوليد: '+(e.message||e)}}
+/* ----- عرض تقييم المدرب للمتدرب ----- */
+function mfRubricHtml(r){
+  const rb=String(r.rubric||'');if(!rb||/^-*$/.test(rb))return '';const ck=String(r.checks||'');let gap=0;
+  const rows=CHK.map((c,i)=>{const m=MF_RB[rb[i]];if(m&&rb[i]==='0'&&ck[i]==='1')gap++;return '<tr><td style="text-align:right">'+esc(c)+'</td><td>'+(ck[i]==='1'?'✅':'⬜')+'</td><td style="color:'+(m?m[1]:'inherit')+'">'+(m?m[0]:'—')+'</td></tr>'}).join('');
+  return '<b>📋 تقييم المدرب حسب معايير القائمة</b><div class="wrapx"><table class="t"><tr><th>المعيار</th><th>تقييمك الذاتي</th><th>تقييم المدرب</th></tr>'+rows+'</table></div>'
+   +(gap?'<p class="note">⚠️ عددٌ من المعايير التي عددتَها محققة (<b>'+gap+'</b>) لم تتحقق بعد في تقدير المدرب؛ ابدأ بمراجعتها.</p>':'')}
+function projFbHtml(r){
+  const st=MF_ST[r.status||'submitted']||MF_ST.submitted;
+  let h='<div style="margin:8px 0">حالة المشروع: '+mfChip(st[0],st[1])+(r.fbts?' <span class="note">آخر تحديث من المدرب: '+mfDate(r.fbts)+'</span>':'')+'</div>';
+  if(r.feedback)h+='<div class="card" style="background:var(--pr2)"><b>💬 تعليق المدرب:</b><br>'+esc(r.feedback).replace(/\n/g,'<br>')+'</div>';
+  else h+='<p class="note">لم يصلك تعليق من المدرب بعد. وهذه في أثناء الانتظار ملاحظات آلية على مشروعك:</p>';
+  h+=mfRubricHtml(r);
+  if(r.status==='needs_work')h+='<p><b>الخطوة التالية:</b> عدّل مشروعك بحسب ملاحظات المدرب ثم اضغط «حفظ مشروعي» ليُراجَع مجدداً.</p>';
+  if(r.status==='approved')h+='<p><b>أحسنت!</b> اعتُمد مشروعك. يمكنك تطوير وحدة أخرى بالمعايير نفسها.</p>';
+  if(!r.feedback||r.status==='needs_work')h+='<b>🔎 ملاحظات آلية</b>'+mfAutoHtml(mfAutoItems({checks:r.checks,link:r.link,hasFile:!!r.fileName,note:r.note}));
+  return h}
+async function projMine(){
+  if(!AG.t)return;
+  try{const j=await api({action:'proj_mine',tok:AG.t});
+    if(j.ok&&j.row){const r=j.row,bits=(r.checks||'').split('');$('ptitle').value=r.title;$('plink').value=r.link;$('pfinfo').textContent=r.fileName?'📎 ملفك المحفوظ لدى المدرب: '+r.fileName+' (اختر ملفاً جديداً لاستبداله)':'';$('pnote').value=r.note;document.querySelectorAll('.ck').forEach((c,i)=>c.checked=bits[i]==='1');projSc();$('pfb').innerHTML=projFbHtml(r)}
+    else $('pfb').innerHTML='<span class="note">لم تحفظ مشروعاً بعد. بعد الحفظ تظهر هنا حالة مشروعك وتقييم المدرب لكل معيار.</span>'}catch(e){}}
+/* ----- لوحة «تغذيتي الراجعة» ----- */
+let MFD=null;
+async function mfLoad(){
+  const b=$('mfbody');
+  if(!AG.t){b.innerHTML='<div class="card"><p>سجّل الدخول متدرباً لترى تغذيتك الراجعة.</p></div>';return}
+  b.innerHTML='<p class="note">⏳ جارٍ التحميل...</p>';
+  try{const j=await api({action:'my_feedback',tok:AG.t});if(!j.ok)throw new Error(j.err||'');MFD=j;mfRender(j);
+    try{localStorage.setItem('mf_seen',String(j.fbts||0))}catch(e){}$('mfdot').style.display='none'}
+  catch(e){b.innerHTML='<div class="card"><p>تعذّر تحميل تغذيتك الراجعة. '+(String(e.message)==='unknown'?'الخادم يعمل بنسخة قديمة من Code.gs: انشر النسخة الجديدة بإصدار جديد.':'تأكد من الاتصال وسجّل الدخول من جديد إن لزم.')+'</p><button class="b s" onclick="mfLoad()">🔄 إعادة المحاولة</button></div>'}}
+function mfSummary(j){
+  const A=j.attempts||[],last=A[0],best=A.reduce((m,a)=>Math.max(m,a.pct||0),0),p=j.proj,v=(j.vids||[]).length,fbv=(j.vids||[]).filter(x=>x.fb).length;
+  const cell=(t,v,s)=>'<div style="flex:1;min-width:130px;background:var(--pr2);border-radius:12px;padding:10px;text-align:center"><div class="note">'+t+'</div><div style="font-size:1.5rem;font-weight:700;color:var(--pr)">'+v+'</div><div class="note">'+(s||'')+'</div></div>';
+  const pst=p?(MF_ST[p.status||'submitted']||MF_ST.submitted)[0]:'لم يُرسل';
+  return '<div class="card"><h2>📈 تغذيتي الراجعة'+(AG.n?' — '+esc(AG.n):'')+'</h2><p class="note">هنا تجد في مكان واحد ما تحتاجه لتحسين أدائك: نتائج اختباراتك وتحليلها، وتقييم المدرب لمشروعك، وملاحظاته على مقابلتك، والخطوة التالية.</p><div style="display:flex;gap:8px;flex-wrap:wrap">'
+   +cell('اختباراتك',A.length,last?'آخر نتيجة '+last.pct+'%':'لم تبدأ')+cell('أفضل نتيجة',A.length?best+'%':'—','')+cell('المشروع',pst.split(' ')[0],p?pst.replace(/^\S+\s/,''):'')+cell('المقابلة المسجلة',v,v?(fbv+' عليها ملاحظات'):'لم تُرسل')+'</div><button class="b s" onclick="mfLoad()" style="margin-top:8px">🔄 تحديث</button></div>'}
+function mfNext(j){
+  const A=j.attempts||[],hasPre=A.some(a=>a.phase=='pre'),post=A.filter(a=>a.phase!='pre'),passed=post.some(a=>a.pct>=(j.passPct||60)),p=j.proj,c=j.cert||{none:true};
+  const s=[];
+  s.push([hasPre,'الاختبار القبلي','أجرِ الاختبار القبلي لتعرف نقطة انطلاقك.']);
+  s.push([post.length>0,'الاختبار البعدي','ادرس الحقيبة ثم أجرِ الاختبار البعدي.']);
+  s.push([passed,'اجتياز الاختبار البعدي (≥'+(j.passPct||60)+'%)','راجع المحاور الأضعف ثم أعد الاختبار.']);
+  s.push([!!p,'حفظ المشروع التطبيقي','احفظ مشروعك في تبويب «المشروع» ليُراجَع.']);
+  s.push([!!p&&p.status==='approved','اعتماد المشروع',p&&p.status==='needs_work'?'عدّل مشروعك بحسب ملاحظات المدرب ثم أعد حفظه.':p?'بانتظار مراجعة المدرب.':'']);
+  if(!c.none)s.push([c.allowed,'استكمال شروط الشهادة',(c.needs||[]).includes('video')?'سجّل المقابلة المسجلة (دقيقة) من تبويب «الاختبار».':'بانتظار تأكيد المدرب.']);
+  const nx=s.find(x=>!x[0]);
+  return '<div class="card"><h3>🧭 مسارك والخطوة التالية</h3><ul style="list-style:none;padding:0">'+s.map(x=>'<li style="margin:4px 0">'+(x[0]?'✅':'⬜')+' '+esc(x[1])+'</li>').join('')+'</ul>'+(nx?'<p><b>الخطوة التالية:</b> '+esc(nx[2]||nx[1])+'</p>':'<p><b>🎉 أنجزتَ كل خطوات المسار.</b></p>')+'</div>'}
+function mfExam(j){
+  const A=j.attempts||[];
+  if(!A.length)return '<div class="card"><h3>📝 اختباراتك</h3><p>لم تُجرِ أي اختبار بعد. ابدأ بالاختبار القبلي لتعرف نقطة انطلاقك، فتظهر هنا خريطة إتقانك وتوصياتك المخصصة.</p><button class="b" onclick="mfGo(\'exam\')">ابدأ الاختبار</button></div>';
+  const last=A[0],lp=A.find(a=>a.phase=='pre'),lq=A.find(a=>a.phase!='pre'),g=j.group;
+  let h='<div class="card"><h3>📝 اختباراتك: تقدمك وتغذيتك الراجعة</h3><div class="wrapx"><table class="t"><tr><th>التاريخ</th><th>النوع</th><th>الدرجة</th><th>النسبة</th><th>المستوى</th></tr>'
+   +A.map(a=>'<tr><td>'+esc(mfDate(a.end||a.start))+'</td><td>'+(a.phase=='pre'?'قبلي':'بعدي')+'</td><td>'+esc(a.score)+' / '+esc(a.total)+'</td><td>'+a.pct+'%'+mfBar(a.pct||0)+'</td><td>'+levelP(a.pct||0,a.phase)+'</td></tr>').join('')+'</table></div>';
+  if(lp&&lq){const d=lq.pct-lp.pct;h+='<p>📈 قبلي <b>'+lp.pct+'%</b> ← بعدي <b>'+lq.pct+'%</b> ('+(d>=0?'+':'')+d+' نقطة). '+(d>=15?'تحسن كبير يدل على أثر الدراسة.':d>0?'تحسن إيجابي، وما زال في المحاور الضعيفة مجال للتقدم.':d==0?'لم يتغير مستواك: ركّز على المحاور الأضعف أدناه ثم أعد الاختبار.':'انخفضت نتيجتك: راجع المحاور الأضعف أدناه قبل المحاولة التالية.')+'</p>'}
+  else if(lp&&!lq)h+='<p class="note">أجريتَ القبلي فقط: ادرس الحقيبة ثم أجرِ البعدي لتقيس تقدمك.</p>';
+  if(g){const mine=lq?lq.pct:last.pct,avg=lq?g.avgPost:g.avgPre;if(avg!==null&&avg!==undefined){const d=mine-avg;h+='<p>👥 متوسط المجموعة ('+(lq?'بعدي':'قبلي')+', دون أسماء): <b>'+avg+'%</b>، ونتيجتك <b>'+mine+'%</b> ('+(d>=0?'أعلى منه بـ ':'أقل منه بـ ')+Math.abs(d)+' نقطة).</p>'}}
+  const rows=last.rows||[];
+  if(rows.length){
+    const t=mfTopicStats(rows),gt={};
+    if(g&&g.perQ)Object.entries(g.perQ).forEach(([q,v])=>{const k=TOPICS[+q];if(!k)return;gt[k]=gt[k]||{ok:0,n:0};gt[k].ok+=v.ok;gt[k].n+=v.n});
+    const e=Object.entries(t).map(([k,v])=>({k,p:Math.round(v.ok/v.n*100),ok:v.ok,n:v.n})).sort((a,b)=>a.p-b.p),hasG=Object.keys(gt).length>0;
+    h+='<h4>🧭 إتقانك للمحاور (آخر محاولة)</h4><div class="wrapx"><table class="t"><tr><th>المحور</th><th>إتقانك</th>'+(hasG?'<th>المجموعة</th>':'')+'<th>الإجراء</th></tr>'
+     +e.map(x=>{const q=gt[x.k],gp=q&&q.n?Math.round(q.ok/q.n*100):null;return '<tr><td style="text-align:right">'+esc(x.k)+'</td><td>'+x.p+'% ('+x.ok+'/'+x.n+')'+mfBar(x.p)+'</td>'+(hasG?'<td>'+(gp===null?'—':gp+'%')+'</td>':'')+'<td>'+(x.p>=80?'✅ متمكن':x.p>=50?'🔸 يحتاج تثبيتاً<br>'+mfStudyBtn(x.k):'🔻 أولوية مراجعة<br>'+mfStudyBtn(x.k))+'</td></tr>'}).join('')+'</table></div>';
+    const hi=rows.filter(r=>!r.ok&&r.cf>=75);
+    if(hi.length)h+='<p>⚠️ أخطأتَ بثقة عالية في <b>'+hi.length+'</b> سؤال: '+hi.map(r=>'س'+r.n).join('، ')+'. هذه أخطر الأخطاء لأنك لا تدرك أنها أخطاء؛ راجعها أولاً في التفاصيل أدناه.</p>';
+    if(last.calib&&last.calib.k)h+=calibBlock(rows);
+    const wrong=rows.filter(r=>!r.ok);
+    h+='<details style="margin-top:8px"><summary><b>🔍 مراجعة تفصيلية لآخر محاولة ('+wrong.length+' سؤالاً يحتاج مراجعة)</b></summary>'+mfReview(rows,last.phase)+'</details>';
+  }
+  if(A.length>1)h+=A.slice(1).map((a,i)=>(a.rows&&a.rows.length)?'<details style="margin-top:6px"><summary>محاولة سابقة: '+(a.phase=='pre'?'قبلي':'بعدي')+' — '+a.pct+'% — '+esc(mfDate(a.end||a.start))+'</summary>'+mfReview(a.rows,a.phase)+'</details>':'').join('');
+  return h+'</div>'}
+function mfProj(j){
+  const p=j.proj;
+  if(!p)return '<div class="card"><h3>🛠️ مشروعك التطبيقي</h3><p>لم تحفظ مشروعاً بعد. احفظ مشروعك ليصلك تقييم المدرب لكل معيار وتعليقه، وتظهر لك ملاحظات آلية فورية.</p><button class="b" onclick="mfGo(\'project\')">انتقل إلى المشروع</button></div>';
+  return '<div class="card"><h3>🛠️ مشروعك التطبيقي: '+esc(p.title||'')+'</h3>'+projFbHtml(p)+'<button class="b s" onclick="mfGo(\'project\')">تعديل المشروع</button></div>'}
+function mfVid(j){
+  const V=j.vids||[],c=j.cert||{none:true};
+  if(!V.length)return '<div class="card"><h3>🎥 مقابلتك المسجلة</h3><p>لم ترسل مقابلة بعد.'+((c.needs||[]).includes('video')?' شهادتك بانتظارها: سجّل مقطعاً من دقيقة تشرح فيه إجاباتك من تبويب «الاختبار» ← «شهادتي».':' تظهر هنا ملاحظات المدرب عليها بعد إرسالها.')+'</p></div>';
+  return '<div class="card"><h3>🎥 مقابلتك المسجلة</h3><p class="note">معايير التقييم: ① سبب اختيارك للإجابة ② دليلها في الحقيبة ③ قدرتك على تغيير الشرط.</p>'
+   +V.map(v=>{const r=MF_VR[v.rating];return '<div class="q"><b>'+esc(mfDate(v.ts))+'</b> • '+esc(v.secs)+' ث '+(r?mfChip(r[0],r[1]):mfChip('⏳ بانتظار مراجعة المدرب','#6b7280'))+(v.fb?'<div class="card" style="background:var(--pr2);margin-top:6px"><b>💬 ملاحظات المدرب:</b><br>'+esc(v.fb).replace(/\n/g,'<br>')+(v.fbts?'<br><span class="note">'+esc(mfDate(v.fbts))+'</span>':'')+'</div>':'')+'</div>'}).join('')+'</div>'}
+function mfRender(j){$('mfbody').innerHTML=mfSummary(j)+mfNext(j)+mfExam(j)+mfProj(j)+mfVid(j)}
+/* ----- تنبيه بوصول تغذية جديدة ----- */
+async function mfPoll(){
+  if(!AG.t)return;
+  try{const j=await api({action:'my_feedback',tok:AG.t,light:'1'});if(!j.ok)return;let seen=0;try{seen=+localStorage.getItem('mf_seen')||0}catch(e){}
+    $('mfdot').style.display=(j.fbts||0)>seen?'inline-block':'none'}catch(e){}}
+document.querySelector('#nav button[data-t="myfb"]').addEventListener('click',()=>mfLoad());
+['plink','pnote'].forEach(id=>$(id).addEventListener('input',()=>projSc()));$('pfile').addEventListener('change',()=>projSc());
+projSc();
+{const _v=agVerify;agVerify=async function(){await _v();setTimeout(mfPoll,600)}}
+setTimeout(mfPoll,1500);setInterval(mfPoll,300000);
+/* ===== واجهة المدرب: تقييم المشاريع بالمعايير والحالة، وتعليق على المقابلة ===== */
+const PS_OPT=[['submitted','📥 مستلم'],['reviewing','🔎 قيد المراجعة'],['needs_work','✏️ يحتاج تعديل'],['approved','✅ معتمد'],['resubmitted','🔁 أُعيد إرساله']];
+const FB_TPL=['عمل متقن: مخرجاتك واضحة وأنشطتك مرتبطة بالتقويم. استمر وأضف تغذية راجعة مكتوبة لكل نشاط.','المحتوى جيد لكن الاتساق البنائي يحتاج ضبطاً: اربط كل نشاط بمخرج تعلم وكل مخرج بأداة تقويم تقيسه.','أضف بدائل لضعف الإنترنت (ملفات خفيفة أو صوتية قابلة للتنزيل) وحدّد قناة الدعم وزمن الرد.','يرجى تعديل الوحدة بحسب الملاحظات أعلاه ثم إعادة حفظ المشروع لنراجعه من جديد.'];
+function projRowHtml(r){
+  const p=esc(r.ph),ck=String(r.checks||''),rb=String(r.rubric||''),st=r.status||'submitted';
+  const sel=(i,v,l)=>'<option value="'+v+'"'+(rb[i]===v?' selected':'')+'>'+l+'</option>';
+  return '<tr><td>'+esc(r.name)+'<br><small dir="ltr">'+p+'</small></td><td>'+esc(r.title)+'</td><td>'+(/^https?:\/\//.test(r.link)?'<a href="'+esc(r.link)+'" target="_blank" rel="noopener">فتح</a>':esc(r.link))+'</td><td>'+(/^https?:\/\//.test(r.fileUrl)?'<a href="'+esc(r.fileUrl)+'" target="_blank" rel="noopener">📎 '+esc(r.fileName||'فتح')+'</a>':'—')+'</td><td>'+esc(r.score)+' / '+CHK.length+'</td><td style="text-align:right">'+esc(r.note)+'</td>'
+   +'<td style="text-align:right;min-width:300px"><select id="st_'+p+'">'+PS_OPT.map(o=>'<option value="'+o[0]+'"'+(st==o[0]?' selected':'')+'>'+o[1]+'</option>').join('')+'</select>'
+   +'<details><summary>📋 تقييم المعايير ('+CHK.length+')</summary>'+CHK.map((c,i)=>'<div style="display:flex;gap:6px;align-items:center;justify-content:space-between;border-bottom:1px dashed var(--bd);padding:3px 0"><span style="font-size:.82rem">'+esc(c)+' <small>('+(ck[i]==='1'?'ذاتي ✓':'ذاتي ✗')+')</small></span><select class="rbs" data-ph="'+p+'" data-i="'+i+'" style="width:auto;margin:0"><option value="-">—</option>'+sel(i,'2','✅')+sel(i,'1','◐')+sel(i,'0','✖')+'</select></div>').join('')+'</details>'
+   +'<select onchange="if(this.value){$(\'fb_'+p+'\').value=this.value;this.selectedIndex=0}"><option value="">➕ إدراج تعليق جاهز…</option>'+FB_TPL.map(t=>'<option value="'+esc(t)+'">'+esc(t.slice(0,38))+'…</option>').join('')+'</select>'
+   +'<textarea rows="3" id="fb_'+p+'">'+esc(r.feedback)+'</textarea><button class="b s" style="padding:4px 10px" onclick="projFb(\''+p+'\')">حفظ التقييم والتعليق</button></td></tr>'}
+async function loadProj(){
+  const b=$('projbox');b.innerHTML='<p class="note">⏳</p>';
+  try{const j=await api({action:'proj_list',pin:TP});if(!j.ok)throw 0;
+    b.innerHTML=j.rows.length?'<div class="wrapx"><table class="t"><tr><th>المتدرب</th><th>العنوان</th><th>الرابط</th><th>الملف (Drive)</th><th>التحقق الذاتي</th><th>ملاحظة المتدرب</th><th>تقييمك للمتدرب (حالة + معايير + تعليق)</th></tr>'+j.rows.map(projRowHtml).join('')+'</table></div><p class="note">يرى المتدرب الحالة وتقييمك لكل معيار وتعليقك في تبويب «تغذيتي الراجعة»، وتظهر له نقطة تنبيه عند وصول تحديث.</p>':'<p class="note">لا توجد مشاريع بعد.</p>'}
+  catch(e){b.innerHTML='<p class="note">تعذّر التحميل. تأكد من نشر أحدث Code.gs بإصدار جديد.</p>'}}
+async function projFb(ph){
+  const rb=[...document.querySelectorAll('.rbs')].filter(s=>s.dataset.ph===ph).sort((a,b)=>a.dataset.i-b.dataset.i).map(s=>s.value).join('');
+  try{const j=await api({action:'proj_fb',pin:TP,ph:ph,text:$('fb_'+ph).value,status:$('st_'+ph).value,rubric:rb});alert(j.ok?'تم الحفظ. سيراه المتدرب في «تغذيتي الراجعة».':'تعذّر الحفظ')}catch(e){alert('تعذّر الاتصال')}}
+async function loadVid(){
+  const b=$('vidbox');b.innerHTML='<p class="note">⏳</p>';
+  try{const j=await api({action:'video_list',pin:TP});if(!j.ok)throw 0;
+    b.innerHTML=j.rows.length?'<div class="wrapx"><table class="t"><tr><th>المتدرب</th><th>الوقت</th><th>المدة</th><th>الأسئلة</th><th>الفيديو</th><th>تقييمك وملاحظاتك للمتدرب</th></tr>'+j.rows.map(v=>{const k=esc(v.ph)+'_'+esc(v.ts);return '<tr><td>'+esc(v.name)+'<br><small dir="ltr">'+esc(v.ph)+'</small></td><td>'+esc(new Date(+v.ts).toLocaleString('ar'))+'</td><td>'+esc(v.secs)+' ث</td><td style="text-align:right">'+esc(v.prompt)+'</td><td><a class="b s" target="_blank" rel="noopener" href="'+esc(v.url)+'">▶️ فتح</a></td><td style="text-align:right;min-width:240px"><select id="vr_'+k+'"><option value="">— التقدير —</option><option value="3"'+(v.rating==='3'?' selected':'')+'>🌟 متقن</option><option value="2"'+(v.rating==='2'?' selected':'')+'>👍 جيد</option><option value="1"'+(v.rating==='1'?' selected':'')+'>🔧 يحتاج إلى تحسين</option></select><textarea rows="2" id="vf_'+k+'" placeholder="① سبب الاختيار ② الدليل ③ تغيير الشرط">'+esc(v.fb)+'</textarea><button class="b s" style="padding:4px 10px" onclick="vidFb(\''+esc(v.ph)+'\',\''+esc(v.ts)+'\')">حفظ</button></td></tr>'}).join('')+'</table></div><p class="note">تُحفظ الفيديوهات في مجلد ODL_Videos في Google Drive الخاص بحسابك ولا يفتحها غيرك. ملاحظاتك تصل المتدرب في «تغذيتي الراجعة».</p>':'<p class="note">لا توجد فيديوهات بعد.</p>'}
+  catch(e){b.innerHTML='<p class="note">تعذّر التحميل. تأكد من نشر أحدث Code.gs وتشغيل authorize.</p>'}}
+async function vidFb(ph,ts){const k=ph+'_'+ts;try{const j=await api({action:'video_fb',pin:TP,ph:ph,ts:ts,text:$('vf_'+k).value,rating:$('vr_'+k).value});alert(j.ok?'تم الحفظ. سيراه المتدرب في «تغذيتي الراجعة».':'تعذّر الحفظ')}catch(e){alert('تعذّر الاتصال')}}
+
+
+/* ===== تتبع المتدربين وتقارير واتساب (لوحة المدرب) ===== */
+const TRK_IC={done:'✅',wip:'⏳',todo:'⬜'};
+function trkSay(t,bad){const m=$('trk_msg');m.textContent=t;m.style.color=bad?'var(--no)':''}
+async function trkLoad(){const box=$('trk_box');box.innerHTML='<p class="note">⏳ جارٍ التحميل...</p>';
+  try{const j=await api({action:'trk_state',pin:TP});if(!j.ok)throw new Error(j.err||'');
+    trkBriefShow(j);
+    const head='<tr><th>المتدرب</th>'+j.steps.map(s=>'<th>'+esc(s.t)+'</th>').join('')+'<th>التقدم</th><th>آخر نشاط</th><th>واتساب</th></tr>';
+    const rows=j.rows.map(r=>{const d=r.last?Math.floor((Date.now()-r.last)/86400000):null;const stall=!r.complete&&d!==null&&d>=j.stallDays;
+      return '<tr><td>'+(stall?'⚠️ ':'')+esc(r.name||'—')+' <span dir="ltr">'+esc(r.ph)+'</span></td>'+r.steps.map(s=>'<td title="'+esc(s.txt)+'">'+TRK_IC[s.s]+'</td>').join('')+'<td><b>'+r.pct+'%</b></td><td>'+(d===null?'—':d===0?'اليوم':'قبل '+d+' يوم')+'</td><td><button class="b s" onclick="trkOpt(\''+esc(r.ph)+'\','+(r.optout?0:1)+')">'+(r.optout?'🔕 موقوف — تفعيل':'🔔 مفعّل — إيقاف')+'</button></td></tr>'}).join('');
+    box.innerHTML='<p class="note">المزوّد: <b>'+esc(j.cfg.provider||'غير مضبوط')+'</b> — مدربون: '+j.cfg.trainers+' — إدارة: '+j.cfg.managers+'</p><table class="t">'+head+(rows||'<tr><td colspan="9">لا يوجد مسجلون.</td></tr>')+'</table>';
+    trkSay('')}catch(e){box.innerHTML='';trkSay('تعذّر التحميل: '+(e.message||'خطأ')+' — تأكد من رفع Tracking.gs ونشر إصدار جديد.',1)}}
+async function trkRun(w){const T={sync:'مزامنة الآن؟ ستُرسل رسائل الخطوات المستحقة.',daily:'إرسال التقرير اليومي الآن للمدرب والإدارة؟',weekly:'إرسال التقرير الأسبوعي الآن لكل المتدربين وللمدرب والإدارة؟'};
+  if(!confirm(T[w]))return;trkSay('⏳ جارٍ التنفيذ...');
+  try{const j=await api({action:'trk_run',what:w,pin:TP});if(j.ok===false)throw new Error(j.err||'');
+    const f=j.flush||{};trkSay('تم. في الطابور: '+(j.queued!=null?j.queued:'—')+' — أُرسل: '+(f.sent||0)+' — فشل: '+(f.failed||0)+(j.baseline?' — (أول تشغيل: حُفظت الحالة دون إرسال)':''));trkLoad()}catch(e){trkSay('تعذّر التنفيذ: '+(e.message||'خطأ'),1)}}
+async function trkTest(){trkSay('⏳ جارٍ الإرسال التجريبي...');try{const j=await api({action:'trk_test',pin:TP});trkSay(j.ok?'وصلت رسالة الاختبار لأرقام المدرب والإدارة.':'تعذّر: '+(j.err||JSON.stringify(j.results||'')),!j.ok)}catch(e){trkSay('تعذّر الاتصال',1)}}
+async function trkOpt(ph,on){try{const j=await api({action:'trk_optout',ph:ph,on:on,pin:TP});if(!j.ok)throw 0;trkLoad()}catch(e){trkSay('تعذّر التعديل',1)}}
+async function trkLog(){try{const j=await api({action:'trk_log',pin:TP});if(!j.ok)throw 0;
+  $('trk_box').innerHTML='<table class="t"><tr><th>الوقت</th><th>إلى</th><th>الدور</th><th>النوع</th><th>الحالة</th><th>محاولات</th><th>خطأ</th></tr>'+j.rows.map(r=>'<tr><td>'+new Date(+r.ts).toLocaleString('ar')+'</td><td dir="ltr">'+esc(r.to)+'</td><td>'+esc(r.role)+'</td><td>'+esc(r.kind)+'</td><td>'+esc(r.status)+'</td><td>'+esc(r.tries)+'</td><td>'+esc(r.err)+'</td></tr>').join('')+'</table>'}catch(e){trkSay('تعذّر تحميل السجل',1)}}
+
+/* ===== لافتة المتدرب + لافتة المدرب ===== */
+let TRK_ME_OPEN=true,PRE_LANDED=false;
+/* أول دخول: من لم يُجرِ الاختبار القبلي (ولم يبدأ البعدي) تُفتح له نافذة الاختبار القبلي أولاً */
+function preLand(need){const n=$('pre_note');if(n)n.style.display=need?'block':'none';
+  if(!need||PRE_LANDED)return;PRE_LANDED=true;try{$('phase').value='pre';tmNote()}catch(e){}mfGo('exam')}
+async function trkMeLoad(){const box=$('trk_me');if(!AG.t||!SHEET_URL){box.style.display='none';return}
+  try{const j=await api({action:'trk_me',tok:AG.t});if(!j.ok){box.style.display='none';return}
+    const _pre=j.steps.find(x=>x.k==='pre'),_post=j.steps.find(x=>x.k==='post');preLand(!!_pre&&_pre.s!=='done'&&!!_post&&_post.s==='todo');
+    const chips=j.steps.map(s=>'<span style="display:inline-block;margin:3px;padding:4px 10px;border-radius:14px;background:'+(s.s==='done'?'var(--chd)':s.s==='wip'?'var(--cwp)':'var(--ctd)')+';color:var(--tx);font-size:.9em" title="'+esc(s.txt)+'">'+({done:'✅',wip:'⏳',todo:'⬜'})[s.s]+' '+esc(s.t)+'</span>').join('');
+    box.innerHTML='<div style="max-width:1000px;margin:10px auto;padding:10px 14px;background:var(--card);color:var(--tx);border:2px solid var(--ac);border-radius:12px"><div style="display:flex;justify-content:space-between;gap:8px;cursor:pointer" onclick="TRK_ME_OPEN=!TRK_ME_OPEN;trkMeLoad()"><b>📍 '+esc(j.name||'مسارك')+' — تقدمك '+j.pct+'% ('+j.done+'/'+j.total+')</b><span>'+(TRK_ME_OPEN?'▲':'▼')+'</span></div>'
+      +'<div style="background:var(--trk);border-radius:8px;height:10px;margin:8px 0"><div style="width:'+j.pct+'%;height:10px;border-radius:8px;background:var(--ok,#2e8b57)"></div></div>'
+      +(TRK_ME_OPEN?'<div>'+chips+'</div><div style="margin-top:6px"><b>الخطوة التالية:</b> '+esc(j.next)+'</div><div style="margin-top:8px"><button class="b s" onclick="agLogout()">تسجيل الخروج</button></div>':'')+'</div>';
+    box.style.display='block'}catch(e){box.style.display='none'}}
+function trkBriefShow(j){const b=j.brief||{},box=$('trk_brief');if(!box)return;
+  const warn=[];if(!j.cfg.provider)warn.push('مزوّد واتساب غير مضبوط');if(!j.cfg.mgrPin)warn.push('رمز المدير غير مضبوط');
+  const it=(n,t,hot)=>'<span style="display:inline-block;margin:3px 6px;padding:6px 12px;border-radius:10px;background:'+(hot&&n>0?'var(--hot)':'var(--inf)')+';color:var(--tx)"><b>'+n+'</b> '+t+'</span>';
+  box.innerHTML='<div style="padding:8px 4px;border-bottom:1px solid var(--sep);margin-bottom:8px"><b>📌 وضع الدورة اليوم</b><div>'+it(b.n,'متدرباً مسجلاً')+it(b.avg+'%','متوسط التقدم')+it(b.complete,'أتمّوا')+it(b.pendProj,'مشروع ينتظر مراجعتك',1)+it(b.pendVid,'فيديو بلا تقييم',1)+it(b.stalled,'متوقف ≥ '+j.stallDays+' أيام',1)+'</div>'+(warn.length?'<div class="note" style="color:var(--no)">⚠️ '+warn.join(' — ')+'</div>':'')+'</div>'}
+try{{const _u=unlock;unlock=async function(){await _u();if(TP)trkLoad()}}}catch(e){}
+try{{const _v=agVerify;agVerify=async function(){await _v();setTimeout(trkMeLoad,800)}}}catch(e){}
+setTimeout(trkMeLoad,1800);setInterval(trkMeLoad,300000);
 </script>
 </body>
 </html>
