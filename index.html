@@ -2771,7 +2771,7 @@ function drawCert(c){const W=1754,H=1240,x=c.getContext('2d'),d=window.CERT;c.wi
  try{if(CERT_LOGO.complete&&CERT_LOGO.naturalWidth)x.drawImage(CERT_LOGO,W/2-85,95,170,170);else CERT_LOGO.onload=()=>{if($('certc'))drawCert($('certc'))}}catch(e){}
  T('شهادة إتمام',380,96,'#0f6b4f',1);T('تشهد إدارة مركز تدارس للتدريب بأن',470,40,'#444');T(d.name,575,84,'#8a5a00',1);T('قد أتمّ بنجاح الحقيبة التدريبية',665,40,'#444');
  T('«التدريس في التعليم المفتوح وعن بُعد»',750,56,'#0f6b4f',1);T('من الأسس النظرية إلى تصميم المقرر وضمان الجودة',820,36,'#444');
- const pv=(d.p===null||d.p===undefined||d.p==='')?NaN:+d.p;if(isFinite(pv))T('بنسبة نجاح '+pv+'% وتقدير «'+level(pv)+'»',895,38,'#222');
+ const pv=(d.p===null||d.p===undefined||d.p==='')?NaN:+d.p;/* بلا نسبة نجاح ولا تقدير على الشهادة */
  T('مركز تدارس للتدريب',975,40,'#0f6b4f',1);
  const S=(s,cx,y,z,col,b)=>{x.fillStyle=col;x.font=(b?'700 ':'400 ')+z+'px Tajawal,Tahoma,Arial,sans-serif';x.fillText(s,cx,y)};
  S('منفذ الدورة',W-420,1035,34,'#0f6b4f',1);S('مدير المركز',420,1035,34,'#0f6b4f',1);
