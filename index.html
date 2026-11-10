@@ -2257,7 +2257,7 @@ table.t{border-collapse:collapse;width:100%;font-size:.88rem}table.t th,table.t 
 </div>
 
 <!-- المراجعة -->
-<!-- السبورة البيضاء: دروس مرئية متزامنة مع الصوت (ملفات في المجلد whiteboard/) -->
+<!-- السبورة البيضاء: تظهر تلقائيًا كل ملفات lesson-01.html و lesson-02.html ... الموجودة بجانب index.html -->
 <div id="board" class="tab" style="display:none">
 <div class="card"><h2>🎞️ السبورة البيضاء</h2>
 <p class="note">اختر الدرس ثم اضغط «ابدأ المشاهدة». يُكتب الشرح باليد مع الصوت، ويمكنك التنقل بين اللوحات من الأزرار أسفل الشاشة.</p>
@@ -3414,24 +3414,26 @@ async function wpRun(){const m=$('wp_msg'),bad=t=>{m.style.color='var(--no)';m.t
   }catch(e){bad('تعذّر التنفيذ: '+(e.message||'خطأ'))}}
 </script>
 <script>
-/* ===== السبورة البيضاء: لإضافة درس جديد أضف سطرًا هنا ===== */
-/* t: عنوان الدرس | f: مسار الملف | u: رقم الوحدة في قائمة الشرح (0 = مقدمة البرنامج) */
-const BOARD_LESSONS=[
- {t:'الدرس 1: مقدمة الحقيبة وبطاقة البرنامج',f:'whiteboard/lesson-01.html',u:0}
-];
-function boardOpen(i){
- const L=BOARD_LESSONS[i];if(!L)return;
+/* ===== السبورة البيضاء: اكتشاف تلقائي للدروس lesson-01.html حتى lesson-40.html ===== */
+const BOARD_LESSONS=[];let _bdP=null;
+async function boardProbe(n){const f='lesson-'+String(n).padStart(2,'0')+'.html';
+ try{const ac=new AbortController(),res=await fetch(f,{signal:ac.signal});if(!res.ok){ac.abort();return null}
+  const rd=res.body.getReader(),dec=new TextDecoder();let buf='';
+  while(buf.length<8000&&buf.indexOf('wb-unit')<0){const r=await rd.read();if(r.done)break;buf+=dec.decode(r.value,{stream:true})}
+  ac.abort();const t=(buf.match(/<title>([^<]*)<\/title>/)||[])[1]||('الدرس '+n),u=(buf.match(/name="wb-unit" content="(-?\d+)"/)||[])[1];
+  return{f:f,n:n,t:t.trim(),u:u==null?-1:+u}}catch(e){return null}}
+function boardScan(){if(_bdP)return _bdP;const box=document.getElementById('bd_list');box.innerHTML='<span class="note">جارٍ البحث عن الدروس…</span>';
+ const ps=[];for(let n=1;n<=40;n++)ps.push(boardProbe(n));
+ _bdP=Promise.all(ps).then(r=>{BOARD_LESSONS.length=0;r.filter(Boolean).sort((a,b)=>a.n-b.n).forEach(x=>BOARD_LESSONS.push(x));box.innerHTML='';
+  if(!BOARD_LESSONS.length){box.innerHTML='<span class="note">لا توجد دروس بعد.</span>';return}
+  BOARD_LESSONS.forEach((L,i)=>{const b=document.createElement('button');b.className='b s';b.textContent='▶ '+L.t;b.onclick=()=>boardOpen(i);box.appendChild(b)})});return _bdP}
+function boardOpen(i){const L=BOARD_LESSONS[i];if(!L)return;
  [...document.getElementById('bd_list').children].forEach((b,j)=>b.classList.toggle('s',j!==i));
- const h=document.getElementById('bd_frame');h.innerHTML='';
- const f=document.createElement('iframe');f.src=L.f;f.title=L.t;f.setAttribute('allow','autoplay; fullscreen');f.setAttribute('allowfullscreen','');
+ const h=document.getElementById('bd_frame');h.innerHTML='';const f=document.createElement('iframe');f.src=L.f;f.title=L.t;f.setAttribute('allow','autoplay; fullscreen');f.setAttribute('allowfullscreen','');
  f.style.cssText='width:100%;height:min(88vh,860px);border:0;border-radius:12px;margin-top:10px;background:#f6efdc';h.appendChild(f)}
-function boardOpenUnit(){
- const i=BOARD_LESSONS.findIndex(l=>l.u===cur);
- if(i<0){alert('لا توجد سبورة لهذه الوحدة بعد. تجد الدروس المتاحة في تبويب «🎞️ السبورة».');document.querySelector('#nav button[data-t="board"]').click();return}
- document.querySelector('#nav button[data-t="board"]').click();boardOpen(i)}
-(function(){const l=document.getElementById('bd_list');
- if(!BOARD_LESSONS.length){l.innerHTML='<span class="note">لا توجد دروس بعد.</span>';return}
- BOARD_LESSONS.forEach((L,i)=>{const b=document.createElement('button');b.className='b s';b.textContent='▶ '+L.t;b.onclick=()=>boardOpen(i);l.appendChild(b)})})();
+async function boardOpenUnit(){document.querySelector('#nav button[data-t="board"]').click();await boardScan();
+ const i=BOARD_LESSONS.findIndex(l=>l.u===cur);if(i<0){alert('لا توجد سبورة لهذه الوحدة بعد. اختر من الدروس المتاحة في تبويب السبورة.');return}boardOpen(i)}
+document.querySelector('#nav button[data-t="board"]').addEventListener('click',boardScan);
 </script>
 </body>
 </html>
