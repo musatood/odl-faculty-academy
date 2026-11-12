@@ -34,6 +34,7 @@ small{display:block;opacity:.75;margin:10px 0}
 </style></head><body><div id="app">
 <p style="margin:4px 0"><a href="index.html">← العودة إلى الحقيبة</a></p>
 <h1>✍️ استوديو السبورة البيضاء: ربط الصوت بالنص</h1>
+<div class="card" id="gate" hidden><div id="gmsg"></div><div id="gbtns" style="margin-top:6px"></div><details style="margin-top:8px"><summary>دخول المدرب</summary><input type="password" id="gpin" placeholder="رمز المدرب" style="font:inherit;padding:4px 8px;border-radius:6px"> <button id="gok">دخول</button> <span id="gpm"></span></details></div>
 <div class="card" id="how" style="font-size:14px"><b>خطوات إنشاء درس:</b> ١) ارفع ملف الصوت. ٢) ارفع ملف النص أو الصقه. ٣) اضغط «بناء السبورة» وشاهد النتيجة. ٤) اكتب رقم الدرس وعنوانه في بطاقة التصدير. ٥) اضغط «تنزيل صفحة HTML مستقلة»، ثم ارفع الملف إلى مستودع الحقيبة بجانب index.html.</div>
 <section id="setup">
 <div class="card"><h2>١) ملف الصوت</h2><input type="file" id="fa" accept="audio/*,video/*"> <span id="ina"></span></div>
@@ -200,8 +201,8 @@ function edit(){$('ed').innerHTML='<table>'+LINES.map((L,i)=>`<tr><td>${i+1}</td
  document.querySelectorAll('#ed .s').forEach(x=>x.onchange=()=>{LINES[+x.dataset.i].start=+x.value;LINES[+x.dataset.i].rs=null;LINES.sort((a,b)=>a.start-b.start);fixEnds();layout();ui2()});
  document.querySelectorAll('#ed .ic').forEach(x=>x.onchange=()=>{const L=LINES[+x.dataset.i];L.noic=x.value=='-';L.man=!!x.value&&x.value!='-';L.icon=x.value==''?autoIcon(L):x.value=='-'?null:x.value;layout();ui2()})}
 function ui2(){$('ch').innerHTML='';BOARDS.forEach((b,i)=>{const x=document.createElement('button');x.textContent='لوحة '+(i+1);x.onclick=()=>{au.currentTime=Math.max(0,b.els[0].L.start)};$('ch').append(x)})}
-async function build(){await fontsReady;const raw=$('tx').value;if(!BLOB||!raw.trim()){status('ارفع الصوت واكتب النص أولًا');return}
- status('جارٍ تحليل الصوت…');LINES=parseText(raw);const buf=await ACTX.decodeAudioData(await BLOB.arrayBuffer());au._stop();au.buf=buf;au.off=0;DUR=buf.duration;
+async function build(){await fontsReady;const raw=$('tx').value;if(!BLOB||!raw.trim()){status('ارفع الصوت واكتب النص أولًا');return}if(GATE&&!G.ok&&!G.trainer){status('سجّل دخولك أولًا');return}if(GATE&&!G.trainer&&G.left<=0){renderGate();status('انتهت محاولاتك. اطلب التجديد من المدرب.');return}
+ status('جارٍ تحليل الصوت…');LINES=parseText(raw);const buf=await ACTX.decodeAudioData(await BLOB.arrayBuffer());if(!(await consume())){status($('st').textContent||'');return}au._stop();au.buf=buf;au.off=0;DUR=buf.duration;
  if(LINES.every(L=>L.cued))fixEnds();else{const runs=await analyze(buf);if($('auto').checked&&runs.length>1)assign(runs);else{const T=DUR/LINES.length;LINES.forEach((L,i)=>L.start=+(i*T).toFixed(2));fixEnds()}}
  layout();ui();status('تم: '+LINES.length+' سطرًا في '+BOARDS.length+' لوحة. اضغط ابدأ.')}
 $('build').onclick=()=>build().catch(e=>status('تعذر البناء: '+e.message));
@@ -211,6 +212,31 @@ $('sample').onclick=()=>{$('tx').value=SAMPLE_TXT;BLOB=b64blob(SAMPLE_AUDIO,'aud
 const tog=()=>{$('ov').hidden=true;au.paused?au.play():au.pause()};$('go').onclick=tog;$('pp').onclick=tog;$('rg').oninput=e=>{au.currentTime=+e.target.value};
 $('off').onchange=e=>OFF=+e.target.value;
 $('fs').onclick=()=>{const s=$('cvw');document.fullscreenElement?document.exitFullscreen():s.requestFullscreen&&s.requestFullscreen()};
+
+// ===== بوابة المتدربين: دخول بالرمز + 3 محاولات يجددها المدرب (تستخدم عدّاد المحاولات الموجود في الحقيبة) =====
+const GATE={"url": "https://script.google.com/macros/s/AKfycbzqdZNXikxVOPWmDPZrSf7cLxolW0v0x4QtcYeYA7MWjIjZO73xPwpH51v4kv4bvvOXog/exec"},GMAX=3,G={tok:'',left:null,ok:!GATE,trainer:false,pin:''};
+async function gapi(q,post){if(post){const r=await fetch(GATE.url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(q)});return r.json()}const r=await fetch(GATE.url+'?'+new URLSearchParams(q));return r.json()}
+function renderGate(){if(!GATE||window.PRELOAD)return;const m=$('gmsg'),b=$('gbtns');$('gate').hidden=false;b.innerHTML='';
+ const btn=(t,f,c)=>{const x=document.createElement('button');x.textContent=t;if(c)x.className=c;x.onclick=f;b.append(x)};
+ if(G.trainer){m.textContent='🎓 وضع المدرب: بلا حد للمحاولات.';$('setup').hidden=false;return}
+ if(!G.tok||!G.ok){m.textContent=G.tok?'انتهت جلسة دخولك. سجّل الدخول من جديد في الحقيبة ثم افتح الاستوديو.':'سجّل دخولك في الحقيبة أولًا، ثم افتح الاستوديو من داخلها.';btn('الذهاب إلى الحقيبة',()=>location.href='index.html','p');$('setup').hidden=true;return}
+ $('setup').hidden=false;m.innerHTML='🎟️ محاولاتك المتبقية: <b>'+G.left+'</b> من '+GMAX+'. كل «بناء سبورة» يُحتسب محاولة واحدة، أما التعديل اليدوي والتصدير فمجانيان.';
+ if(G.left<=0){m.innerHTML+='<br>انتهت محاولاتك. اطلب التجديد من المدرب.';btn('📩 طلب تجديد المحاولات من المدرب',async()=>{try{const j=await gapi({action:'auth_ai_request',tok:G.tok},1);$('gmsg').insertAdjacentHTML('beforeend','<br>'+(j.ok?'تم إرسال طلبك إلى المدرب.':'تعذّر إرسال الطلب.'))}catch(e){$('gmsg').insertAdjacentHTML('beforeend','<br>تعذّر الاتصال بالخادم.')}},'p')}}
+async function gateInit(){if(!GATE||window.PRELOAD)return;try{G.tok=localStorage.getItem('odl_tok')||''}catch(e){}
+ $('setup').hidden=true;
+ if(G.tok){try{const j=await gapi({action:'auth_check',tok:G.tok});if(j.ok){G.ok=true;G.left=+j.left}}catch(e){$('gate').hidden=false;$('gmsg').textContent='تعذّر الاتصال بالخادم. حاول لاحقًا.';return}}
+ renderGate()}
+$('gok').onclick=async()=>{const pin=$('gpin').value.trim();if(!pin)return;$('gpm').textContent='⏳';try{const j=await gapi({action:'auth_users',pin},1);if(j&&j.ok){G.trainer=true;G.pin=pin;G.ok=true;$('gpin').value='';$('gpm').textContent='';renderGate()}else $('gpm').textContent='رمز غير صحيح'}catch(e){$('gpm').textContent='تعذّر الاتصال'}};
+async function consume(){if(!GATE||G.trainer)return true;
+ if(G.left<=0){renderGate();status('انتهت محاولاتك. اطلب التجديد من المدرب.');return false}
+ if(!confirm('سيُحتسب هذا البناء محاولة واحدة. المتبقي لديك: '+G.left+' من '+GMAX+'. هل تتابع؟')){status('أُلغي البناء ولم تُحتسب أي محاولة.');return false}
+ const run='studio-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
+ const j=await gapi({action:'ai',tok:G.tok,run,model:'openrouter/free',prompt:'أجب بكلمة واحدة فقط: جاهز'},1);
+ if(j.left!==undefined&&j.left!==null){G.left=+j.left;renderGate()}
+ if(j.ok){if(j.left===undefined){G.left=Math.max(0,G.left-1);renderGate()}return true}
+ if(j.code==='quota'){G.left=0;renderGate();status('انتهت محاولاتك. اطلب التجديد من المدرب.');return false}
+ throw new Error('تعذّر التحقق من المحاولات الآن، حاول بعد قليل');}
+gateInit();
 // ===== التصدير =====
 async function save(name,blob){try{if(window.claude&&claude.use){const d=await claude.use('downloads');if(d){await d.save({filename:name,data:blob});return}}}catch(e){if(e&&e.code=='declined')return;console.warn(e)}const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.append(a);a.click();a.remove()}
 const lite=()=>LINES.map(({t,type,cells,start,end,icon,first,rs})=>({t,type,cells,start,end,icon,first,rs}));
